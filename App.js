@@ -1,16 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { View } from 'react-native';
+// In Routes.js in a new project
 
-import styles from './global';
-//import Routes from './src/routes';
-import SearchPage from './src/pages/Search';
+import * as React from 'react';
 
-export default function App() {
+import Routes from './src/routes'
+
+function App() {
   return (
-    <View style={styles.container}>
-      <SearchPage></SearchPage>
-    </View>
+    <Routes/>
   );
 }
 
+export default App;

@@ -1,11 +1,13 @@
-import React from 'react'
-import {View} from 'react-native'
+import React from 'react';
+import { View, Button, Text } from 'react-native';
 
-export default function Details(){
-    return(
-        <View>
+const Details = () => (
+  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+    <Text>Details</Text>
+  </View>
+);
 
-            
-        </View>
-    );
-}
+
+
+
+export default Details;
