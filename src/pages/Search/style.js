@@ -6,20 +6,23 @@ const styles = StyleSheet.create({
       backgroundColor: '#1F1A38',
       justifyContent: 'center',
     },
-    titulo:{
+    title:{
       //fontFamily: 'Press Start 2P',
       color: '#F21B3F',
       fontSize: 70,
       textAlign: 'center',
+      textAlignVertical: 'top',
+  
+    },
 
-    },
-    titleLocal:{
-      margin: '10%',
-      marginBottom: '60%',
-      margin: 30,
-    },
-    pesquisa:{
-      backgroundColor: '#C4C4C4'
+    description:{
+      color: '#979797',
+      fontSize: 16,
+      textAlign: 'center',
+      marginLeft: 30,
+      marginRight: 30,
+      paddingTop: 30,
+      marginBottom: 30
     }
 
 });

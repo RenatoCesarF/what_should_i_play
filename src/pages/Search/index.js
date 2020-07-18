@@ -1,8 +1,8 @@
   
 import styles from './style.js'
 
-import SearchBar from '../../components/SearchBar/index'
 
+import SearchBar from '../../components/SearchBar/index'
 import React from 'react';
 import { View , Text,StatusBar} from 'react-native';
 
@@ -11,9 +11,15 @@ export default function SearchPage() {
     
     <View style={styles.container}>
 
-      <View style={styles.titleLocal}>
-        <Text style={styles.titulo}>What Should I Play?</Text>
-      </View>
+     
+      <Text style={styles.title}>What Should I Play?</Text>
+     
+
+      <Text style={styles.description}>
+        Digite um jogo que você gostou 
+        e eu te indicarei o que devia jogar agora
+      </Text>
+  
 
       <SearchBar/>
 

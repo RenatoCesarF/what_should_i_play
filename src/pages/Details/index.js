@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './style'
 import { View, Button, Text } from 'react-native';
 
 const Details = () => (
@@ -8,6 +9,6 @@ const Details = () => (
 );
 
 
-
+// on click in setinha navigation.pop(); 
 
 export default Details;

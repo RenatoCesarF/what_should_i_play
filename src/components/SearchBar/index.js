@@ -1,18 +1,22 @@
 import React from 'react'
 import {View} from 'react-native'
-import {TextInput} from 'react-native-paper'
+import {Form} from '@unform/mobile'
+import {FaSearch} from 'react-icons/fa'
+
 import styles from './style'
+import Input from './input/input'
 
 const SearchBar = () => {
-    const [text] = React.useState('');
   
     return (
-      <TextInput
-        style={styles.areaPesquisa}
-        label="Jogo"
-        value={text}
-        //onChangeText={text => setText(text)}
-      />
+      <View>
+
+        <Form>
+          <Input name="Jogo" />
+        </Form>
+
+
+      </View>
     );
 };
 
