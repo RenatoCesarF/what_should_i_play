@@ -13,6 +13,6 @@ export default function Input({name}) {
     }, [inputRef]);
 
     return(
-        <TextInput ref={inputRef} value="f" style={styles.areaPesquisa}/>
+        <TextInput ref={inputRef} value='sa' style={styles.areaPesquisa}/>
     )
 }

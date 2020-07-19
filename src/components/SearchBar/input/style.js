@@ -13,8 +13,8 @@ const styles = StyleSheet.create({
         marginRight: "10%",
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: "50%",
-        marginTop: "10%",
+        
+        
         paddingHorizontal: 20
      
 
