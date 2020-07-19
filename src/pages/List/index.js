@@ -1,10 +1,17 @@
 import React from 'react';
-import { View, Button, Text } from 'react-native';
+import { View, Button, Text,StatusBar } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons'; 
 
+import SearchBar from '../../components/SearchBar/index'
+import styles from './style'
+
 const List = ({ navigation }) => (
-  <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-    <Text></Text>
+  <View style={styles.container}>
+    
+    <View style={styles.header}>
+      <SearchBar></SearchBar>
+    </View>
+
     <Button
       title="Ir para About"
       onPress={() => navigation.navigate('Details') }
@@ -12,12 +19,10 @@ const List = ({ navigation }) => (
 
 
 
-  <FontAwesome name="remove"/>
-  <FontAwesome name="search"/>
-  <FontAwesome name="chevron-right"/>
-  <FontAwesome name="chevron-left"/>
-
-  </View>
+      <FontAwesome name="chevron-right"/>
+      <FontAwesome name="chevron-left"/>
+      <StatusBar style="auto" />
+    </View>
 );
 
 List.navigationOptions = {
