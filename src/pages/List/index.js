@@ -13,14 +13,14 @@ const List = ({ navigation }) => (
     </View>
 
     <Button
-      title="Ir para About"
+      title="Botton test to go to Details page"
       onPress={() => navigation.navigate('Details') }
     />
 
 
 
-      <FontAwesome name="chevron-right"/>
-      <FontAwesome name="chevron-left"/>
+      <FontAwesome name="chevron-right" color="#F21B3F" size={30}/>
+      <FontAwesome name="chevron-left" color="#F21B3F" size={30}/>
       <StatusBar style="auto" />
     </View>
 );

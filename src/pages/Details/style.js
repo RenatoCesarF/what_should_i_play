@@ -10,7 +10,6 @@ const style = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         width: "100%", 
-        position: "absolute",
         top: 0,
         borderBottomWidth: 3,
         borderColor: '#110e1F',
@@ -19,6 +18,8 @@ const style = StyleSheet.create({
     },
     details:{
         paddingHorizontal: "3%",
+        position: "relative",
+        flex: 1
     },
     topic:{
         color: "#979797",
@@ -31,6 +32,16 @@ const style = StyleSheet.create({
         paddingTop: 30,
         lineHeight: 50,
         fontSize: 20
+    },
+    imageView:{
+        flex: 1,
+        backgroundColor: '#130d2d',
+        alignItems: "center",
+        paddingTop: 10,
+        paddingBottom: 80,
+        borderBottomWidth: 3,
+        borderColor: '#110e1F',
+        
     }
 });
 

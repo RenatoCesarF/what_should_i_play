@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './style'
-import { View, Text, StatusBar, Image, Linking } from 'react-native';
+import { View, Text, StatusBar, Image, Linking, FlatList } from 'react-native';
 import { useNavigation, useRoute} from '@react-navigation/native'
 import { FontAwesome } from '@expo/vector-icons'; 
 
@@ -25,8 +25,12 @@ function Details(){
         <FontAwesome name="bookmark" color="#F21B3F" size={27}/>
       </View>
 
-      <View>
-        <Image source={{uri:"https://lojasaraiva.vteximg.com.br/arquivos/ids/3265309/1008083018.jpg"}}/>
+      <View style={styles.imageView}>
+        <Image 
+          style={{width: 260, height: 300}}
+          resizeMode="contain"
+          source={{uri:"https://images.igdb.com/igdb/image/upload/t_cover_big/co23jy.jpg"}}
+        />
       </View>
 
       <View style={styles.details}>
@@ -38,7 +42,7 @@ function Details(){
         <Text style={styles.topic}> Available on:</Text>
 
         <Text style={styles.action} onPress={ytRedirect}>
-          <FontAwesome name="youtube-play" color="#F21B3F" size={35} onPress={ytRedirect}/>
+          <FontAwesome name="youtube-play" color="#F21B3F" size={30} onPress={ytRedirect}/>
           Watch a Gameplay
         </Text>
 
