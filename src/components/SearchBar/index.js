@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { View } from 'react-native'
+import { View, KeyboardAvoidingView, Button} from 'react-native'
 import { Form } from '@unform/mobile'
 import { TextInput } from 'react-native-gesture-handler'
 
@@ -16,8 +16,13 @@ const SearchBar = () => {
   return (
     <View>
       <Form onSubmit={onSubmit}>
-        <Input name="Jogo" returnKeyType="send" onSubmitEditing={onSubmit} />
+        <Input name="Jogo"  returnKeyType="send" onSubmitEditing={onSubmit}/>
       </Form>
+
+      <Button
+      title="Botton test subimit"
+      onPress={onSubmit}
+      />
     </View>
   )
 }

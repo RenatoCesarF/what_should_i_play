@@ -16,7 +16,7 @@ export default function SearchPage() {
      
 
       <Text style={styles.description}>
-        Write a game that you have liked and I will show you a similar!
+        Write the name of a game that you have liked and I will show you a similar!
       </Text>
   
 

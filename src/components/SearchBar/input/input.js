@@ -21,10 +21,12 @@ function Input({ name }, ref) {
       name: fieldName,
       ref: inputValueRef.current,
       path: 'value',
-      setValue(reference: any, value) {
+      
+      setValue(value) {
         inputValueRef.current.value = value
         inputRef.current.setNativeProps({ text: value })
       },
+      
       clearValue() {
         inputValueRef.current.value = ''
         inputRef.current.clear()

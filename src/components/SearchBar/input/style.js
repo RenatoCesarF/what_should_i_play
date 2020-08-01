@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native'
 const styles = StyleSheet.create({
     container:{
     },
-    input:{
+    areaPesquisa:{
     
         backgroundColor: '#C4C4C4',
         display: 'flex',
