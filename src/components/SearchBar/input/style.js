@@ -3,21 +3,17 @@ import {StyleSheet} from 'react-native'
 const styles = StyleSheet.create({
     container:{
     },
-    areaPesquisa:{
+    input:{
+    
         backgroundColor: '#C4C4C4',
         display: 'flex',
         borderRadius: 100,
-        height: 50,
-        width: 300,    
         marginLeft: "10%",
         marginRight: "10%",
-        justifyContent: 'center',
-        alignItems: 'center',
+        marginBottom: 15,
+        paddingHorizontal: 12,
+        paddingVertical: 16,
         
-        
-        paddingHorizontal: 20
-     
-
     },
 
 });

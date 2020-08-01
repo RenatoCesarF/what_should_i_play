@@ -15,10 +15,10 @@ const Stack = createStackNavigator();
 const Routes = () => {
   return (
     <NavigationContainer >
-      <Stack.Navigator initialRouteName='List' screenOptions={{ headerMode: 'none', headerShown: false }}>
+      <Stack.Navigator initialRouteName='SearchPage' screenOptions={{ headerMode: 'none', headerShown: false }}>
+        <Stack.Screen name="SearchPage" component={SearchPage} />
         <Stack.Screen name="List" component={List} />
         <Stack.Screen name="Details" component={Details} />
-        <Stack.Screen name="SearchPage" component={SearchPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );
