@@ -1,7 +1,5 @@
 /*
-This file will contain some functions that will
-be used in others part of the App, so will write
-it here to use everywhere
+Some external Functions that maybe will be used in others scripts
 */
 
 const axios = require('axios').default;
