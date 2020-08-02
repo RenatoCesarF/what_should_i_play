@@ -75,6 +75,4 @@ async function Details(id){
 
 }
 
-
-module Details();
-Details(7)
+export default Details;

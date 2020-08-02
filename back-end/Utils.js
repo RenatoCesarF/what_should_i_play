@@ -6,8 +6,7 @@ it here to use everywhere
 
 const axios = require('axios').default;
 
-module.exports = {
-    //Function to get the image of a game
+module.exports = {    
     async getCover(idGame){
         link = await axios({
     
