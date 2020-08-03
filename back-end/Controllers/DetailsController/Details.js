@@ -6,6 +6,7 @@ show to our user the game that he clicked at
 
 const axios = require('axios').default;
 
+
 module.exports = {
     async  Details(id){
         //General Data
@@ -18,7 +19,7 @@ module.exports = {
                 'user-key': '92dc2928aab6bc080b79811519353eb5'
             },
             
-            data: `where id = ${id}; fields name, cover,first_release_date, genres.name,involved_companies.company.name,platforms.name,total_rating;`
+            data: `where id = ${id}; fields name, cover.image_id,first_release_date, genres.name,platforms.name,total_rating, involved_companies.company.name,involved_companies.developer;`
         })
         .then(response => {
             const data = response.data[0]
@@ -34,22 +35,25 @@ module.exports = {
         const release = data.first_release_date
         const rating = Math.floor(data.total_rating)
         const platforms = data.platforms
-        const involvedCompanies = data.involved_companies
+        const involved_companies = data.involved_companies
         const genres = data.genres
 
         //Getting the genres of the game
         genresNames = []
-        for(i = 0;i < genres.length;i ++){
+        for(i = 0;i < genres.length; i ++){
             genresNames.push(genres[i].name)
         }
 
         //Getting the companies that create the game
-        companiesNames = []
-        for(i = 0;i < involvedCompanies.length;i ++){
-            company = involvedCompanies[i].company.name
-            companiesNames.push(company)
+        developer =[]
+        for(i = 0; i< involved_companies.length; i ++){
+            dev = involved_companies[i].developer
+            if(dev == true){
+                devName = involved_companies[i].company.name
+                developer.push(devName)
+            }
         }
-
+    
         //Getting the platforms where the game are
         platformsNames = []
         for(i = 0; i < platforms.length; i++){
@@ -64,25 +68,20 @@ module.exports = {
         const year = dateObject.toLocaleString("en-US", {year: "numeric"}) 
         dateObject.toLocaleString("en-US", {timeZoneName: "short"})
 
+        image = `https://images.igdb.com/igdb/image/upload/t_cover_big/${data.cover.image_id}.jpg`
 
-        console.log({
-            name,
-            year,
-            rating,
-            genresNames,
-            companiesNames,
-            platformsNames
-        })
 
         return({
+            image,
             name,
             year,
             rating,
             genresNames,
-            companiesNames,
+            developer,
             platformsNames
         })
 
     }
+    
 }
-Details(1942)
+
