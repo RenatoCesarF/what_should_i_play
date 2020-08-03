@@ -77,8 +77,8 @@ module.exports = {
 
 
         return({
-            image,
             name,
+            image,
             year,
             rating,
             genresNames,

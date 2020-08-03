@@ -48,10 +48,10 @@ module.exports = {
 
             fullfranchise.push(franchiseGame)
         }
-    
 
-        //Getting the images of games that the developer did (image,id,name)
+        
         developers = []
+        //Getting the company that is developer 
         async function isDev(){
 
             for(i = 0; i <= companies.length; i ++){
@@ -66,11 +66,12 @@ module.exports = {
         }
         const company = await isDev()
         const theDev = companies[company].company
+        //Getting the games of the developer
         for(i = 0; i< companies.length; i++ ){
             allFromDev = [
                 theDev.published[i].id,
+                theDev.published[i].name,
                 `https://images.igdb.com/igdb/image/upload/t_cover_big/${theDev.published[i].cover.image_id}.jpg`,
-                theDev.published[i].name
             ]
         }
 
@@ -79,8 +80,8 @@ module.exports = {
         for(i = 0;i < similars.length;i ++){
             eachGame = [ //this array return the id and the link to the image of each game
                 similars[i].id,
-                `https://images.igdb.com/igdb/image/upload/t_cover_big/${similars[i].cover.image_id}.jpg`,
                 similars[i].name
+                `https://images.igdb.com/igdb/image/upload/t_cover_big/${similars[i].cover.image_id}.jpg`,
             ]
 
             similarGames.push(eachGame)
