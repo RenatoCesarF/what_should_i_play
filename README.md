@@ -24,5 +24,6 @@ Using the IGDB API, this app, developed in react-native, will suggest a game tha
 
 ## :crystal_ball: Future implementations:
 - A web version of the app
+- A way to chose your platform, and just show your games from this platform
 - ...
 
