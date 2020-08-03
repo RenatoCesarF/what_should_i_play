@@ -1,7 +1,11 @@
 /*
-This function is responseble to recebe a ID and 
-with it get all the information that we need to 
-show to our user the game that he clicked at
+This function will be used in page Details
+to bring, from the API, information about the
+game that the user chose(click/touch). It
+receve and ID and return:
+
+cover image src, name, release year, rating on IGDB website, 
+genres, developer company, and platforms where the game are avalible
 */
 
 const axios = require('axios').default;
@@ -9,7 +13,7 @@ const axios = require('axios').default;
 
 module.exports = {
     async  Details(id){
-        //General Data
+        //Calling the API to get it's data
         data = await axios({
             
             url: "https://api-v3.igdb.com/games/",
@@ -18,7 +22,7 @@ module.exports = {
                 'Accept': 'application/json',
                 'user-key': '92dc2928aab6bc080b79811519353eb5'
             },
-            
+            //data that we are getting form the API
             data: `where id = ${id}; fields name, cover.image_id,first_release_date, genres.name,platforms.name,total_rating, involved_companies.company.name,involved_companies.developer;`
         })
         .then(response => {
@@ -68,6 +72,7 @@ module.exports = {
         const year = dateObject.toLocaleString("en-US", {year: "numeric"}) 
         dateObject.toLocaleString("en-US", {timeZoneName: "short"})
 
+        //Getting the cover of the image
         image = `https://images.igdb.com/igdb/image/upload/t_cover_big/${data.cover.image_id}.jpg`
 
 
@@ -82,6 +87,5 @@ module.exports = {
         })
 
     }
-    
 }
 

@@ -1,16 +1,13 @@
 /*
-This script will be used on LIST page, its receve
-an ID of the game that you search and return lists of
-others games.
+This function is responseble to list the similar
+games receving one(game ID) from paramter
 */
 
 const axios = require('axios')
 
 module.exports = {
-
-
     async List(id){
-        //General Data
+        //Getting the API data
         data = await axios({
         
             url: "https://api-v3.igdb.com/games/",
@@ -20,7 +17,7 @@ module.exports = {
                 'user-key': '92dc2928aab6bc080b79811519353eb5'
             },
             
-            
+            //asking for the especifyc data
             data: `where id = ${id};fields name,franchises.games.name,franchises.games.cover.image_id, similar_games.cover.image_id, similar_games.name, involved_companies.company.published.cover.image_id, involved_companies.company.name, involved_companies.developer, involved_companies.company.published.name;`
         }) 
         .then(response => {
@@ -32,16 +29,15 @@ module.exports = {
             console.error(err);
         });
 
-        
+        //Data API transformed to consts
         const franchises = data.franchises
         const similars = data.similar_games
         const companies = data.involved_companies
 
         
-        //Getting the Collection
+        //Getting the franshise games (image,id,name)
         manyInFranchise = franchises[0].games
         fullfranchise = []
-
         for(i = 0;i < manyInFranchise.length; i ++){
             image = franchises[0].games[i].cover.image_id
             franchiseGame = [
@@ -54,7 +50,7 @@ module.exports = {
         }
     
 
-        //Getting the images of games that the developer did
+        //Getting the images of games that the developer did (image,id,name)
         developers = []
         async function isDev(){
 
@@ -78,7 +74,7 @@ module.exports = {
             ]
         }
 
-        //Getting the similar ones, images, names and IDs     
+        //Getting the similar ones (image,id,name)    
         similarGames = []
         for(i = 0;i < similars.length;i ++){
             eachGame = [ //this array return the id and the link to the image of each game
