@@ -3,6 +3,9 @@
 
 </p>
 <p align='center'>
+   <a href="https://gitmoji.carloscuesta.me">
+    <img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square" alt="Gitmoji">
+  </a>
     <img src="https://img.shields.io/badge/React-Native-blue?style=flat-square&logo=react">
     <!-- Budlers-->
     <img src="https://img.shields.io/badge/Video--Games-%F0%9F%8E%AE-red?style=flat-square">
