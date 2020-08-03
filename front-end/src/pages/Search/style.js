@@ -4,15 +4,14 @@ const styles = StyleSheet.create({
   container:{ 
       flex: 1,
       backgroundColor: '#1F1A38',
-      justifyContent: 'center',
     },
     title:{
       //fontFamily: 'Press Start 2P',
       color: '#F21B3F',
-      fontSize: 70,
+      fontSize: 80,
       textAlign: 'center',
       textAlignVertical: 'top',
-  
+      marginTop: '10%'
     },
 
     description:{
