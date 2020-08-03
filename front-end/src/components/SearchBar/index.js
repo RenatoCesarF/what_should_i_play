@@ -1,30 +1,59 @@
+import React, { useRef } from 'react';
+import { Button, View } from 'react-native';
+import { Form } from '@unform/mobile';
+import Input from './input/input';
+import { FontAwesome } from '@expo/vector-icons'
+import styles from './input/style';
 
-import React from 'react'
-import { View, KeyboardAvoidingView, Button} from 'react-native'
-import { Form } from '@unform/mobile'
-import { TextInput } from 'react-native-gesture-handler'
+export default function SearchBar() {
+  const formRef = useRef(null);
+  function handleSubmit(data) {
+    console.log(data);
 
-import styles from './style'
-import Input from './input/input'
-
-const SearchBar = () => {
-
-  function onSubmit(data) {
-    console.log('Your input Jogo', data)
   }
-
   return (
-    <View>
-      <Form onSubmit={onSubmit}>
-        <Input name="Jogo"  returnKeyType="send" onSubmitEditing={onSubmit}/>
-      </Form>
+    <Form ref={formRef} onSubmit={handleSubmit}>    
+      <View style = {{
+          flex: 1,
+          flexDirection: 'row',
+          justifyContent: 'center'
+        }}>
+          
+        <View style = {{width: '90%',height: 50}}>
+          <Input name="game" type="string" />
+          
+          <View style = {{alignSelf: 'center'}}>
+            <FontAwesome 
+              name="search" 
+              size={30} 
+              color="#F21B3F" 
+              onPress={() => formRef.current.submitForm()}
+            />
+          </View>
+        </View>
 
-      <Button
-      title="Botton test subimit"
-      onPress={onSubmit}
-      />
-    </View>
-  )
+      </View>
+    </Form>
+  );
 }
+/*
+      <View style = {{
+          flex: 1,
+          flexDirection: 'ROW',
+          justifyContent: 'center'
+        
+        }}>
+          < View style = {{width: 50,height: 50,backgroundColor: 'steelblue'}}>
+            <Input name="game" type="string" />
+          </View>
 
-export default SearchBar
+          <View style = {{width: 50,height: 50,backgroundColor: 'powderblue'}}>
+            <FontAwesome 
+              name="search" 
+              size={30} 
+              color="#F21B3F" 
+              onPress={() => formRef.current.submitForm()}
+            />
+          </View>
+      </View>
+*/

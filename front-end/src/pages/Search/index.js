@@ -12,7 +12,7 @@ export default function SearchPage() {
     <View style={styles.container}>
 
      
-      <Text style={styles.title}>What Should I Play?</Text>
+      <Text style={styles.title}>What Should <br/>I Play?</Text>
      
 
       <Text style={styles.description}>
@@ -22,7 +22,7 @@ export default function SearchPage() {
 
       <SearchBar/>
 
-      <StatusBar style="auto" />
+      <StatusBar style="hide" />
     </View>
   );
 }

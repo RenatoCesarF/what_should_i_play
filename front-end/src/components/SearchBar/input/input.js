@@ -1,7 +1,8 @@
+
+
 import React, { useEffect, useImperativeHandle, forwardRef, useRef } from 'react'
 import { useField } from '@unform/core'
 import { TextInput, View } from 'react-native'
-import { FontAwesome } from '@expo/vector-icons'
 
 import styles from './style'
 
@@ -21,12 +22,10 @@ function Input({ name }, ref) {
       name: fieldName,
       ref: inputValueRef.current,
       path: 'value',
-      
       setValue(value) {
         inputValueRef.current.value = value
         inputRef.current.setNativeProps({ text: value })
       },
-      
       clearValue() {
         inputValueRef.current.value = ''
         inputRef.current.clear()
@@ -36,13 +35,7 @@ function Input({ name }, ref) {
 
   return (
     <View>
-      <View>
-        <FontAwesome name="search" size={30} color="#F21B3F"/>
-      </View>
-
-      <View>
-        <FontAwesome name="remove" size={30} color="#2d2d2d"/>  
-      </View>
+     
       
       <TextInput
         ref={inputRef}
@@ -57,4 +50,3 @@ function Input({ name }, ref) {
 }
 
 export default forwardRef(Input)
-
