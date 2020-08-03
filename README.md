@@ -1,9 +1,11 @@
 <p align='center'>
- <h1 align='center'>What Should I Play?</h1>
+ <img src="https://user-images.githubusercontent.com/62253156/89195942-8193e800-d577-11ea-9e4f-47ef96d47b9a.png"/>
+
 </p>
 <p align='center'>
     <img src="https://img.shields.io/badge/React-Native-blue?style=flat-square&logo=react">
     <!-- Budlers-->
+    <img src="https://img.shields.io/badge/Video--Games-%F0%9F%8E%AE-red?style=flat-square">
 </p>
 
 Using the IGDB API, this app, developed in react-native, will suggest a game that you probably like based in one that you have already liked.
@@ -18,9 +20,10 @@ Using the IGDB API, this app, developed in react-native, will suggest a game tha
 
 
 ## :warning: Problems:
-- Getting information from the API still takes a long time
 - ...
 
 ## :crystal_ball: Future implementations:
 - A web version of the app
+- A way to chose your platform, and just show your games from this platform
 - ...
+
