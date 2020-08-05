@@ -5,12 +5,19 @@ import Input from './input/input';
 import { FontAwesome } from '@expo/vector-icons'
 import styles from './input/style';
 
+//import Search from '../../../../back-end/Controllers/SearchController/Search'
+
+
 export default function SearchBar() {
   const formRef = useRef(null);
   function handleSubmit(data) {
     console.log(data);
-
+    
   }
+  
+  
+  //console.log(await Search(1234))
+
   return (
     <Form ref={formRef} onSubmit={handleSubmit}>    
       <View style = {{
