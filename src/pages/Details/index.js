@@ -44,8 +44,7 @@ export default function Details(){
     LoadInfo()
   }, []);
   
-  console.log(teste)
-
+  
   return (
     
     <SafeAreaView style={styles.container}>

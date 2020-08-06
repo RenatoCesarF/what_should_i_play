@@ -14,10 +14,10 @@ const List = ({ navigation }) => (
       />
     </View>
 
-    <ListOf/>
+    <ListOf onPress={() => navigation.navigate('Details')}/>
 
-      <StatusBar style="auto" />
-    </View>
+    <StatusBar style="auto" />
+  </View>
 );
 
 List.navigationOptions = {
