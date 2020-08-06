@@ -1,10 +1,9 @@
   
 import styles from './style.js'
-import React from 'react';
+import * as React from 'react';
 import { View , Text, StatusBar } from 'react-native';
-
+import { FontAwesome } from '@expo/vector-icons'; 
 import RightGame from '../../components/RightGame/index'
-import SearchBar from '../../components/SearchBar/index'
 
 //for each result of Search function will create one RightGame component
 
@@ -15,13 +14,14 @@ export default function RightName() {
       
       <View style={styles.header}>
         <FontAwesome name="arrow-left" color="#F21B3F" size={27}
-            onPress={() =>  navigation.goBack()}
+            onPress={() =>  navigation.goBack()}//FIXME: go back to Search page
         />
-        <FontAwesome name="bookmark" color="#F21B3F" size={27}/>
       </View>
 
       <RightGame/>
-      <h1> You mean:</h1>
+      <RightGame/>
+      <RightGame/>
+
       <StatusBar style="hide" />
     </View>
   );

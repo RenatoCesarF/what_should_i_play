@@ -5,9 +5,18 @@ const styles = StyleSheet.create({
      
     },
     borderDiv: {
-        backgroundColor: '#1F1A38',
-        borderradius: "50%",
-        borderColor: '#000000',
+        flexDirection: 'row',
+        backgroundColor: '#242038',
+        marginVertical: 10,
+        marginHorizontal: 5,
+
+        borderRadius: 40,
+        alignItems: 'center',
+    },
+    gameTitle: {
+        fontSize: 28,
+        color: '#979797',
+        maxWidth: '65%',
     }
     
 
