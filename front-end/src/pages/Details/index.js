@@ -4,20 +4,22 @@ import { View, Text, StatusBar, Image, Linking, FlatList } from 'react-native';
 import { useNavigation, useRoute} from '@react-navigation/native'
 import { FontAwesome } from '@expo/vector-icons'; 
 
+//on open, run function Details() with game id that comes from list
+
 function Details(){
 
   const navigation = useNavigation();
 
-  function ytRedirect(){ // função que redireciona para uma busca pelo nome do jogo no YT
+  function ytRedirect(){ // This function redirect you to a gameplay of the game
     Linking.openURL(`https://www.youtube.com/results?search_query=nome+do+jogo`);
   }
-  function steamRedirect(){
+  function steamRedirect(){ // This function redirect you to steam store of the game
     Linking.openURL(`https://store.steampowered.com/search?term=nome+do+Jogo`)
   }
 
   return(
     <View style={ styles.container}>
-
+      
       <View style={styles.header}>
         <FontAwesome name="arrow-left" color="#F21B3F" size={27}
             onPress={() =>  navigation.goBack()}
