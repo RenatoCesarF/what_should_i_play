@@ -2,7 +2,7 @@
 
 import React, { useEffect, useImperativeHandle, forwardRef, useRef } from 'react'
 import { useField } from '@unform/core'
-import { TextInput, View } from 'react-native'
+import { TextInput, View,KeyboardAvoidingView,TouchableWithoutFeedback,Keyboard } from 'react-native'
 
 import styles from './style'
 
@@ -33,20 +33,30 @@ function Input({ name }, ref) {
     })
   }, [fieldName, registerField])
 
+  //FIXME: this avoid keyboardView is not working yet
   return (
-    <View>
-     
-      
-      <TextInput
-        ref={inputRef}
-        style={styles.areaPesquisa}
-        defaultValue={defaultValue}
-        onChangeText={value => {
-          inputValueRef.current.value = value
-        }}
-      />
-    </View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS == "ios" ? "padding" : "height"}
+      style={{}}
+    >
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={styles.inner}>
+          
+          <TextInput
+            ref={inputRef}
+            style={styles.areaPesquisa}
+            defaultValue={defaultValue}
+            onChangeText={value => {
+              inputValueRef.current.value = value
+            }}
+          />
+       
+        </View>
+      </TouchableWithoutFeedback>
+  
+  </KeyboardAvoidingView>
   )
 }
 
 export default forwardRef(Input)
+

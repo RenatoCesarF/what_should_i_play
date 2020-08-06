@@ -14,9 +14,6 @@ export default function SearchBar() {
     console.log(data);
     
   }
-  
-  
-  //console.log(await Search(1234))
 
   return (
     <Form ref={formRef} onSubmit={handleSubmit}>    
@@ -43,24 +40,3 @@ export default function SearchBar() {
     </Form>
   );
 }
-/*
-      <View style = {{
-          flex: 1,
-          flexDirection: 'ROW',
-          justifyContent: 'center'
-        
-        }}>
-          < View style = {{width: 50,height: 50,backgroundColor: 'steelblue'}}>
-            <Input name="game" type="string" />
-          </View>
-
-          <View style = {{width: 50,height: 50,backgroundColor: 'powderblue'}}>
-            <FontAwesome 
-              name="search" 
-              size={30} 
-              color="#F21B3F" 
-              onPress={() => formRef.current.submitForm()}
-            />
-          </View>
-      </View>
-*/

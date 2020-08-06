@@ -12,11 +12,11 @@ export default function SearchPage() {
     <View style={styles.container}>
 
      
-      <Text style={styles.title}>What Should <br/>I Play?</Text>
+      <Text style={styles.title}>What Should I Play?</Text>
      
-
+      
       <Text style={styles.description}>
-        Write the name of a game that you have liked and I will show you a similar!
+        Write the name of a game that you have liked and I will show you some similars!
       </Text>
   
 

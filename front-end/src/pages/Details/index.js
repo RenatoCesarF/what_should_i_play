@@ -6,7 +6,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 //on open, run function Details() with game id that comes from list
 
-function Details(){
+export default function Details(){
 
   const navigation = useNavigation();
 
@@ -62,5 +62,3 @@ function Details(){
 
 
 // on click in setinha navigation.pop();  navigation.navigate('List')
-
-export default Details;
