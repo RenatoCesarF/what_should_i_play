@@ -12,7 +12,7 @@ export default function SearchPage() {
     <View style={styles.container}>
 
      
-      <Text style={styles.title}>What Should I Play?</Text>
+      <Text style={styles.title}>What Should {'\n'}I Play?</Text>
      
       
       <Text style={styles.description}>
