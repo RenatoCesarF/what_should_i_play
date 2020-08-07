@@ -9,7 +9,7 @@ platformsNames
 */
 import React, { useState, useEffect }from 'react';
 import { View, Text, StatusBar, Image, Linking, ScrollView, SafeAreaView } from 'react-native';
-import { useNavigation, } from '@react-navigation/native'
+import { useNavigation,RectButton } from '@react-navigation/native'
 import { FontAwesome } from '@expo/vector-icons'; 
 
 import styles from './style'
@@ -34,54 +34,54 @@ export default function Details(){
 
   useEffect(() => {
     async function LoadInfo() {
-      console.log('LoadInfo chamado')
-      const response = await Api.Details(1942)
+      const response = await Api.Details(1422)
       const data = await response
 
       setInfo(data)
     }
+   
 
     LoadInfo()
   }, []);
   
-  
   return (
     
     <SafeAreaView style={styles.container}>
-        <ScrollView>
+      <ScrollView>
 
-          <View style={styles.header}>
-            <FontAwesome name="arrow-left" color="#F21B3F" size={27}
-                onPress={() =>  navigation.goBack()}
+        <View style={styles.header}>
+          <FontAwesome name="arrow-left" color="#F21B3F" size={27}
+              onPress={() =>  navigation.goBack()}
+          />
+          <FontAwesome name="bookmark" color="#F21B3F" size={27}/>
+        </View>
+
+        <View style={styles.imageView}>
+          <Image 
+            style={{width: 225, height: 300, backgroundColor: '#282243'}}
+            resizeMode="contain"
+            source={{uri:`https://images.igdb.com/igdb/image/upload/t_cover_big/${'data.cover.image_id'}.jpg`}}//
             />
-            <FontAwesome name="bookmark" color="#F21B3F" size={27}/>
-          </View>
+        </View>
 
-          <View style={styles.imageView}>
-            <Image 
-              style={{width: 260, height: 300}}
-              resizeMode="contain"
-              source={{uri:"https://images.igdb.com/igdb/image/upload/t_cover_big/co23jy.jpg"}}
-              />
-          </View>
+        <View style={styles.details}>
 
-          <View style={styles.details}>
+        <Text style={styles.topic}> Name: {`${'data.name'}`}</Text>
+        <Text style={styles.topic}> Genre: {`${'data.genres[0].name'}, ${2}`}</Text>
+        <Text style={styles.topic}> Developer: {`${1}`}</Text>
+        <Text style={styles.topic}> Launch: {`${'data.year'}`}</Text>
+        <Text style={styles.topic}> Available on: {`${'data.platformsNames'}`}</Text>
+        <Text style={styles.topic}> Rating on IGDB: {`${'data.rating'}`}</Text>
 
-          <Text style={styles.topic}> Name:</Text>
-          <Text style={styles.topic}> Genre:</Text>
-          <Text style={styles.topic}> Developer:</Text>
-          <Text style={styles.topic}> Launch: </Text>
-          <Text style={styles.topic}> Available on:</Text>
+        <Text style={styles.action} onPress={ytRedirect}>
+          <FontAwesome name="youtube-play" color="#F21B3F" size={30} onPress={ytRedirect}/>
+          Watch a Gameplay
+        </Text>
 
-          <Text style={styles.action} onPress={ytRedirect}>
-            <FontAwesome name="youtube-play" color="#F21B3F" size={30} onPress={ytRedirect}/>
-            Watch a Gameplay
-          </Text>
-
-          <Text style={styles.action} onPress={steamRedirect} >
-            <FontAwesome name="credit-card-alt" color="#F21B3F" size={27} onPress={steamRedirect}/>
-            Buy
-          </Text>
+        <Text style={styles.action} onPress={steamRedirect} >
+          <FontAwesome name="credit-card-alt" color="#F21B3F" size={27} onPress={steamRedirect}/>
+          Buy
+        </Text>
           
         </View>
 

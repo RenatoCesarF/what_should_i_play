@@ -26,7 +26,6 @@ module.exports = {
         })
         .then(response => {
             const data = response.data[0]
-            console.log(data)
             return data
         })
         .catch(err => {
@@ -71,19 +70,7 @@ module.exports = {
         const year = dateObject.toLocaleString("en-US", {year: "numeric"}) 
         dateObject.toLocaleString("en-US", {timeZoneName: "short"})
 
-        //Getting the cover of the image
-        image = `https://images.igdb.com/igdb/image/upload/t_cover_big/${data.cover.image_id}.jpg`
-
-    
-        gameInfo = {
-            name,
-            image,
-            year,
-            rating,
-            genresNames,
-            developer,
-            platformsNames
-        }
+        const image = data.cover.image_id
         return ({
             name,
             image,
@@ -91,7 +78,7 @@ module.exports = {
             rating,
             genresNames,
             developer,
-            platformsNames
+            platformsNames,
         })
 
     }
