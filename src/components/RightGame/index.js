@@ -2,9 +2,8 @@ import React from 'react';
 import styles from './style.js'
 import { View ,Image, Text } from 'react-native'
 
-export default function RightGame() {
+export default function RightGame(props) {
     //on click in game div, pass the gameID to page and function List 
-    //TODO: add props to text and image URI
     return (
       
         <View className="borderDiv" style={styles.borderDiv}>
@@ -12,11 +11,11 @@ export default function RightGame() {
             <Image 
                 style={{width: 110, height: 100, borderRadius: 20, marginVertical: 10}}
                 resizeMode="contain"
-                source={{uri:"https://images.igdb.com/igdb/image/upload/t_cover_big/co23jy.jpg"}}
+                source={{uri:`https://images.igdb.com/igdb/image/upload/t_cover_big/${props.game.cover.image_id}.jpg`}}
             />
 
             <Text className="gameTitle" style={styles.gameTitle}>
-                Game Name
+                {props.data.name}
             </Text>
 
         </View>

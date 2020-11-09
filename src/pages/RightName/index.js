@@ -7,9 +7,9 @@ import RightGame from '../../components/RightGame/index'
 
 //for each result of Search function will create one RightGame component
 export default function RightName() {
-  const teste = {
-    nome:'a'
-  }
+  
+  //const Games = FUNÇÃODELISTAGEM.map(item => <RightGame item={item}/>)
+
   return (
     
     <View style={styles.container}>
@@ -20,7 +20,8 @@ export default function RightName() {
         />
       </View>
    
-        <RightGame/>
+      <RightGame />
+      {{/* {Games}*/ }}
    
       <StatusBar style="hide" />
     </View>

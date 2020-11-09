@@ -71,6 +71,7 @@ module.exports = {
         dateObject.toLocaleString("en-US", {timeZoneName: "short"})
 
         const image = data.cover.image_id
+        
         return ({
             name,
             image,
