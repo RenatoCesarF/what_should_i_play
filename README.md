@@ -6,26 +6,34 @@
    <a href="https://gitmoji.carloscuesta.me">
     <img src="https://img.shields.io/badge/gitmoji-%20😜%20😍-FFDD67.svg?style=flat-square" alt="Gitmoji">
   </a>
-    <img src="https://img.shields.io/badge/React-Native-blue?style=flat-square&logo=react">
+    <img src="https://img.shields.io/badge/Dart-Flutter-blue?style=flat-square&logo=flutter">
     <!-- Budlers-->
     <img src="https://img.shields.io/badge/Video--Games-%F0%9F%8E%AE-red?style=flat-square">
 </p>
 
 Using the IGDB API, this app, developed in react-native, will suggest a game that you probably like based in one that you have already liked.
 
+## 📝 To-Do:
+- [ ] IGDB API Conect
+- [ ] List Page
+- [ ] Search Page
+- [ ] Game Details Page
+- [ ] Splash Screen
+- [ ] Web Version
 
-## :globe_with_meridians: Technologies:
-- Expo
-- React-Native
-- Axios
+## 🌐 Technologies:
+- MobX
+- Slidy
+- Flutter Modular
+- Dio
 
-## :newspaper: Layout:
+## 📰 Layout:
 
 
-## :warning: Problems:
+## ⚠️ Problems:
 - ...
 
-## :crystal_ball: Future implementations:
+## 🔮 Future implementations:
 - A web version of the app
 - A way to chose your platform, and just show your games from this platform
 - When click into the cover of a game you can see Screenshots of it 

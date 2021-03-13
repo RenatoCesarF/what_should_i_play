@@ -19,7 +19,6 @@ class SearchModule extends WidgetModule {
   static Inject get to => Inject<SearchModule>.of();
 
   @override
-  // TODO: implement view
   Widget get view => SearchPage();
 }
 
