@@ -1,10 +1,8 @@
-import 'dart:math';
-
+import 'package:dio/dio.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mobx/mobx.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:dio/dio.dart';
 
 part 'search_controller.g.dart';
 
@@ -19,6 +17,15 @@ abstract class _SearchControllerBase with Store {
   @observable
   Animation<num> animation;
 
-  @action
-  Future searchGame() async {}
+  Future searchGame() async {
+    String gameName = searchBarController.text;
+    await Dio().post("${env["BASE_URL"]}/games",
+        data: "fields name,cover.image_id; search $gameName; limit 30;",
+        options: Options(headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Client-ID': env["CLIENT_ID"],
+          'Authorization': env["AUTHORIZATION"],
+        }));
+  }
 }

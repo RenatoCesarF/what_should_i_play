@@ -1,6 +1,6 @@
+// ignore: implementation_imports
 import 'package:flutter/src/widgets/framework.dart';
 
-import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'search_page.dart';
 import './search_controller.dart';
@@ -21,9 +21,3 @@ class SearchModule extends WidgetModule {
   @override
   Widget get view => SearchPage();
 }
-
-
-/**
- * Inventory_details_page
- * Inventory_item_widget
- */

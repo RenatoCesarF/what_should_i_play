@@ -1,3 +1,0 @@
-lib/app/modules/details/details_module.dart
-lib/app/modules/details/repositories/details_repository.dart
-test/app/modules/details/repositories/details_repository_test.dart

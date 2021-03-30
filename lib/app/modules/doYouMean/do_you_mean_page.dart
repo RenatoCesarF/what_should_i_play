@@ -1,0 +1,28 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'do_you_mean_controller.dart';
+
+class DoYouMeanPage extends StatefulWidget {
+  final String title;
+  const DoYouMeanPage({Key key, this.title = "DoYouMean"}) : super(key: key);
+
+  @override
+  _DoYouMeanPageState createState() => _DoYouMeanPageState();
+}
+
+class _DoYouMeanPageState
+    extends ModularState<DoYouMeanPage, DoYouMeanController> {
+  //use 'controller' variable to access controller
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: Column(
+        children: <Widget>[],
+      ),
+    );
+  }
+}

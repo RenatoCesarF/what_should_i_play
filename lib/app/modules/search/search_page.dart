@@ -2,7 +2,6 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:project/app/modules/search/search_controller.dart';
 
@@ -49,17 +48,16 @@ class _SearchPageState extends State<SearchPage>
                   fontWeight: FontWeight.w400,
                   fontStyle: FontStyle.italic),
             ),
-            Spacer(
-              flex: 3,
-            ),
+            Spacer(flex: 3),
             TextField(
                 controller: controller.searchBarController,
                 onChanged: (value) {
                   controller.searchBarController.text = value;
                 },
                 decoration: InputDecoration(
-                    suffixIcon: GestureDetector(
-                      onTap: () {
+                    //it was a gesture detector before
+                    suffixIcon: TextButton(
+                      onPressed: () {
                         controller.searchGame();
                       },
                       child: Icon(

@@ -1,0 +1,7 @@
+##slidy commands
+
+Create module without Repository
+> slidy generate module modules/<name> -c
+
+Update changes 
+> slidy run mobx_watch   
