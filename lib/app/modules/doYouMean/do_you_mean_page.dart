@@ -4,15 +4,21 @@ import 'do_you_mean_controller.dart';
 
 class DoYouMeanPage extends StatefulWidget {
   final String title;
-  const DoYouMeanPage({Key key, this.title = "DoYouMean"}) : super(key: key);
+  final String gameName;
+  const DoYouMeanPage({Key key, this.title = "DoYouMean", this.gameName}) : super(key: key);
 
   @override
   _DoYouMeanPageState createState() => _DoYouMeanPageState();
 }
 
-class _DoYouMeanPageState
-    extends ModularState<DoYouMeanPage, DoYouMeanController> {
+class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanController> {
   //use 'controller' variable to access controller
+
+  @override
+  void initState() {
+    super.initState();
+    controller.findGames(widget.gameName);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +27,14 @@ class _DoYouMeanPageState
         title: Text(widget.title),
       ),
       body: Column(
-        children: <Widget>[],
+        children: <Widget>[
+          Row(
+            children: [
+              Image.network("https://via.placeholder.com/150"),
+              Text("Nome do jogo"),
+            ],
+          )
+        ],
       ),
     );
   }

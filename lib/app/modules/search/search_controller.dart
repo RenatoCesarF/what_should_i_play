@@ -3,6 +3,11 @@ import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mobx/mobx.dart';
+import 'package:project/app/modules/doYouMean/do_you_mean_module.dart';
+import 'package:project/app/modules/doYouMean/do_you_mean_page.dart';
+import 'package:project/app/modules/search/search_module.dart';
+import 'package:project/shared/models/game_model.dart';
+import '../doYouMean/do_you_mean_module.dart';
 
 part 'search_controller.g.dart';
 
@@ -12,20 +17,8 @@ abstract class _SearchControllerBase with Store {
   @observable
   TextEditingController searchBarController = TextEditingController();
 
-  @observable
-  AnimationController animController;
-  @observable
-  Animation<num> animation;
-
-  Future searchGame() async {
-    String gameName = searchBarController.text;
-    await Dio().post("${env["BASE_URL"]}/games",
-        data: "fields name,cover.image_id; search $gameName; limit 30;",
-        options: Options(headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Client-ID': env["CLIENT_ID"],
-          'Authorization': env["AUTHORIZATION"],
-        }));
+  Future pushToDoYouMeanPage(BuildContext context) async {
+    Navigator.push(context,
+        MaterialPageRoute(builder: (_) => DoYouMeanModule(gameName: searchBarController.text)));
   }
 }

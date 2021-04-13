@@ -10,16 +10,12 @@ class SearchPage extends StatefulWidget {
   _SearchPageState createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage>
-    with SingleTickerProviderStateMixin {
+class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateMixin {
   final SearchController controller = SearchController();
 
   @override
   void initState() {
     super.initState();
-    controller.animController = AnimationController(vsync: this);
-    controller.animation =
-        Tween(begin: 0, end: 2 * pi).animate(controller.animController);
   }
 
   @override
@@ -29,9 +25,7 @@ class _SearchPageState extends State<SearchPage>
       body: Observer(builder: (_) {
         return Container(
           margin: EdgeInsets.symmetric(horizontal: 28, vertical: 20),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.center, children: <
-                  Widget>[
+          child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
             Spacer(flex: 2),
             Container(
               child: Image.asset(
@@ -58,7 +52,7 @@ class _SearchPageState extends State<SearchPage>
                     //it was a gesture detector before
                     suffixIcon: TextButton(
                       onPressed: () {
-                        controller.searchGame();
+                        controller.pushToDoYouMeanPage(this.context);
                       },
                       child: Icon(
                         Icons.search_rounded,

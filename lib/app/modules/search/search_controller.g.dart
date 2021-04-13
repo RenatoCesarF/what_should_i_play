@@ -25,43 +25,10 @@ mixin _$SearchController on _SearchControllerBase, Store {
     });
   }
 
-  final _$animControllerAtom =
-      Atom(name: '_SearchControllerBase.animController');
-
-  @override
-  AnimationController get animController {
-    _$animControllerAtom.reportRead();
-    return super.animController;
-  }
-
-  @override
-  set animController(AnimationController value) {
-    _$animControllerAtom.reportWrite(value, super.animController, () {
-      super.animController = value;
-    });
-  }
-
-  final _$animationAtom = Atom(name: '_SearchControllerBase.animation');
-
-  @override
-  Animation<num> get animation {
-    _$animationAtom.reportRead();
-    return super.animation;
-  }
-
-  @override
-  set animation(Animation<num> value) {
-    _$animationAtom.reportWrite(value, super.animation, () {
-      super.animation = value;
-    });
-  }
-
   @override
   String toString() {
     return '''
-searchBarController: ${searchBarController},
-animController: ${animController},
-animation: ${animation}
+searchBarController: ${searchBarController}
     ''';
   }
 }
