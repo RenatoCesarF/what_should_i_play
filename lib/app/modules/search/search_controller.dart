@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -19,8 +20,9 @@ abstract class _SearchControllerBase with Store {
 
   Future pushToDoYouMeanPage(BuildContext context) async {
     FocusScope.of(context).unfocus();
-
-    await Navigator.push(context,
+    await Modular.to.push(
         MaterialPageRoute(builder: (_) => DoYouMeanModule(gameName: searchBarController.text)));
+    // await Navigator.push(context,
+    //     MaterialPageRoute(builder: (_) => DoYouMeanModule(gameName: searchBarController.text)));
   }
 }
