@@ -1,5 +1,6 @@
 class Game {
   String summary;
+  String summaryShort;
   int id;
   Cover cover;
   int firstReleaseDate;
@@ -18,10 +19,19 @@ class Game {
       this.name,
       this.platforms,
       this.totalRating,
+      this.summaryShort,
       this.summary});
 
   Game.fromJson(Map<String, dynamic> json) {
     summary = json['summary'];
+
+    if (summary != null) {
+      summaryShort = summary.substring(0, (summary.length / 3).floor());
+      if (summary.length > 500) {
+        summaryShort = summary.substring(0, (summary.length / 6).floor());
+      }
+    }
+
     id = json['id'];
     cover = json['cover'] != null ? new Cover.fromJson(json['cover']) : null;
     firstReleaseDate = json['first_release_date'];
