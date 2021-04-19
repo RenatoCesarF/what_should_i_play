@@ -22,7 +22,5 @@ abstract class _SearchControllerBase with Store {
     FocusScope.of(context).unfocus();
     await Modular.to.push(
         MaterialPageRoute(builder: (_) => DoYouMeanModule(gameName: searchBarController.text)));
-    // await Navigator.push(context,
-    //     MaterialPageRoute(builder: (_) => DoYouMeanModule(gameName: searchBarController.text)));
   }
 }

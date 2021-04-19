@@ -7,9 +7,8 @@ import 'package:project/shared/components/loading.dart';
 import 'do_you_mean_controller.dart';
 
 class DoYouMeanPage extends StatefulWidget {
-  final String title;
   final String gameName;
-  const DoYouMeanPage({Key key, this.title = "DoYouMean", this.gameName}) : super(key: key);
+  const DoYouMeanPage({Key key, this.gameName}) : super(key: key);
 
   @override
   _DoYouMeanPageState createState() => _DoYouMeanPageState();
@@ -47,7 +46,7 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                             children: controller.games
                                 .map((game) => game != null
                                     ? GestureDetector(
-                                        onTap: () => print(game.name),
+                                        onTap: () => controller.openGame(game),
                                         child: Dismissible(
                                           key: ValueKey(game),
                                           child: Container(
@@ -67,7 +66,7 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                                                     borderRadius: BorderRadius.circular(8.0),
                                                     child: Image.network(
                                                         game.cover != null
-                                                            ? "https://images.igdb.com/igdb/image/upload/t_cover_small/${game.cover.imageId}.jpg"
+                                                            ? game.cover.smallCover
                                                             : "https://via.placeholder.com/100x120",
                                                         fit: BoxFit.contain),
                                                   ),
@@ -144,8 +143,10 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                       SizedBox(
                         width: 40,
                         child: TextButton(
-                          onPressed: () =>
-                              controller.findGames(controller.searchBarController.text),
+                          onPressed: () {
+                            FocusScope.of(context).unfocus();
+                            controller.findGames(controller.searchBarController.text);
+                          },
                           child: Icon(
                             Icons.search_rounded,
                             size: 30,

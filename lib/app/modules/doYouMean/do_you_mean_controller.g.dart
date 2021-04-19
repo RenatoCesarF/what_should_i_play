@@ -64,6 +64,14 @@ mixin _$DoYouMeanController on _DoYouMeanControllerBase, Store {
     return _$findGamesAsyncAction.run(() => super.findGames(gameName));
   }
 
+  final _$openGameAsyncAction =
+      AsyncAction('_DoYouMeanControllerBase.openGame');
+
+  @override
+  Future<void> openGame(Game game) {
+    return _$openGameAsyncAction.run(() => super.openGame(game));
+  }
+
   @override
   String toString() {
     return '''

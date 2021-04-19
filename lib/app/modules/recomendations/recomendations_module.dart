@@ -2,13 +2,14 @@
 import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:project/shared/models/game_model.dart';
 import './recomendations_page.dart';
 import './recomendations_controller.dart';
 
 class RecomendationsModule extends WidgetModule {
-  final String gameId;
+  final Game game;
 
-  RecomendationsModule({this.gameId});
+  RecomendationsModule({this.game});
 
   @override
   List<Bind> get binds => [
@@ -24,6 +25,6 @@ class RecomendationsModule extends WidgetModule {
 
   @override
   Widget get view => RecomendationsPage(
-        gameId: gameId,
+        game: game,
       );
 }
