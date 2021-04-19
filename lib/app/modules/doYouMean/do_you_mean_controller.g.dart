@@ -24,6 +24,22 @@ mixin _$DoYouMeanController on _DoYouMeanControllerBase, Store {
     });
   }
 
+  final _$finishSearchAtom =
+      Atom(name: '_DoYouMeanControllerBase.finishSearch');
+
+  @override
+  bool get finishSearch {
+    _$finishSearchAtom.reportRead();
+    return super.finishSearch;
+  }
+
+  @override
+  set finishSearch(bool value) {
+    _$finishSearchAtom.reportWrite(value, super.finishSearch, () {
+      super.finishSearch = value;
+    });
+  }
+
   final _$findGamesAsyncAction =
       AsyncAction('_DoYouMeanControllerBase.findGames');
 
@@ -35,7 +51,8 @@ mixin _$DoYouMeanController on _DoYouMeanControllerBase, Store {
   @override
   String toString() {
     return '''
-games: ${games}
+games: ${games},
+finishSearch: ${finishSearch}
     ''';
   }
 }
