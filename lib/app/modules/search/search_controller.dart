@@ -18,7 +18,9 @@ abstract class _SearchControllerBase with Store {
   TextEditingController searchBarController = TextEditingController();
 
   Future pushToDoYouMeanPage(BuildContext context) async {
-    Navigator.push(context,
+    FocusScope.of(context).unfocus();
+
+    await Navigator.push(context,
         MaterialPageRoute(builder: (_) => DoYouMeanModule(gameName: searchBarController.text)));
   }
 }

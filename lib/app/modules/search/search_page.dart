@@ -24,7 +24,7 @@ class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateM
       backgroundColor: Color(0xff322A5C),
       body: Observer(builder: (_) {
         return Container(
-          margin: EdgeInsets.symmetric(horizontal: 28, vertical: 20),
+          margin: EdgeInsets.symmetric(horizontal: 18, vertical: 20),
           child: Column(crossAxisAlignment: CrossAxisAlignment.center, children: <Widget>[
             Spacer(flex: 2),
             Container(
@@ -43,42 +43,56 @@ class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateM
                   fontStyle: FontStyle.italic),
             ),
             Spacer(flex: 3),
-            TextField(
-                controller: controller.searchBarController,
-                onChanged: (value) {
-                  controller.searchBarController.text = value;
-                },
-                decoration: InputDecoration(
-                    //it was a gesture detector before
-                    suffixIcon: TextButton(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: 40,
+                  child: TextButton(
                       onPressed: () {
-                        controller.pushToDoYouMeanPage(this.context);
+                        //FocusScope.of(context).unfocus();
+                        controller.searchBarController.text = '';
+                        controller.searchBarController.clear();
                       },
-                      child: Icon(
-                        Icons.search_rounded,
-                        size: 30,
-                        color: Color(0xffF21B3F),
-                      ),
-                    ),
-                    prefixIcon: GestureDetector(
-                        onTap: () {
-                          controller.searchBarController.text = '';
-                          controller.searchBarController.clear();
-                        },
-                        child: Icon(Icons.cancel, color: Color(0xffF21B3F))),
-                    isDense: false,
-                    hintText: "A game that you have enjoyed",
-                    hintStyle: TextStyle(color: Color(0x66979797))),
-                autocorrect: false,
-                style: TextStyle(
-                  color: Colors.white,
+                      child: Icon(Icons.cancel, color: Color(0xffF21B3F))),
                 ),
-                selectionHeightStyle: BoxHeightStyle.tight,
-                textAlign: TextAlign.center,
-                cursorColor: Color(0xffF21B3F)),
-            Spacer(
-              flex: 3,
-            )
+                Expanded(
+                  child: TextField(
+                    onEditingComplete: () => controller.pushToDoYouMeanPage(this.context),
+                    controller: controller.searchBarController,
+                    onChanged: (value) {
+                      controller.searchBarController.text = value;
+                    },
+                    decoration: InputDecoration(
+
+                        //it was a gesture detector before
+
+                        isDense: true,
+                        hintText: "A game that you have enjoyed",
+                        hintStyle: TextStyle(color: Color(0x66979797))),
+                    autocorrect: false,
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    selectionHeightStyle: BoxHeightStyle.tight,
+                    textAlign: TextAlign.center,
+                    cursorColor: Color(0xffF21B3F),
+                  ),
+                ),
+                SizedBox(
+                  width: 40,
+                  child: TextButton(
+                    onPressed: () => controller.pushToDoYouMeanPage(this.context),
+                    child: Icon(
+                      Icons.search_rounded,
+                      size: 30,
+                      color: Color(0xffF21B3F),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Spacer(flex: 3)
           ]),
         );
       }),

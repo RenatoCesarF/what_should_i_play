@@ -6,9 +6,9 @@ import './do_you_mean_page.dart';
 import './do_you_mean_controller.dart';
 
 class DoYouMeanModule extends WidgetModule {
-  String gameName;
+  final String gameName;
 
-  DoYouMeanModule({String gameName});
+  DoYouMeanModule({this.gameName});
 
   @override
   List<Bind> get binds => [
@@ -23,5 +23,7 @@ class DoYouMeanModule extends WidgetModule {
   static Inject get to => Inject<DoYouMeanModule>.of();
 
   @override
-  Widget get view => DoYouMeanPage();
+  Widget get view => DoYouMeanPage(
+        gameName: gameName,
+      );
 }

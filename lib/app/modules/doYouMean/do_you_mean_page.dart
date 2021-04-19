@@ -23,19 +23,58 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Column(
-        children: <Widget>[
-          Row(
-            children: [
-              Image.network("https://via.placeholder.com/150"),
-              Text("Nome do jogo"),
-            ],
-          )
-        ],
-      ),
-    );
+        backgroundColor: Color(0xff322A5C),
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: controller.games.isNotEmpty
+            ? ListView(
+                children: controller.games
+                    .map((game) => Container(
+                          decoration: new BoxDecoration(
+                              color: Color(0xff1F1A38),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(20.0),
+                              )),
+                          margin: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(8),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.network(
+                                      "https://images.igdb.com/igdb/image/upload/t_cover_small/${game.cover.imageId}.jpg",
+                                      fit: BoxFit.contain),
+                                ),
+                              ),
+                              Container(width: 8),
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      game.name,
+                                      style: TextStyle(
+                                          color: Color(0xff979797),
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18),
+                                    ),
+                                    Container(height: 10),
+                                    Text(
+                                      game.summary != null
+                                          ? "${game.summary.substring(0, 80)}..."
+                                          : "",
+                                      style: TextStyle(color: Color(0xff979797), fontSize: 12),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ))
+                    .toList())
+            : CircularProgressIndicator());
   }
 }

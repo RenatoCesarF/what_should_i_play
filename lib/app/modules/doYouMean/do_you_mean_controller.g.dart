@@ -12,13 +12,13 @@ mixin _$DoYouMeanController on _DoYouMeanControllerBase, Store {
   final _$gamesAtom = Atom(name: '_DoYouMeanControllerBase.games');
 
   @override
-  List<Game> get games {
+  ObservableList<Game> get games {
     _$gamesAtom.reportRead();
     return super.games;
   }
 
   @override
-  set games(List<Game> value) {
+  set games(ObservableList<Game> value) {
     _$gamesAtom.reportWrite(value, super.games, () {
       super.games = value;
     });

@@ -1,4 +1,5 @@
 class Game {
+  String summary;
   int id;
   Cover cover;
   int firstReleaseDate;
@@ -16,9 +17,11 @@ class Game {
       this.involvedCompanies,
       this.name,
       this.platforms,
-      this.totalRating});
+      this.totalRating,
+      this.summary});
 
   Game.fromJson(Map<String, dynamic> json) {
+    summary = json['summary'];
     id = json['id'];
     cover = json['cover'] != null ? new Cover.fromJson(json['cover']) : null;
     firstReleaseDate = json['first_release_date'];
