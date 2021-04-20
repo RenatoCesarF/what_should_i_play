@@ -23,13 +23,13 @@ abstract class _DoYouMeanControllerBase with Store {
 
   @action
   Future<void> findGames(String gameName) async {
-    gameName = "mario";
+    gameName = "Valheim";
     finishSearch = false;
     games.clear();
     List response = await Dio()
         .post("https://api.igdb.com/v4/games/",
             data:
-                'fields name,cover.image_id,summary,screenshots,first_release_date,genres.name,platforms.name,total_rating, involved_companies.company.name,involved_companies.developer; search "$gameName"; limit 29;', //$gameName
+                'search "$gameName"; limit 29;fields name,cover.image_id,summary,screenshots,first_release_date,genres.name,platforms.name,total_rating, involved_companies.company.name,involved_companies.developer;',
             options: Options(headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/x-www-form-urlencoded',
@@ -44,7 +44,7 @@ abstract class _DoYouMeanControllerBase with Store {
 
       games.add(game);
     });
-    print("The size of the list is ${games.length}");
+    // print("The size of the list is ${games.length}");
 
     finishSearch = true;
     return;

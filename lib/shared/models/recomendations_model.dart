@@ -1,3 +1,5 @@
+import 'game_model.dart';
+
 class Recomendations {
   int id;
   List<InvolvedCompanies> involvedCompanies;
@@ -110,25 +112,6 @@ class Published {
       data['cover'] = this.cover.toJson();
     }
     data['name'] = this.name;
-    return data;
-  }
-}
-
-class Cover {
-  int id;
-  String imageId;
-
-  Cover({this.id, this.imageId});
-
-  Cover.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    imageId = json['image_id'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['image_id'] = this.imageId;
     return data;
   }
 }

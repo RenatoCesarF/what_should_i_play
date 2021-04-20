@@ -67,7 +67,7 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                                                     child: Image.network(
                                                         game.cover != null
                                                             ? game.cover.smallCover
-                                                            : "https://via.placeholder.com/100x120",
+                                                            : "https://via.placeholder.com/90x128",
                                                         fit: BoxFit.contain),
                                                   ),
                                                 ),
