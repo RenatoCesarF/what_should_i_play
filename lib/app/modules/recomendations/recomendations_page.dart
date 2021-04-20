@@ -97,46 +97,6 @@ class _RecomendationsPageState extends State<RecomendationsPage>
                               fontWeight: FontWeight.bold,
                             )),
                       ),
-                      Text("From the same Company",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Color(0xff979797),
-                            fontWeight: FontWeight.bold,
-                          )),
-                      //Vertical List View
-                      Expanded(
-                        child: ListView(
-                          children: [
-                            //Horizontal List View
-                            controller.sameCompany.isNotEmpty || controller.sameCompany != null
-                                ? Container(
-                                    padding: EdgeInsets.symmetric(vertical: 10),
-                                    color: Color(0xff1F1A38),
-                                    child: SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Row(
-                                          children: controller.sameCompany
-                                              .map(
-                                                (gameFromCompany) => Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: ClipRRect(
-                                                    borderRadius: BorderRadius.circular(8.0),
-                                                    child: Image.network(
-                                                        gameFromCompany != null
-                                                            ? gameFromCompany.cover.bigCover
-                                                            : "https://via.placeholder.com/264x374",
-                                                        scale: 2,
-                                                        fit: BoxFit.contain),
-                                                  ),
-                                                ),
-                                              )
-                                              .toList()),
-                                    ),
-                                  )
-                                : Container()
-                          ],
-                        ),
-                      ),
                     ],
                   )
                 : Loading());
