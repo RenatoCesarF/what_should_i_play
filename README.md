@@ -14,28 +14,30 @@
 Using the IGDB API, this app, developed in react-native, will suggest a game that you probably like based in one that you have already liked.
 
 ## 📝 To-Do:
-- [ x ] IGDB API Conect
-- [ x ] List Page
-- [ x ] Search Page
+- [x] IGDB API Conect
+- [x] List Page
+- [x] Search Page
+- [x] Recomendation system
 - [ ] Game Details Page
+- [ ] Favorite system
 - [ ] Splash Screen
 - [ ] Web Version
+- [ ] Explore page
 
 ## 🌐 Technologies:
+- IGDB API
 - MobX
 - Slidy
 - Flutter Modular
 - Dio
 
 ## 📰 Layout:
-
+- :construction: Working on it
 
 ## ⚠️ Problems:
-- ...
+- :construction:
 
 ## 🔮 Future implementations:
 - A web version of the app
-- A way to chose your platform, and just show your games from this platform
-- When click into the cover of a game you can see Screenshots of it 
 - ...
 
