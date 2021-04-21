@@ -24,6 +24,39 @@ mixin _$DetailsController on _DetailsControllerBase, Store {
     });
   }
 
+  final _$isRecomendationsExpandedAtom =
+      Atom(name: '_DetailsControllerBase.isRecomendationsExpanded');
+
+  @override
+  bool get isRecomendationsExpanded {
+    _$isRecomendationsExpandedAtom.reportRead();
+    return super.isRecomendationsExpanded;
+  }
+
+  @override
+  set isRecomendationsExpanded(bool value) {
+    _$isRecomendationsExpandedAtom
+        .reportWrite(value, super.isRecomendationsExpanded, () {
+      super.isRecomendationsExpanded = value;
+    });
+  }
+
+  final _$isInfoExpandedAtom =
+      Atom(name: '_DetailsControllerBase.isInfoExpanded');
+
+  @override
+  bool get isInfoExpanded {
+    _$isInfoExpandedAtom.reportRead();
+    return super.isInfoExpanded;
+  }
+
+  @override
+  set isInfoExpanded(bool value) {
+    _$isInfoExpandedAtom.reportWrite(value, super.isInfoExpanded, () {
+      super.isInfoExpanded = value;
+    });
+  }
+
   final _$sameCompanyAtom = Atom(name: '_DetailsControllerBase.sameCompany');
 
   @override
@@ -58,13 +91,13 @@ mixin _$DetailsController on _DetailsControllerBase, Store {
       Atom(name: '_DetailsControllerBase.recomendedGames');
 
   @override
-  Recomendations get recomendedGames {
+  GamePage get recomendedGames {
     _$recomendedGamesAtom.reportRead();
     return super.recomendedGames;
   }
 
   @override
-  set recomendedGames(Recomendations value) {
+  set recomendedGames(GamePage value) {
     _$recomendedGamesAtom.reportWrite(value, super.recomendedGames, () {
       super.recomendedGames = value;
     });
@@ -79,10 +112,37 @@ mixin _$DetailsController on _DetailsControllerBase, Store {
         .run(() => super.getRecomendedGames(gameId));
   }
 
+  final _$_DetailsControllerBaseActionController =
+      ActionController(name: '_DetailsControllerBase');
+
+  @override
+  void onTapRecomendationsPanel() {
+    final _$actionInfo = _$_DetailsControllerBaseActionController.startAction(
+        name: '_DetailsControllerBase.onTapRecomendationsPanel');
+    try {
+      return super.onTapRecomendationsPanel();
+    } finally {
+      _$_DetailsControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void onTapInfoPanel() {
+    final _$actionInfo = _$_DetailsControllerBaseActionController.startAction(
+        name: '_DetailsControllerBase.onTapInfoPanel');
+    try {
+      return super.onTapInfoPanel();
+    } finally {
+      _$_DetailsControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 finishLoad: ${finishLoad},
+isRecomendationsExpanded: ${isRecomendationsExpanded},
+isInfoExpanded: ${isInfoExpanded},
 sameCompany: ${sameCompany},
 similarGames: ${similarGames},
 recomendedGames: ${recomendedGames}

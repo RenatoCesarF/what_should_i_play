@@ -9,6 +9,7 @@ class Game {
   String name;
   List<Platforms> platforms;
   double totalRating;
+  List<Websites> websites;
 
   Game(
       {this.id,
@@ -19,6 +20,7 @@ class Game {
       this.name,
       this.platforms,
       this.totalRating,
+      this.websites,
       this.summaryShort,
       this.summary});
 
@@ -30,6 +32,13 @@ class Game {
       if (summary.length > 500) {
         summaryShort = summary.substring(0, (summary.length / 6).floor());
       }
+    }
+
+    if (json['websites'] != null) {
+      websites = new List<Websites>();
+      json['websites'].forEach((v) {
+        websites.add(Websites.fromJson(v));
+      });
     }
 
     id = json['id'];
@@ -191,5 +200,22 @@ class Platforms {
       data['platforms'] = this.platforms.map((v) => v.toJson()).toList();
     }
     return data;
+  }
+}
+
+class Websites {
+  int category;
+  String url;
+
+  Websites({this.category, this.url});
+
+  Websites.fromJson(Map<String, dynamic> json) {
+    if (json['category'] != null) {
+      category = json['category'];
+    }
+
+    if (json['url'] != null) {
+      url = json['url'];
+    }
   }
 }

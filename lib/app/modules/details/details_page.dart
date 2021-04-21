@@ -59,7 +59,7 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                                 Expanded(
                                   child: Center(
                                     child: Text(
-                                      controller.recomendedGames.name,
+                                      controller.recomendedGames.game.name,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontSize: 18,
@@ -83,17 +83,57 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                           ),
                           Container(
                             height: 3,
-                            color: Color(0xff1F1A38),
+                            color: Theme.of(context).hintColor,
                           )
                         ],
                       ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          child: ExpansionPanelList(
+                              dividerColor: Theme.of(context).primaryColor,
+                              expansionCallback: (int index, bool isExpanded) =>
+                                  controller.onTapInfoPanel,
+                              children: [
+                                ExpansionPanel(
+                                    backgroundColor: Theme.of(context).primaryColor,
+                                    headerBuilder: (BuildContext context, bool isExpanded) {
+                                      return ListTile(
+                                          onTap: controller.onTapInfoPanel,
+                                          title: Text("Details",
+                                              textAlign: TextAlign.left,
+                                              style: Theme.of(context).textTheme.headline1));
+                                    },
+                                    isExpanded: controller.isInfoExpanded,
+                                    body: Column(
+                                      children: [
+                                        Image.network(
+                                            controller.recomendedGames.game.cover.bigCover)
+                                      ],
+                                    )),
+                                ExpansionPanel(
+                                    backgroundColor: Theme.of(context).primaryColor,
+                                    headerBuilder: (BuildContext context, bool isExpanded) {
+                                      return ListTile(
+                                          onTap: controller.onTapRecomendationsPanel,
+                                          title: Text("Recomendations",
+                                              textAlign: TextAlign.left,
+                                              style: Theme.of(context).textTheme.headline1));
+                                    },
+                                    isExpanded: controller.isRecomendationsExpanded,
+                                    body: Column(
+                                      children: [
+                                        //Same Company
+                                        RecomendationsList(controller, controller.sameCompany,
+                                            "From the same Company"),
 
-                      //Same Company
-                      RecomendationsList(
-                          controller, controller.sameCompany, "From the same Company"),
-
-                      //Similar games
-                      RecomendationsList(controller, controller.similarGames, "Similar ones")
+                                        //Similar games
+                                        RecomendationsList(
+                                            controller, controller.similarGames, "Similar ones")
+                                      ],
+                                    )),
+                              ]),
+                        ),
+                      )
                     ],
                   )
                 : Loading());
@@ -101,3 +141,63 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
     );
   }
 }
+
+/*
+Expanded(child:
+ SingleChildScrollView(
+                        child: ExpansionPanelList(
+                            dividerColor: Theme.of(context).primaryColor,
+                            expansionCallback: (int index, bool isExpanded) {
+                              controller.isRecomendationsExpanded =
+                                  !controller.isRecomendationsExpanded;
+                            },
+                            children: [
+                              ExpansionPanel(
+                                  backgroundColor: Theme.of(context).primaryColor,
+                                  headerBuilder: (BuildContext context, bool isExpanded) {
+                                    return ListTile(
+                                        onTap: () {
+                                          controller.isRecomendationsExpanded =
+                                              !controller.isRecomendationsExpanded;
+                                        },
+                                        hoverColor: Colors.blue,
+                                        focusColor: Colors.red,
+                                        title: Text("Titulo",
+                                            textAlign: TextAlign.left,
+                                            style: Theme.of(context).textTheme.headline1));
+                                  },
+                                  isExpanded: controller.isRecomendationsExpanded,
+                                  body: Column(
+                                    children: [
+                                      Image.network(controller.recomendedGames.game.cover.bigCover)
+                                    ],
+                                  )),
+                              ExpansionPanel(
+                                  backgroundColor: Theme.of(context).primaryColor,
+                                  headerBuilder: (BuildContext context, bool isExpanded) {
+                                    return ListTile(
+                                        onTap: () {
+                                          controller.isRecomendationsExpanded =
+                                              !controller.isRecomendationsExpanded;
+                                        },
+                                        hoverColor: Colors.blue,
+                                        focusColor: Colors.red,
+                                        title: Text("Recomendations",
+                                            textAlign: TextAlign.left,
+                                            style: Theme.of(context).textTheme.headline1));
+                                  },
+                                  isExpanded: controller.isRecomendationsExpanded,
+                                  body: Column(
+                                    children: [
+                                      //Same Company
+                                      RecomendationsList(controller, controller.sameCompany,
+                                          "From the same Company"),
+
+                                      //Similar games
+                                      RecomendationsList(
+                                          controller, controller.similarGames, "Similar ones")
+                                    ],
+                                  )),
+                            ]),
+                      ),)
+*/

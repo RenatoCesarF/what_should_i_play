@@ -34,7 +34,7 @@ class _RecomendationsListState extends State<RecomendationsList> {
                   ),
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 8),
-                    color: Color(0xff1F1A38),
+                    color: Theme.of(context).hintColor,
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(

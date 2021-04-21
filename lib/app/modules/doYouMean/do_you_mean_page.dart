@@ -52,7 +52,7 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                                       key: ValueKey(game),
                                       child: Container(
                                         decoration: new BoxDecoration(
-                                            color: Color(0xff1F1A38),
+                                            color: Theme.of(context).hintColor,
                                             borderRadius: BorderRadius.all(
                                               Radius.circular(20.0),
                                             )),
@@ -161,7 +161,7 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                 ),
                 Container(
                   height: 3,
-                  color: Color(0xff1F1A38),
+                  color: Theme.of(context).hintColor,
                 ),
               ],
             )),

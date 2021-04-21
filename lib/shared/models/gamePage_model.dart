@@ -1,22 +1,20 @@
 import 'game_model.dart';
 
-class Recomendations {
-  int id;
+class GamePage {
   List<InvolvedCompanies> involvedCompanies;
-  String name;
   List<Game> similarGames;
+  Game game;
 
-  Recomendations({this.id, this.involvedCompanies, this.name, this.similarGames});
+  GamePage({this.involvedCompanies, this.similarGames, this.game});
 
-  Recomendations.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+  GamePage.fromJson(Map<String, dynamic> json) {
+    game = Game.fromJson(json);
     if (json['involved_companies'] != null) {
       involvedCompanies = new List<InvolvedCompanies>();
       json['involved_companies'].forEach((v) {
         involvedCompanies.add(new InvolvedCompanies.fromJson(v));
       });
     }
-    name = json['name'];
     if (json['similar_games'] != null) {
       similarGames = new List<Game>();
       json['similar_games'].forEach((v) {
@@ -27,11 +25,9 @@ class Recomendations {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
     if (this.involvedCompanies != null) {
       data['involved_companies'] = this.involvedCompanies.map((v) => v.toJson()).toList();
     }
-    data['name'] = this.name;
     if (this.similarGames != null) {
       data['similar_games'] = this.similarGames.map((v) => v.toJson()).toList();
     }
