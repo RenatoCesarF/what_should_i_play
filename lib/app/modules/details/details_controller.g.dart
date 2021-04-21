@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'recomendations_controller.dart';
+part of 'details_controller.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,9 +8,8 @@ part of 'recomendations_controller.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$RecomendationsController on _RecomendationsControllerBase, Store {
-  final _$finishLoadAtom =
-      Atom(name: '_RecomendationsControllerBase.finishLoad');
+mixin _$DetailsController on _DetailsControllerBase, Store {
+  final _$finishLoadAtom = Atom(name: '_DetailsControllerBase.finishLoad');
 
   @override
   bool get finishLoad {
@@ -25,8 +24,7 @@ mixin _$RecomendationsController on _RecomendationsControllerBase, Store {
     });
   }
 
-  final _$sameCompanyAtom =
-      Atom(name: '_RecomendationsControllerBase.sameCompany');
+  final _$sameCompanyAtom = Atom(name: '_DetailsControllerBase.sameCompany');
 
   @override
   ObservableList<Game> get sameCompany {
@@ -41,8 +39,23 @@ mixin _$RecomendationsController on _RecomendationsControllerBase, Store {
     });
   }
 
+  final _$similarGamesAtom = Atom(name: '_DetailsControllerBase.similarGames');
+
+  @override
+  ObservableList<Game> get similarGames {
+    _$similarGamesAtom.reportRead();
+    return super.similarGames;
+  }
+
+  @override
+  set similarGames(ObservableList<Game> value) {
+    _$similarGamesAtom.reportWrite(value, super.similarGames, () {
+      super.similarGames = value;
+    });
+  }
+
   final _$recomendedGamesAtom =
-      Atom(name: '_RecomendationsControllerBase.recomendedGames');
+      Atom(name: '_DetailsControllerBase.recomendedGames');
 
   @override
   Recomendations get recomendedGames {
@@ -58,7 +71,7 @@ mixin _$RecomendationsController on _RecomendationsControllerBase, Store {
   }
 
   final _$getRecomendedGamesAsyncAction =
-      AsyncAction('_RecomendationsControllerBase.getRecomendedGames');
+      AsyncAction('_DetailsControllerBase.getRecomendedGames');
 
   @override
   Future<void> getRecomendedGames(int gameId) {
@@ -71,6 +84,7 @@ mixin _$RecomendationsController on _RecomendationsControllerBase, Store {
     return '''
 finishLoad: ${finishLoad},
 sameCompany: ${sameCompany},
+similarGames: ${similarGames},
 recomendedGames: ${recomendedGames}
     ''';
   }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:project/app/modules/recomendations/recomendations_controller.dart';
+import 'package:project/app/modules/details/details_controller.dart';
 import 'package:project/shared/models/game_model.dart';
 
 class RecomendationsList extends StatefulWidget {
-  final RecomendationsController controller;
+  final DetailsController controller;
   final List<Game> games;
   final String title;
 
@@ -19,7 +19,7 @@ class _RecomendationsListState extends State<RecomendationsList> {
   Widget build(BuildContext context) {
     return Observer(
       builder: (BuildContext context) {
-        return widget.games.isNotEmpty
+        return widget.games.length > 0
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

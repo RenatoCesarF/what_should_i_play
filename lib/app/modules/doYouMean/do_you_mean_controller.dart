@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:project/app/modules/recomendations/recomendations_module.dart';
+import 'package:project/app/modules/details/details_module.dart';
 import 'package:project/shared/models/game_model.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -52,7 +52,7 @@ abstract class _DoYouMeanControllerBase with Store {
 
   @action
   Future<void> openGame(Game game) async {
-    await Modular.to.push(MaterialPageRoute(builder: (_) => RecomendationsModule(game: game)));
+    await Modular.to.push(MaterialPageRoute(builder: (_) => DetailsModule(game: game)));
     // await Navigator.push(context,
     print(game.name);
   }

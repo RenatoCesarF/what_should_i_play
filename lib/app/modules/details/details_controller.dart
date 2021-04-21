@@ -7,11 +7,11 @@ import 'package:mobx/mobx.dart';
 import 'package:project/shared/models/game_model.dart';
 import 'package:project/shared/models/recomendations_model.dart';
 
-part 'recomendations_controller.g.dart';
+part 'details_controller.g.dart';
 
-class RecomendationsController = _RecomendationsControllerBase with _$RecomendationsController;
+class DetailsController = _DetailsControllerBase with _$DetailsController;
 
-abstract class _RecomendationsControllerBase with Store {
+abstract class _DetailsControllerBase with Store {
   @observable
   bool finishLoad = false;
 
