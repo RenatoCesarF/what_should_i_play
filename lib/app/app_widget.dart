@@ -6,11 +6,21 @@ class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      darkTheme: ThemeData(
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          accentColor: Color(0xffF21B3F),
-          primaryColor: Color(0xff322A5C),
-          hintColor: Color(0xffF21B3F)),
+      theme: ThemeData(
+        textTheme: TextTheme(
+          //Big text
+          headline1: TextStyle(
+            fontSize: 25,
+            color: Color(0xff979797),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        fontFamily: "Poppins",
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        accentColor: Color(0xffF21B3F),
+        primaryColor: Color(0xff322A5C),
+        hintColor: Color(0xff1F1A38),
+      ),
       color: Color(0xff1F1A38),
       navigatorKey: Modular.navigatorKey,
       debugShowCheckedModeBanner: false,
@@ -20,7 +30,6 @@ class AppWidget extends StatelessWidget {
       builder: BotToastInit(),
       themeMode: ThemeMode.dark,
       navigatorObservers: [BotToastNavigatorObserver()],
-      theme: ThemeData(fontFamily: "Poppins"),
     );
   }
 }

@@ -9,6 +9,22 @@ part of 'do_you_mean_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$DoYouMeanController on _DoYouMeanControllerBase, Store {
+  final _$searchBarControllerAtom =
+      Atom(name: '_DoYouMeanControllerBase.searchBarController');
+
+  @override
+  TextEditingController get searchBarController {
+    _$searchBarControllerAtom.reportRead();
+    return super.searchBarController;
+  }
+
+  @override
+  set searchBarController(TextEditingController value) {
+    _$searchBarControllerAtom.reportWrite(value, super.searchBarController, () {
+      super.searchBarController = value;
+    });
+  }
+
   final _$gamesAtom = Atom(name: '_DoYouMeanControllerBase.games');
 
   @override
@@ -48,9 +64,18 @@ mixin _$DoYouMeanController on _DoYouMeanControllerBase, Store {
     return _$findGamesAsyncAction.run(() => super.findGames(gameName));
   }
 
+  final _$openGameAsyncAction =
+      AsyncAction('_DoYouMeanControllerBase.openGame');
+
+  @override
+  Future<void> openGame(Game game) {
+    return _$openGameAsyncAction.run(() => super.openGame(game));
+  }
+
   @override
   String toString() {
     return '''
+searchBarController: ${searchBarController},
 games: ${games},
 finishSearch: ${finishSearch}
     ''';
