@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:project/app/modules/recomendations/recomendations_controller.dart';
+import 'package:project/app/modules/recomendations/recomendations_list_widget/recomendations_list.dart';
 import 'package:project/app/modules/search/search_controller.dart';
 import 'package:project/shared/components/loading.dart';
 import 'package:project/shared/models/game_model.dart';
@@ -34,7 +35,7 @@ class _RecomendationsPageState extends State<RecomendationsPage>
     return Observer(
       builder: (BuildContext context) {
         return Scaffold(
-            backgroundColor: Color(0xff322A5C),
+            backgroundColor: Theme.of(context).primaryColor,
             body: controller.finishLoad
                 ? Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,7 +44,7 @@ class _RecomendationsPageState extends State<RecomendationsPage>
                       Column(
                         children: [
                           Container(
-                            color: Color(0xff322A5C),
+                            color: Theme.of(context).primaryColor,
                             padding: EdgeInsets.only(top: 30, bottom: 6),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,7 +54,7 @@ class _RecomendationsPageState extends State<RecomendationsPage>
                                   child: TextButton(
                                     onPressed: () => Modular.to.pop(),
                                     child: Icon(Icons.arrow_back_rounded,
-                                        size: 30, color: Color(0xffF21B3F)),
+                                        size: 30, color: Theme.of(context).accentColor), //changed
                                   ),
                                 ),
                                 Expanded(
@@ -62,8 +63,8 @@ class _RecomendationsPageState extends State<RecomendationsPage>
                                       controller.recomendedGames.name,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        fontSize: 15,
-                                        color: Color(0xff979797), // Color(0xffF21B3F)
+                                        fontSize: 18,
+                                        color: Color(0xff979797),
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -75,7 +76,7 @@ class _RecomendationsPageState extends State<RecomendationsPage>
                                   child: Icon(
                                     Icons.bookmark_border_outlined,
                                     size: 30,
-                                    color: Color(0xffF21B3F),
+                                    color: Theme.of(context).accentColor, //changed
                                   ),
                                 ),
                               ],
@@ -87,16 +88,13 @@ class _RecomendationsPageState extends State<RecomendationsPage>
                           )
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 8.0, top: 10, bottom: 30),
-                        child: Text("Recomendations",
-                            textAlign: TextAlign.start,
-                            style: TextStyle(
-                              fontSize: 25,
-                              color: Color(0xff979797),
-                              fontWeight: FontWeight.bold,
-                            )),
-                      ),
+
+                      //Same Company
+                      RecomendationsList(
+                          controller, controller.sameCompany, "From the same Company"),
+
+                      //Similar games
+                      RecomendationsList(controller, controller.similarGames, "Similar ones")
                     ],
                   )
                 : Loading());

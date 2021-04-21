@@ -23,7 +23,7 @@ abstract class _DoYouMeanControllerBase with Store {
 
   @action
   Future<void> findGames(String gameName) async {
-    gameName = "Valheim";
+    gameName = "League of legends";
     finishSearch = false;
     games.clear();
     List response = await Dio()

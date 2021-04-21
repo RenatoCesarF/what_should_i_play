@@ -4,7 +4,7 @@ class Recomendations {
   int id;
   List<InvolvedCompanies> involvedCompanies;
   String name;
-  List<SimilarGames> similarGames;
+  List<Game> similarGames;
 
   Recomendations({this.id, this.involvedCompanies, this.name, this.similarGames});
 
@@ -18,9 +18,9 @@ class Recomendations {
     }
     name = json['name'];
     if (json['similar_games'] != null) {
-      similarGames = new List<SimilarGames>();
+      similarGames = new List<Game>();
       json['similar_games'].forEach((v) {
-        similarGames.add(new SimilarGames.fromJson(v));
+        similarGames.add(new Game.fromJson(v));
       });
     }
   }
@@ -66,7 +66,7 @@ class InvolvedCompanies {
 class Company {
   int id;
   String name;
-  List<Published> published;
+  List<Game> published;
 
   Company({this.id, this.name, this.published});
 
@@ -74,9 +74,9 @@ class Company {
     id = json['id'];
     name = json['name'];
     if (json['published'] != null) {
-      published = new List<Published>();
+      published = new List<Game>();
       json['published'].forEach((v) {
-        published.add(new Published.fromJson(v));
+        published.add(new Game.fromJson(v));
       });
     }
   }
@@ -88,54 +88,6 @@ class Company {
     if (this.published != null) {
       data['published'] = this.published.map((v) => v.toJson()).toList();
     }
-    return data;
-  }
-}
-
-class Published {
-  int id;
-  Cover cover;
-  String name;
-
-  Published({this.id, this.cover, this.name});
-
-  Published.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    cover = json['cover'] != null ? new Cover.fromJson(json['cover']) : null;
-    name = json['name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    if (this.cover != null) {
-      data['cover'] = this.cover.toJson();
-    }
-    data['name'] = this.name;
-    return data;
-  }
-}
-
-class SimilarGames {
-  int id;
-  Cover cover;
-  String name;
-
-  SimilarGames({this.id, this.cover, this.name});
-
-  SimilarGames.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    cover = json['cover'] != null ? new Cover.fromJson(json['cover']) : null;
-    name = json['name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    if (this.cover != null) {
-      data['cover'] = this.cover.toJson();
-    }
-    data['name'] = this.name;
     return data;
   }
 }

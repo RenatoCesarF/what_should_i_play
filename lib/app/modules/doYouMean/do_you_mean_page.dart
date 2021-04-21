@@ -29,7 +29,7 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
     return Observer(
       builder: (BuildContext context) {
         return Scaffold(
-          backgroundColor: Color(0xff322A5C),
+          backgroundColor: Theme.of(context).primaryColor,
           body: Stack(children: [
             controller.finishSearch
                 ? controller.games.isEmpty || controller.games == null
@@ -39,75 +39,76 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                         style: TextStyle(
                             color: Color(0xff979797), fontWeight: FontWeight.bold, fontSize: 18),
                       ))
-                    : Padding(
-                        padding: const EdgeInsets.only(top: 85.0),
-                        child: ListView(
-                            addAutomaticKeepAlives: false,
-                            children: controller.games
-                                .map((game) => game != null
-                                    ? GestureDetector(
-                                        onTap: () => controller.openGame(game),
-                                        child: Dismissible(
-                                          key: ValueKey(game),
-                                          child: Container(
-                                            decoration: new BoxDecoration(
-                                                color: Color(0xff1F1A38),
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(20.0),
-                                                )),
-                                            margin: const EdgeInsets.all(8.0),
-                                            padding: const EdgeInsets.all(8),
-                                            child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsets.all(5.0),
-                                                  child: ClipRRect(
-                                                    borderRadius: BorderRadius.circular(8.0),
-                                                    child: Image.network(
-                                                        game.cover != null
-                                                            ? game.cover.smallCover
-                                                            : "https://via.placeholder.com/90x128",
-                                                        fit: BoxFit.contain),
-                                                  ),
-                                                ),
-                                                Container(width: 8),
-                                                Expanded(
-                                                  child: Column(
-                                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                                    children: [
-                                                      Text(
-                                                        game.name,
-                                                        style: TextStyle(
-                                                            color: Color(0xff979797),
-                                                            fontWeight: FontWeight.bold,
-                                                            fontSize: 18),
-                                                      ),
-                                                      Container(height: 10),
-                                                      Text(
-                                                        game.summary != null
-                                                            ? "${game.summaryShort}..."
-                                                            : "",
-                                                        textAlign: TextAlign.start,
-                                                        style: TextStyle(
-                                                            color: Color(0xff979797), fontSize: 12),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
+                    : ListView(
+                        shrinkWrap: true,
+                        addAutomaticKeepAlives: false,
+                        children: controller.games
+                            .map((game) => game != null
+                                ? GestureDetector(
+                                    onTap: () => controller.openGame(game),
+                                    child: Dismissible(
+                                      onDismissed: (key) => controller.games
+                                          .removeWhere((element) => element == game),
+                                      key: ValueKey(game),
+                                      child: Container(
+                                        decoration: new BoxDecoration(
+                                            color: Color(0xff1F1A38),
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(20.0),
+                                            )),
+                                        margin: const EdgeInsets.all(8.0),
+                                        padding: const EdgeInsets.all(8),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.all(5.0),
+                                              child: ClipRRect(
+                                                borderRadius: BorderRadius.circular(8.0),
+                                                child: Image.network(
+                                                    game.cover != null
+                                                        ? game.cover.smallCover
+                                                        : "https://via.placeholder.com/90x128",
+                                                    fit: BoxFit.contain),
+                                              ),
                                             ),
-                                          ),
+                                            Container(width: 8),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    game.name,
+                                                    style: TextStyle(
+                                                        color: Color(0xff979797),
+                                                        fontWeight: FontWeight.bold,
+                                                        fontSize: 18),
+                                                  ),
+                                                  Container(height: 10),
+                                                  Text(
+                                                    game.summary != null
+                                                        ? "${game.summaryShort}..."
+                                                        : "",
+                                                    textAlign: TextAlign.start,
+                                                    style: TextStyle(
+                                                        color: Color(0xff979797), fontSize: 12),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      )
-                                    : Container())
-                                .toList()))
+                                      ),
+                                    ),
+                                  )
+                                : Container())
+                            .toList())
                 : Loading(),
             Positioned(
                 child: Column(
               children: [
                 Container(
-                  color: Color(0xff322A5C),
+                  color: Theme.of(context).primaryColor,
                   padding: EdgeInsets.only(top: 30, bottom: 6),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -116,7 +117,8 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                         width: 40,
                         child: TextButton(
                           onPressed: () => Navigator.pop(context),
-                          child: Icon(Icons.arrow_back_rounded, size: 30, color: Color(0xffF21B3F)),
+                          child: Icon(Icons.arrow_back_rounded,
+                              size: 30, color: Theme.of(context).accentColor), //changed
                         ),
                       ),
                       Expanded(
@@ -137,7 +139,7 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                           ),
                           selectionHeightStyle: BoxHeightStyle.tight,
                           textAlign: TextAlign.center,
-                          cursorColor: Color(0xffF21B3F),
+                          cursorColor: Theme.of(context).accentColor, //changed
                         ),
                       ),
                       SizedBox(
@@ -150,7 +152,7 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                           child: Icon(
                             Icons.search_rounded,
                             size: 30,
-                            color: Color(0xffF21B3F),
+                            color: Theme.of(context).accentColor, //changed
                           ),
                         ),
                       ),
@@ -160,7 +162,7 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                 Container(
                   height: 3,
                   color: Color(0xff1F1A38),
-                )
+                ),
               ],
             )),
           ]),
