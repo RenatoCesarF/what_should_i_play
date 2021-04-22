@@ -1,3 +1,5 @@
+import 'gamePage_model.dart';
+
 class Game {
   String summary;
   String summaryShort;
@@ -24,6 +26,11 @@ class Game {
       this.summaryShort,
       this.summary});
 
+  get launchYear => DateTime.fromMillisecondsSinceEpoch(this.firstReleaseDate * 1000).year;
+
+  get getDeveloperCompany =>
+      this.involvedCompanies.where((element) => element.developer == true).first.company;
+
   Game.fromJson(Map<String, dynamic> json) {
     summary = json['summary'];
 
@@ -35,7 +42,7 @@ class Game {
     }
 
     if (json['websites'] != null) {
-      websites = new List<Websites>();
+      websites = <Websites>[];
       json['websites'].forEach((v) {
         websites.add(Websites.fromJson(v));
       });
@@ -43,7 +50,9 @@ class Game {
 
     id = json['id'];
     cover = json['cover'] != null ? new Cover.fromJson(json['cover']) : null;
+
     firstReleaseDate = json['first_release_date'];
+
     if (json['genres'] != null) {
       // ignore: deprecated_member_use
       genres = new List<Genres>();
@@ -158,14 +167,14 @@ class Genres {
 
 class InvolvedCompanies {
   int id;
-  Genres company;
+  Company company;
   bool developer;
 
   InvolvedCompanies({this.id, this.company, this.developer});
 
   InvolvedCompanies.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    company = json['company'] != null ? new Genres.fromJson(json['company']) : null;
+    company = json['company'] != null ? new Company.fromJson(json['company']) : null;
     developer = json['developer'];
   }
 
@@ -187,7 +196,7 @@ class Platforms {
 
   Platforms.fromJson(Map<String, dynamic> json) {
     if (json['platforms'] != null) {
-      platforms = List<Platforms>();
+      platforms = <Platforms>[];
       json['platforms'].forEach((v) {
         platforms.add(new Platforms.fromJson(v));
       });

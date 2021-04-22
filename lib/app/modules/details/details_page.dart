@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -7,7 +6,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:project/app/modules/details/details_controller.dart';
 import 'package:project/app/modules/details/recomendations_list_widget/recomendations_list.dart';
-import 'package:project/app/modules/search/search_controller.dart';
 import 'package:project/shared/components/loading.dart';
 import 'package:project/shared/models/game_model.dart';
 
@@ -106,8 +104,32 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                                     isExpanded: controller.isInfoExpanded,
                                     body: Column(
                                       children: [
-                                        Image.network(
-                                            controller.recomendedGames.game.cover.bigCover)
+                                        Container(
+                                          padding: EdgeInsets.only(top: 20, bottom: 20),
+                                          width: double.infinity,
+                                          color: Theme.of(context).hintColor,
+                                          child: Column(
+                                            children: [
+                                              // Image.network(controller.recomendedGames.game
+                                              //     .getDeveloperCompany.getCompanyLogo),
+                                              ClipRRect(
+                                                borderRadius: BorderRadius.circular(18.0),
+                                                child: Image.network(
+                                                    controller.recomendedGames.game.cover != null
+                                                        ? controller
+                                                            .recomendedGames.game.cover.bigCover
+                                                        : "https://via.placeholder.com/264x374"),
+                                              ),
+                                              Text(
+                                                  "${controller.recomendedGames.game.launchYear} — ${controller.recomendedGames.game.getDeveloperCompany.name}  ,")
+                                            ],
+                                          ),
+                                        )
+
+                                        //Rating
+                                        //General information
+                                        //Wrap with links
+                                        //screenshots
                                       ],
                                     )),
                                 ExpansionPanel(
@@ -141,63 +163,3 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
     );
   }
 }
-
-/*
-Expanded(child:
- SingleChildScrollView(
-                        child: ExpansionPanelList(
-                            dividerColor: Theme.of(context).primaryColor,
-                            expansionCallback: (int index, bool isExpanded) {
-                              controller.isRecomendationsExpanded =
-                                  !controller.isRecomendationsExpanded;
-                            },
-                            children: [
-                              ExpansionPanel(
-                                  backgroundColor: Theme.of(context).primaryColor,
-                                  headerBuilder: (BuildContext context, bool isExpanded) {
-                                    return ListTile(
-                                        onTap: () {
-                                          controller.isRecomendationsExpanded =
-                                              !controller.isRecomendationsExpanded;
-                                        },
-                                        hoverColor: Colors.blue,
-                                        focusColor: Colors.red,
-                                        title: Text("Titulo",
-                                            textAlign: TextAlign.left,
-                                            style: Theme.of(context).textTheme.headline1));
-                                  },
-                                  isExpanded: controller.isRecomendationsExpanded,
-                                  body: Column(
-                                    children: [
-                                      Image.network(controller.recomendedGames.game.cover.bigCover)
-                                    ],
-                                  )),
-                              ExpansionPanel(
-                                  backgroundColor: Theme.of(context).primaryColor,
-                                  headerBuilder: (BuildContext context, bool isExpanded) {
-                                    return ListTile(
-                                        onTap: () {
-                                          controller.isRecomendationsExpanded =
-                                              !controller.isRecomendationsExpanded;
-                                        },
-                                        hoverColor: Colors.blue,
-                                        focusColor: Colors.red,
-                                        title: Text("Recomendations",
-                                            textAlign: TextAlign.left,
-                                            style: Theme.of(context).textTheme.headline1));
-                                  },
-                                  isExpanded: controller.isRecomendationsExpanded,
-                                  body: Column(
-                                    children: [
-                                      //Same Company
-                                      RecomendationsList(controller, controller.sameCompany,
-                                          "From the same Company"),
-
-                                      //Similar games
-                                      RecomendationsList(
-                                          controller, controller.similarGames, "Similar ones")
-                                    ],
-                                  )),
-                            ]),
-                      ),)
-*/

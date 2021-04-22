@@ -10,13 +10,13 @@ class GamePage {
   GamePage.fromJson(Map<String, dynamic> json) {
     game = Game.fromJson(json);
     if (json['involved_companies'] != null) {
-      involvedCompanies = new List<InvolvedCompanies>();
+      involvedCompanies = <InvolvedCompanies>[];
       json['involved_companies'].forEach((v) {
         involvedCompanies.add(new InvolvedCompanies.fromJson(v));
       });
     }
     if (json['similar_games'] != null) {
-      similarGames = new List<Game>();
+      similarGames = <Game>[];
       json['similar_games'].forEach((v) {
         similarGames.add(new Game.fromJson(v));
       });
@@ -63,14 +63,21 @@ class Company {
   int id;
   String name;
   List<Game> published;
+  Logo logo; //a getter to developer logo
 
-  Company({this.id, this.name, this.published});
+  Company({this.id, this.name, this.published, this.logo});
 
   Company.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
+
+    if (json['logo'] != null) {
+      logo = Logo.fromJson(json['logo']);
+      print(logo.imageId);
+    }
+
     if (json['published'] != null) {
-      published = new List<Game>();
+      published = <Game>[];
       json['published'].forEach((v) {
         published.add(new Game.fromJson(v));
       });
@@ -84,6 +91,26 @@ class Company {
     if (this.published != null) {
       data['published'] = this.published.map((v) => v.toJson()).toList();
     }
+    return data;
+  }
+}
+
+class Logo {
+  int id;
+  String imageId;
+
+  Logo({this.id, this.imageId});
+
+  Logo.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    imageId = json['image_id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['image_id'] = this.imageId;
+
     return data;
   }
 }

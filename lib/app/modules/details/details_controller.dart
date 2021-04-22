@@ -1,8 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_modular/flutter_modular.dart';
-import 'package:mobx/mobx.dart';
-import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:project/shared/models/game_model.dart';
 import 'package:project/shared/models/gamePage_model.dart';
@@ -39,7 +36,7 @@ abstract class _DetailsControllerBase with Store {
     var response = await Dio()
         .post("https://api.igdb.com/v4/games",
             data:
-                'where id = $gameId; fields name,websites,websites.url, websites.category,summary,cover.image_id,first_release_date, genres.name,platforms.name,total_rating,name,franchises.games.name,franchises.games.cover.image_id, similar_games.cover.image_id, similar_games.name, involved_companies.company.published.cover.image_id, involved_companies.company.name, involved_companies.developer, involved_companies.company.published.name;',
+                'where id = $gameId; fields name,websites,websites.url, websites.category,summary,cover.image_id,first_release_date, genres.name,platforms.name,total_rating,name, similar_games.cover.image_id, similar_games.name, involved_companies.company.published.cover.image_id, involved_companies.company.name, involved_companies.developer, involved_companies.company.published.name,involved_companies.company.logo.image_id;',
             options: Options(headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/x-www-form-urlencoded',
@@ -68,8 +65,6 @@ abstract class _DetailsControllerBase with Store {
     });
 
     finishLoad = true;
-
-    print(recomendedGames.game.websites[0].url);
   }
 
   @action
