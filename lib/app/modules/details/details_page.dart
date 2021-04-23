@@ -57,11 +57,11 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                                 Expanded(
                                   child: Center(
                                     child: Text(
-                                      controller.recomendedGames.game.name,
+                                      controller.recomendedGames.name,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontSize: 18,
-                                        color: Color(0xff979797),
+                                        color: Theme.of(context).canvasColor,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
@@ -110,18 +110,20 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                                           color: Theme.of(context).hintColor,
                                           child: Column(
                                             children: [
-                                              // Image.network(controller.recomendedGames.game
+                                              // Image.network(controller.recomendedGames
                                               //     .getDeveloperCompany.getCompanyLogo),
                                               ClipRRect(
                                                 borderRadius: BorderRadius.circular(18.0),
                                                 child: Image.network(
-                                                    controller.recomendedGames.game.cover != null
-                                                        ? controller
-                                                            .recomendedGames.game.cover.bigCover
+                                                    controller.recomendedGames.cover != null
+                                                        ? controller.recomendedGames.cover.bigCover
                                                         : "https://via.placeholder.com/264x374"),
                                               ),
                                               Text(
-                                                  "${controller.recomendedGames.game.launchYear} — ${controller.recomendedGames.game.getDeveloperCompany.name}  ,")
+                                                  "${controller.recomendedGames.launchYear} — ${controller.recomendedGames.getDeveloperCompany.name}",
+                                                  style: TextStyle(
+                                                      color: Theme.of(context).canvasColor,
+                                                      fontWeight: FontWeight.bold))
                                             ],
                                           ),
                                         )
