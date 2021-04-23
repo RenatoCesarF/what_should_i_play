@@ -24,10 +24,10 @@ abstract class _DetailsControllerBase with Store {
   ObservableList<Game> similarGames = ObservableList.of([]);
 
   @observable
-  Game recomendedGames;
+  Game gameInfo;
 
   @action
-  Future<void> getRecomendedGames(int gameId) async {
+  Future<void> getgameInfo(int gameId) async {
     similarGames.clear();
     sameCompany.clear();
 
@@ -35,7 +35,7 @@ abstract class _DetailsControllerBase with Store {
     var response = await Dio()
         .post("https://api.igdb.com/v4/games",
             data:
-                'where id = $gameId; fields name,websites,websites.url, websites.category,summary,cover.image_id,first_release_date, genres.name,platforms.name,total_rating,name, similar_games.cover.image_id, similar_games.name, involved_companies.company.published.cover.image_id, involved_companies.company.name, involved_companies.developer, involved_companies.company.published.name,involved_companies.company.logo.image_id;',
+                'where id = $gameId; fields name,websites.url, websites.category,summary,cover.image_id,first_release_date, genres.name,platforms.name,platforms.platform_logo.image_id,total_rating,name, similar_games.cover.image_id, similar_games.name, involved_companies.company.published.cover.image_id, involved_companies.company.name, involved_companies.developer, involved_companies.company.published.name,involved_companies.company.logo.image_id;',
             options: Options(headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/x-www-form-urlencoded',
@@ -45,12 +45,10 @@ abstract class _DetailsControllerBase with Store {
         .then((value) => value.data);
 
     // print(response);
-    recomendedGames = Game.fromJson(response[0]);
+    gameInfo = Game.fromJson(response[0]);
 
     //Same company
-    recomendedGames.involvedCompanies
-        .where((element) => element.developer == true)
-        .forEach((element) {
+    gameInfo.involvedCompanies.where((element) => element.developer == true).forEach((element) {
       if (element.company.published == null) return;
       element.company.published.forEach((game) {
         if (game.id == gameId) return;
@@ -59,7 +57,7 @@ abstract class _DetailsControllerBase with Store {
     });
 
     //Similar Games
-    recomendedGames.similarGames.forEach((game) {
+    gameInfo.similarGames.forEach((game) {
       similarGames.add(game);
     });
 

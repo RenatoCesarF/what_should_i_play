@@ -87,29 +87,27 @@ mixin _$DetailsController on _DetailsControllerBase, Store {
     });
   }
 
-  final _$recomendedGamesAtom =
-      Atom(name: '_DetailsControllerBase.recomendedGames');
+  final _$gameInfoAtom = Atom(name: '_DetailsControllerBase.gameInfo');
 
   @override
-  Game get recomendedGames {
-    _$recomendedGamesAtom.reportRead();
-    return super.recomendedGames;
+  Game get gameInfo {
+    _$gameInfoAtom.reportRead();
+    return super.gameInfo;
   }
 
   @override
-  set recomendedGames(Game value) {
-    _$recomendedGamesAtom.reportWrite(value, super.recomendedGames, () {
-      super.recomendedGames = value;
+  set gameInfo(Game value) {
+    _$gameInfoAtom.reportWrite(value, super.gameInfo, () {
+      super.gameInfo = value;
     });
   }
 
-  final _$getRecomendedGamesAsyncAction =
-      AsyncAction('_DetailsControllerBase.getRecomendedGames');
+  final _$getgameInfoAsyncAction =
+      AsyncAction('_DetailsControllerBase.getgameInfo');
 
   @override
-  Future<void> getRecomendedGames(int gameId) {
-    return _$getRecomendedGamesAsyncAction
-        .run(() => super.getRecomendedGames(gameId));
+  Future<void> getgameInfo(int gameId) {
+    return _$getgameInfoAsyncAction.run(() => super.getgameInfo(gameId));
   }
 
   final _$_DetailsControllerBaseActionController =
@@ -145,7 +143,7 @@ isRecomendationsExpanded: ${isRecomendationsExpanded},
 isInfoExpanded: ${isInfoExpanded},
 sameCompany: ${sameCompany},
 similarGames: ${similarGames},
-recomendedGames: ${recomendedGames}
+gameInfo: ${gameInfo}
     ''';
   }
 }

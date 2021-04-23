@@ -24,7 +24,7 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
   @override
   void initState() {
     super.initState();
-    controller.getRecomendedGames(widget.game.id);
+    controller.getgameInfo(widget.game.id);
   }
 
   @override
@@ -57,7 +57,7 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                                 Expanded(
                                   child: Center(
                                     child: Text(
-                                      controller.recomendedGames.name,
+                                      controller.gameInfo.name,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                         fontSize: 18,
@@ -110,20 +110,26 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                                           color: Theme.of(context).hintColor,
                                           child: Column(
                                             children: [
-                                              // Image.network(controller.recomendedGames
-                                              //     .getDeveloperCompany.getCompanyLogo),
+                                              Container(
+                                                  child: Image.network(
+                                                      controller.gameInfo.getDeveloperCompany.logo
+                                                          .bigImageURL,
+                                                      scale: 2)),
                                               ClipRRect(
                                                 borderRadius: BorderRadius.circular(18.0),
                                                 child: Image.network(
-                                                    controller.recomendedGames.cover != null
-                                                        ? controller.recomendedGames.cover.bigCover
+                                                    controller.gameInfo.cover != null
+                                                        ? controller.gameInfo.cover.bigCover
                                                         : "https://via.placeholder.com/264x374"),
                                               ),
-                                              Text(
-                                                  "${controller.recomendedGames.launchYear} — ${controller.recomendedGames.getDeveloperCompany.name}",
-                                                  style: TextStyle(
-                                                      color: Theme.of(context).canvasColor,
-                                                      fontWeight: FontWeight.bold))
+                                              Container(
+                                                margin: EdgeInsets.only(top: 15),
+                                                child: Text(
+                                                    "${controller.gameInfo.launchYear} — ${controller.gameInfo.getDeveloperCompany.name}",
+                                                    style: TextStyle(
+                                                        color: Theme.of(context).canvasColor,
+                                                        fontWeight: FontWeight.bold)),
+                                              )
                                             ],
                                           ),
                                         )
