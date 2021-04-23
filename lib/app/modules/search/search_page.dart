@@ -35,7 +35,7 @@ class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateM
               "Write down a game that you enjoyed,\n and discover your next expirence",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Color(0xff979797),
+                  color: Theme.of(context).canvasColor,
                   fontFamily: "Roboto",
                   fontSize: 15,
                   fontWeight: FontWeight.w400,

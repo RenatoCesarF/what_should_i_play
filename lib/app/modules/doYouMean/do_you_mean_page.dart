@@ -37,7 +37,9 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                         child: Text(
                         "Couldn't Find ${widget.gameName.isEmpty ? controller.searchBarController.text : widget.gameName} ...",
                         style: TextStyle(
-                            color: Color(0xff979797), fontWeight: FontWeight.bold, fontSize: 18),
+                            color: Theme.of(context).canvasColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
                       ))
                     : ListView(
                         shrinkWrap: true,
@@ -80,18 +82,19 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                                                   Text(
                                                     game.name,
                                                     style: TextStyle(
-                                                        color: Color(0xff979797),
+                                                        color: Theme.of(context).canvasColor,
                                                         fontWeight: FontWeight.bold,
                                                         fontSize: 18),
                                                   ),
                                                   Container(height: 10),
                                                   Text(
                                                     game.summary != null
-                                                        ? "${game.summaryShort}..."
+                                                        ? "${game.getShortSummary}..."
                                                         : "",
                                                     textAlign: TextAlign.start,
                                                     style: TextStyle(
-                                                        color: Color(0xff979797), fontSize: 12),
+                                                        color: Theme.of(context).canvasColor,
+                                                        fontSize: 12),
                                                   ),
                                                 ],
                                               ),

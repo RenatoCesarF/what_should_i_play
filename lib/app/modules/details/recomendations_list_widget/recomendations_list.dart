@@ -28,7 +28,7 @@ class _RecomendationsListState extends State<RecomendationsList> {
                     child: Text(widget.games.isNotEmpty ? widget.title : "",
                         style: TextStyle(
                           fontSize: 23,
-                          color: Color(0xff979797),
+                          color: Theme.of(context).canvasColor,
                           fontWeight: FontWeight.bold,
                         )),
                   ),

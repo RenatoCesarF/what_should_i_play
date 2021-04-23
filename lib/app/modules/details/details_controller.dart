@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:mobx/mobx.dart';
 import 'package:project/shared/models/game_model.dart';
-import 'package:project/shared/models/gamePage_model.dart';
 
 part 'details_controller.g.dart';
 
@@ -25,7 +24,7 @@ abstract class _DetailsControllerBase with Store {
   ObservableList<Game> similarGames = ObservableList.of([]);
 
   @observable
-  GamePage recomendedGames;
+  Game recomendedGames;
 
   @action
   Future<void> getRecomendedGames(int gameId) async {
@@ -46,7 +45,7 @@ abstract class _DetailsControllerBase with Store {
         .then((value) => value.data);
 
     // print(response);
-    recomendedGames = GamePage.fromJson(response[0]);
+    recomendedGames = Game.fromJson(response[0]);
 
     //Same company
     recomendedGames.involvedCompanies

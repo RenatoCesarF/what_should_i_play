@@ -7,6 +7,12 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+        fontFamily: "Poppins",
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        accentColor: Color(0xffF21B3F),
+        primaryColor: Color(0xff322A5C),
+        hintColor: Color(0xff1F1A38),
+        canvasColor: Color(0xff979797),
         textTheme: TextTheme(
           //Big text
           headline1: TextStyle(
@@ -14,12 +20,12 @@ class AppWidget extends StatelessWidget {
             color: Color(0xff979797),
             fontWeight: FontWeight.bold,
           ),
+          bodyText1: TextStyle(
+            fontSize: 18,
+            color: Theme.of(context).canvasColor,
+            fontWeight: FontWeight.bold,
+          ),
         ),
-        fontFamily: "Poppins",
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        accentColor: Color(0xffF21B3F),
-        primaryColor: Color(0xff322A5C),
-        hintColor: Color(0xff1F1A38),
       ),
       color: Color(0xff1F1A38),
       navigatorKey: Modular.navigatorKey,

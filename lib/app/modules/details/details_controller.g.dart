@@ -91,13 +91,13 @@ mixin _$DetailsController on _DetailsControllerBase, Store {
       Atom(name: '_DetailsControllerBase.recomendedGames');
 
   @override
-  GamePage get recomendedGames {
+  Game get recomendedGames {
     _$recomendedGamesAtom.reportRead();
     return super.recomendedGames;
   }
 
   @override
-  set recomendedGames(GamePage value) {
+  set recomendedGames(Game value) {
     _$recomendedGamesAtom.reportWrite(value, super.recomendedGames, () {
       super.recomendedGames = value;
     });
