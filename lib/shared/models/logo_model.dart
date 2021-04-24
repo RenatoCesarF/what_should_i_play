@@ -19,6 +19,9 @@ class Logo {
     return data;
   }
 
-  get bigImageURL => "https://images.igdb.com/igdb/image/upload/t_cover_big/${this.imageId}.jpg";
-  get thumbImageURL => "https://images.igdb.com/igdb/image/upload/t_thumb/${this.imageId}.jpg";
+  get getBigImageURL => "https://images.igdb.com/igdb/image/upload/t_cover_big/${this.imageId}.jpg";
+  get getThumbImageURL => "https://images.igdb.com/igdb/image/upload/t_thumb/${this.imageId}.jpg";
+  get getLogoMedURL => "https://images.igdb.com/igdb/image/upload/t_logo_med/${this.imageId}.jpg";
+
+  //
 }

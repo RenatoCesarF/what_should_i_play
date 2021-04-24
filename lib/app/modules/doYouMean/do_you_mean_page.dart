@@ -35,7 +35,7 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                 ? controller.games.isEmpty || controller.games == null
                     ? Center(
                         child: Text(
-                        "Couldn't Find ${widget.gameName.isEmpty ? controller.searchBarController.text : widget.gameName} ...",
+                        "Couldn't Find ${widget.gameName} ...",
                         style: TextStyle(
                             color: Theme.of(context).canvasColor,
                             fontWeight: FontWeight.bold,

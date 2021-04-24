@@ -57,6 +57,22 @@ mixin _$DetailsController on _DetailsControllerBase, Store {
     });
   }
 
+  final _$isSummaryExpandedAtom =
+      Atom(name: '_DetailsControllerBase.isSummaryExpanded');
+
+  @override
+  bool get isSummaryExpanded {
+    _$isSummaryExpandedAtom.reportRead();
+    return super.isSummaryExpanded;
+  }
+
+  @override
+  set isSummaryExpanded(bool value) {
+    _$isSummaryExpandedAtom.reportWrite(value, super.isSummaryExpanded, () {
+      super.isSummaryExpanded = value;
+    });
+  }
+
   final _$sameCompanyAtom = Atom(name: '_DetailsControllerBase.sameCompany');
 
   @override
@@ -141,6 +157,7 @@ mixin _$DetailsController on _DetailsControllerBase, Store {
 finishLoad: ${finishLoad},
 isRecomendationsExpanded: ${isRecomendationsExpanded},
 isInfoExpanded: ${isInfoExpanded},
+isSummaryExpanded: ${isSummaryExpanded},
 sameCompany: ${sameCompany},
 similarGames: ${similarGames},
 gameInfo: ${gameInfo}

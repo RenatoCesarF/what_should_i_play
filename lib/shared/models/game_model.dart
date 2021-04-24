@@ -101,12 +101,14 @@ class Game {
     return data;
   }
 
-  get launchYear => DateTime.fromMillisecondsSinceEpoch(this.firstReleaseDate * 1000).year;
+  get launchYear => this.firstReleaseDate != null
+      ? DateTime.fromMillisecondsSinceEpoch(this.firstReleaseDate * 1000).year
+      : "Undefined";
 
-  get getDeveloperCompany =>
+  Company get getDeveloperCompany =>
       this.involvedCompanies.where((element) => element.developer == true).first.company;
 
-  get getShortSummary {
+  String get getShortSummary {
     String summaryShort = "";
     if (this.summary != null) {
       summaryShort = this.summary.substring(0, (this.summary.length / 3).floor());
@@ -114,6 +116,7 @@ class Game {
         summaryShort = this.summary.substring(0, (this.summary.length / 6).floor());
       }
     }
+    summaryShort += '...';
     return summaryShort;
   }
 }
@@ -146,7 +149,6 @@ class Platform {
   Platform.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     if (json['platform_logo'] != null) {
-      print(json['platform_logo']);
       platformLogo = Logo.fromJson(json['platform_logo']);
     }
   }

@@ -8,6 +8,7 @@ import 'package:project/app/modules/details/details_controller.dart';
 import 'package:project/app/modules/details/recomendations_list_widget/recomendations_list.dart';
 import 'package:project/shared/components/loading.dart';
 import 'package:project/shared/models/game_model.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 class DetailsPage extends StatefulWidget {
   final String title;
@@ -103,39 +104,148 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                                     },
                                     isExpanded: controller.isInfoExpanded,
                                     body: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Container(
-                                          padding: EdgeInsets.only(top: 20, bottom: 20),
-                                          width: double.infinity,
-                                          color: Theme.of(context).hintColor,
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                  child: Image.network(
-                                                      controller.gameInfo.getDeveloperCompany.logo
-                                                          .bigImageURL,
-                                                      scale: 2)),
-                                              ClipRRect(
-                                                borderRadius: BorderRadius.circular(18.0),
-                                                child: Image.network(
-                                                    controller.gameInfo.cover != null
+                                        Stack(
+                                          children: [
+                                            Container(
+                                              padding: EdgeInsets.only(top: 20, bottom: 20),
+                                              width: double.infinity,
+                                              color: Theme.of(context).hintColor,
+                                              child: Column(
+                                                children: [
+                                                  ClipRRect(
+                                                    borderRadius: BorderRadius.circular(18.0),
+                                                    child: Image.network(controller
+                                                                .gameInfo.cover !=
+                                                            null
                                                         ? controller.gameInfo.cover.bigCover
                                                         : "https://via.placeholder.com/264x374"),
+                                                  ),
+                                                  Container(
+                                                    margin: EdgeInsets.only(top: 15),
+                                                    child: Text(
+                                                        "${controller.gameInfo.launchYear} — ${controller.gameInfo.getDeveloperCompany.name}",
+                                                        style: TextStyle(
+                                                            color: Theme.of(context).canvasColor,
+                                                            fontWeight: FontWeight.bold)),
+                                                  )
+                                                ],
                                               ),
+                                            ),
+                                            Positioned(
+                                              bottom: 40,
+                                              right: 40,
+                                              child: ClipRRect(
+                                                  borderRadius: BorderRadius.circular(8.0),
+                                                  child: Image.network(
+                                                      controller.gameInfo.getDeveloperCompany !=
+                                                              null
+                                                          ? controller.gameInfo.getDeveloperCompany
+                                                              .logo.getLogoMedURL
+                                                          : 'https://via.placeholder.com/284x160',
+                                                      scale: 2.3)),
+                                            )
+                                          ],
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(left: 20, top: 10),
+                                          child: Text("Summary: ",
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Theme.of(context).accentColor,
+                                                  fontWeight: FontWeight.w900)),
+                                        ),
+                                        GestureDetector(
+                                          onTap: () {
+                                            controller.isSummaryExpanded =
+                                                !controller.isSummaryExpanded;
+                                          },
+                                          child: Container(
+                                            margin: EdgeInsets.only(top: 5, left: 30),
+                                            child: Text(
+                                              "\t${controller.isSummaryExpanded ? controller.gameInfo.summary : controller.gameInfo.getShortSummary}",
+                                              style: TextStyle(
+                                                  color: Theme.of(context).canvasColor,
+                                                  fontSize: 15),
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 5, left: 20),
+                                          child: Text("Genres: ",
+                                              style: TextStyle(
+                                                  fontSize: 16,
+                                                  color: Theme.of(context).accentColor,
+                                                  fontWeight: FontWeight.w900)),
+                                        ),
+                                        Container(
+                                          margin: EdgeInsets.only(top: 3, left: 25),
+                                          child: Row(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
                                               Container(
-                                                margin: EdgeInsets.only(top: 15),
-                                                child: Text(
-                                                    "${controller.gameInfo.launchYear} — ${controller.gameInfo.getDeveloperCompany.name}",
-                                                    style: TextStyle(
-                                                        color: Theme.of(context).canvasColor,
-                                                        fontWeight: FontWeight.bold)),
+                                                margin: EdgeInsets.only(left: 3),
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisAlignment: MainAxisAlignment.end,
+                                                  children: controller.gameInfo.genres
+                                                      .map((genre) => Text(" ${genre.name},",
+                                                          style: TextStyle(
+                                                              color: Theme.of(context).canvasColor,
+                                                              fontWeight: FontWeight.bold)))
+                                                      .toList(),
+                                                ),
+                                              ),
+                                              Spacer(),
+                                              SizedBox(
+                                                width: 150,
+                                                height: 150,
+                                                child: AspectRatio(
+                                                  aspectRatio: 1,
+                                                  child: PieChart(
+                                                    PieChartData(
+                                                        pieTouchData: PieTouchData(
+                                                          touchCallback: (pieTouchResponse) {},
+                                                          enabled: true,
+                                                        ),
+                                                        startDegreeOffset: 180,
+                                                        borderData: FlBorderData(
+                                                          show: false,
+                                                        ),
+                                                        sectionsSpace: 0,
+                                                        centerSpaceRadius: 20,
+                                                        sections: [
+                                                          PieChartSectionData(
+                                                            color: const Color(0xff0293ee),
+                                                            value: 100 -
+                                                                controller.gameInfo.totalRating,
+                                                            title: '',
+                                                            radius: 5,
+                                                            titleStyle: TextStyle(
+                                                                fontSize: 18,
+                                                                fontWeight: FontWeight.bold,
+                                                                color: const Color(0xff044d7c)),
+                                                            titlePositionPercentageOffset: 0.55,
+                                                          ),
+                                                          PieChartSectionData(
+                                                            color: const Color(0xff772CE8),
+                                                            value: controller.gameInfo.totalRating,
+                                                            title: '',
+                                                            radius: 10,
+                                                            titleStyle: TextStyle(
+                                                                fontSize: 18,
+                                                                fontWeight: FontWeight.bold,
+                                                                color: const Color(0xff044d7c)),
+                                                            titlePositionPercentageOffset: 0.55,
+                                                          )
+                                                        ]),
+                                                  ),
+                                                ),
                                               )
                                             ],
                                           ),
                                         )
-
-                                        //Rating
-                                        //General information
                                         //Wrap with links
                                         //screenshots
                                       ],

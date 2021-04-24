@@ -23,7 +23,7 @@ abstract class _DoYouMeanControllerBase with Store {
 
   @action
   Future<void> findGames(String gameName) async {
-    gameName = "god of war";
+    gameName = "overdrive";
     finishSearch = false;
     games.clear();
     List response = await Dio()
@@ -41,10 +41,8 @@ abstract class _DoYouMeanControllerBase with Store {
 
     response.forEach((element) {
       Game game = Game.fromJson(element);
-
       games.add(game);
     });
-    // print("The size of the list is ${games.length}");
 
     finishSearch = true;
     return;
