@@ -107,7 +107,7 @@ abstract class _DetailsControllerBase with Store {
   }
 
   void _getSimilarGames(Game game) {
-    if (gameInfo != null) {
+    if (gameInfo.similarGames != null) {
       gameInfo.similarGames.forEach((game) {
         similarGames.add(game);
       });

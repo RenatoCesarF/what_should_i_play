@@ -14,7 +14,8 @@ class DoYouMeanPage extends StatefulWidget {
   _DoYouMeanPageState createState() => _DoYouMeanPageState();
 }
 
-class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanController> {
+class _DoYouMeanPageState
+    extends ModularState<DoYouMeanPage, DoYouMeanController> {
   //use 'controller' variable to access controller
 
   @override
@@ -35,7 +36,7 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                 ? controller.games.isEmpty || controller.games == null
                     ? Center(
                         child: Text(
-                        "Couldn't Find ${widget.gameName} ...",
+                        "Couldn't Find ${widget.gameName}",
                         style: TextStyle(
                             color: Theme.of(context).canvasColor,
                             fontWeight: FontWeight.bold,
@@ -50,7 +51,8 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                                     onTap: () => controller.openGame(game),
                                     child: Dismissible(
                                       onDismissed: (key) => controller.games
-                                          .removeWhere((element) => element == game),
+                                          .removeWhere(
+                                              (element) => element == game),
                                       key: ValueKey(game),
                                       child: Container(
                                         decoration: new BoxDecoration(
@@ -61,12 +63,15 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                                         margin: const EdgeInsets.all(8.0),
                                         padding: const EdgeInsets.all(8),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.all(5.0),
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
                                               child: ClipRRect(
-                                                borderRadius: BorderRadius.circular(8.0),
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
                                                 child: Image.network(
                                                     game.cover != null
                                                         ? game.cover.smallCover
@@ -77,13 +82,16 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                                             Container(width: 8),
                                             Expanded(
                                               child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     game.name,
                                                     style: TextStyle(
-                                                        color: Theme.of(context).canvasColor,
-                                                        fontWeight: FontWeight.bold,
+                                                        color: Theme.of(context)
+                                                            .canvasColor,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                         fontSize: 18),
                                                   ),
                                                   Container(height: 10),
@@ -93,7 +101,8 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                                                         : "",
                                                     textAlign: TextAlign.start,
                                                     style: TextStyle(
-                                                        color: Theme.of(context).canvasColor,
+                                                        color: Theme.of(context)
+                                                            .canvasColor,
                                                         fontSize: 12),
                                                   ),
                                                 ],
@@ -121,13 +130,14 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                         child: TextButton(
                           onPressed: () => Navigator.pop(context),
                           child: Icon(Icons.arrow_back_rounded,
-                              size: 30, color: Theme.of(context).accentColor), //changed
+                              size: 30,
+                              color: Theme.of(context).accentColor), //changed
                         ),
                       ),
                       Expanded(
                         child: TextField(
-                          onEditingComplete: () =>
-                              controller.findGames(controller.searchBarController.text),
+                          onEditingComplete: () => controller
+                              .findGames(controller.searchBarController.text),
                           controller: controller.searchBarController,
                           onChanged: (value) {
                             controller.searchBarController.text = value;
@@ -150,7 +160,8 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                         child: TextButton(
                           onPressed: () {
                             FocusScope.of(context).unfocus();
-                            controller.findGames(controller.searchBarController.text);
+                            controller
+                                .findGames(controller.searchBarController.text);
                           },
                           child: Icon(
                             Icons.search_rounded,

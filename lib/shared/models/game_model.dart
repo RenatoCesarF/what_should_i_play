@@ -89,7 +89,8 @@ class Game {
       data['genres'] = this.genres.map((v) => v.toJson()).toList();
     }
     if (this.involvedCompanies != null) {
-      data['involved_companies'] = this.involvedCompanies.map((v) => v.toJson()).toList();
+      data['involved_companies'] =
+          this.involvedCompanies.map((v) => v.toJson()).toList();
     }
 
     if (this.platforms != null) {
@@ -105,15 +106,20 @@ class Game {
       ? DateTime.fromMillisecondsSinceEpoch(this.firstReleaseDate * 1000).year
       : "Undefined";
 
-  Company get getDeveloperCompany =>
-      this.involvedCompanies.where((element) => element.developer == true).first.company;
+  Company get getDeveloperCompany => this
+      .involvedCompanies
+      .where((element) => element.developer == true)
+      .first
+      .company;
 
   String get getShortSummary {
     String summaryShort = "";
     if (this.summary != null) {
-      summaryShort = this.summary.substring(0, (this.summary.length / 3).floor());
+      summaryShort =
+          this.summary.substring(0, (this.summary.length / 3).floor());
       if (this.summary.length > 500) {
-        summaryShort = this.summary.substring(0, (this.summary.length / 6).floor());
+        summaryShort =
+            this.summary.substring(0, (this.summary.length / 6).floor());
       }
     }
     summaryShort += '...';
@@ -218,7 +224,8 @@ class InvolvedCompanies {
 
   InvolvedCompanies.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    company = json['company'] != null ? new Company.fromJson(json['company']) : null;
+    company =
+        json['company'] != null ? new Company.fromJson(json['company']) : null;
     developer = json['developer'];
   }
 
