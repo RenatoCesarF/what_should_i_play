@@ -42,6 +42,7 @@ dependencies:
   mobx: ^1.2.1+4
   flutter_mobx: ^1.1.0+2
   bot_toast: ^3.0.5
+  url_launcher: ^6.0.3
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -74,6 +75,24 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/logo.png
+    - assets/images/symbols/world.png
+    - assets/images/symbols/steam.png
+    - assets/images/symbols/wikipedia.png
+    - assets/images/symbols/twitter.png
+    - assets/images/symbols/book.png
+    - assets/images/symbols/android.png
+    - assets/images/symbols/discord.png
+    - assets/images/symbols/epicGames.png
+    - assets/images/symbols/facebook.png
+    - assets/images/symbols/gog.png
+    - assets/images/symbols/instagram.png
+    - assets/images/symbols/iphone.png
+    - assets/images/symbols/itch.png
+    - assets/images/symbols/reddit.png
+    - assets/images/symbols/twitch.png
+    - assets/images/symbols/instagramLogo.png
+    - assets/images/symbols/website.png
+    
     - .env
   #   - images/a_dot_ham.jpeg
 

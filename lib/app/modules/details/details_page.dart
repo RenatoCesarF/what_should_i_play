@@ -8,8 +8,8 @@ import 'package:project/app/modules/details/details_controller.dart';
 import 'package:project/app/modules/details/ratingChart/ratingChart.dart';
 import 'package:project/app/modules/details/recomendations_list_widget/recomendations_list.dart';
 import 'package:project/shared/components/loading.dart';
+import 'package:project/shared/components/website_widget.dart';
 import 'package:project/shared/models/game_model.dart';
-import 'package:fl_chart/fl_chart.dart';
 
 class DetailsPage extends StatefulWidget {
   final String title;
@@ -340,27 +340,9 @@ class _DetailsPageState extends State<DetailsPage>
                                                   spacing: 20,
                                                   children: controller
                                                       .gameInfo.websites
-                                                      .map(
-                                                          (website) =>
-                                                              GestureDetector(
-                                                                onTap: () => {
-                                                                  print(website
-                                                                      .url)
-                                                                },
-                                                                child:
-                                                                    Container(
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                          color: Theme.of(context)
-                                                                              .cardColor,
-                                                                          borderRadius:
-                                                                              BorderRadius.all(
-                                                                            Radius.circular(8),
-                                                                          )),
-                                                                  width: 50,
-                                                                  height: 50,
-                                                                ),
-                                                              ))
+                                                      .map((website) =>
+                                                          WebsiteLinkComponent(
+                                                              website))
                                                       .toList(),
                                                 ),
                                               ),
