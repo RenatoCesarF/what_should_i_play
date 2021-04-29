@@ -48,7 +48,7 @@ class _RecomendationsListState extends State<RecomendationsList> {
                                   child: GestureDetector(
                                     onTap: () async {
                                       await Modular.to.push(MaterialPageRoute(
-                                          builder: (_) => DetailsModule(game: game)));
+                                          builder: (_) => DetailsModule(game)));
                                     }, //widget.controller.getgameInfo(game.id),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8.0),

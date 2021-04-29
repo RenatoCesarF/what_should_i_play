@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:project/app/modules/search/search_module.dart';
+import 'package:project/app/modules/search/search_page.dart';
 import 'package:project/shared/components/loading.dart';
 import 'do_you_mean_controller.dart';
 
@@ -128,7 +130,9 @@ class _DoYouMeanPageState
                       SizedBox(
                         width: 40,
                         child: TextButton(
-                          onPressed: () => Navigator.pop(context),
+                          onPressed: () async => await Modular.to.push(
+                              MaterialPageRoute(
+                                  builder: (_) => SearchModule())),
                           child: Icon(Icons.arrow_back_rounded,
                               size: 30,
                               color: Theme.of(context).accentColor), //changed

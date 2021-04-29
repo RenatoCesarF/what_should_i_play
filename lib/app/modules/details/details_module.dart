@@ -9,7 +9,7 @@ import 'details_controller.dart';
 class DetailsModule extends WidgetModule {
   final Game game;
 
-  DetailsModule({this.game});
+  DetailsModule(this.game);
 
   @override
   List<Bind> get binds => [
@@ -18,13 +18,11 @@ class DetailsModule extends WidgetModule {
 
   @override
   List<ModularRouter> get routers => [
-        ModularRouter(Modular.initialRoute, child: (_, args) => DetailsPage()),
+        ModularRouter('/details', child: (_, args) => DetailsPage(game)),
       ];
 
   static Inject get to => Inject<DetailsModule>.of();
 
   @override
-  Widget get view => DetailsPage(
-        game: game,
-      );
+  Widget get view => DetailsPage(game);
 }

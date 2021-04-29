@@ -12,10 +12,9 @@ import 'package:project/shared/components/website_widget.dart';
 import 'package:project/shared/models/game_model.dart';
 
 class DetailsPage extends StatefulWidget {
-  final String title;
   final Game game;
-  const DetailsPage({Key key, this.title = "DoYouMean", this.game})
-      : super(key: key);
+
+  const DetailsPage(this.game, {Key key}) : super(key: key);
 
   @override
   _DetailsPageState createState() => _DetailsPageState();
@@ -53,6 +52,8 @@ class _DetailsPageState extends State<DetailsPage>
                                 SizedBox(
                                   width: 40,
                                   child: TextButton(
+                                    onLongPress: () =>
+                                        controller.backToDoYouMeanPage(),
                                     onPressed: () => Modular.to.pop(),
                                     child: Icon(Icons.arrow_back_rounded,
                                         size: 30,
@@ -195,36 +196,46 @@ class _DetailsPageState extends State<DetailsPage>
                                                             .accentColor,
                                                         fontWeight:
                                                             FontWeight.w900)),
-                                              ),
+                                              ), //TODO: add a down arrow to indicate that you can expand the summary
                                               GestureDetector(
                                                 onTap: () {
                                                   controller.isSummaryExpanded =
                                                       !controller
                                                           .isSummaryExpanded;
                                                 },
-                                                child: Container(
-                                                  margin: EdgeInsets.only(
-                                                      top: 5, left: 10),
-                                                  child: Text(
-                                                    "\t${controller.isSummaryExpanded ? controller.gameInfo.summary : controller.gameInfo.getShortSummary}",
-                                                    textAlign:
-                                                        TextAlign.justify,
-                                                    style: TextStyle(
-                                                        color: Theme.of(context)
-                                                            .canvasColor,
-                                                        fontSize: 15),
-                                                  ),
+                                                child: Stack(
+                                                  children: [
+                                                    Container(
+                                                      margin: EdgeInsets.only(
+                                                          top: 5, left: 10),
+                                                      child: Text(
+                                                        "\t${controller.isSummaryExpanded ? controller.gameInfo.summary : controller.gameInfo.getShortSummary}",
+                                                        textAlign:
+                                                            TextAlign.justify,
+                                                        style: TextStyle(
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .canvasColor,
+                                                            fontSize: 15),
+                                                      ),
+                                                    ),
+                                                    Positioned(
+                                                        right: -5,
+                                                        bottom: -10,
+                                                        child: Icon(
+                                                          controller
+                                                                  .isSummaryExpanded
+                                                              ? Icons
+                                                                  .expand_less_rounded
+                                                              : Icons
+                                                                  .expand_more_outlined,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .accentColor,
+                                                          size: 30,
+                                                        ))
+                                                  ],
                                                 ),
-                                              ),
-                                              Container(
-                                                margin: EdgeInsets.only(top: 5),
-                                                child: Text("Genres: ",
-                                                    style: TextStyle(
-                                                        fontSize: 16,
-                                                        color: Theme.of(context)
-                                                            .accentColor,
-                                                        fontWeight:
-                                                            FontWeight.w900)),
                                               ),
                                               Container(
                                                 margin: EdgeInsets.only(
@@ -235,75 +246,94 @@ class _DetailsPageState extends State<DetailsPage>
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    controller.gameInfo
-                                                                .genres !=
-                                                            null
-                                                        ? Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Container(
-                                                                margin: EdgeInsets
-                                                                    .only(
-                                                                        left:
-                                                                            7),
-                                                                child: Column(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .end,
-                                                                  children: controller
-                                                                      .gameInfo
-                                                                      .genres
-                                                                      .map((genre) => Text(
-                                                                          " ${genre.name},",
+                                                    Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        controller.gameInfo
+                                                                    .genres !=
+                                                                null
+                                                            ? Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Container(
+                                                                      margin: EdgeInsets.only(
+                                                                          top:
+                                                                              5),
+                                                                      child: Text(
+                                                                          "Genres: ",
                                                                           style: TextStyle(
-                                                                              color: Theme.of(context).canvasColor,
-                                                                              fontWeight: FontWeight.bold)))
-                                                                      .toList(),
-                                                                ),
-                                                              ),
-                                                              Container(
-                                                                  height: 20),
-                                                              Text("Platforms:",
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          16,
-                                                                      color: Theme.of(
-                                                                              context)
-                                                                          .accentColor,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w900)),
-                                                              Container(
-                                                                margin: EdgeInsets
-                                                                    .only(
+                                                                              fontSize: 16,
+                                                                              color: Theme.of(context).accentColor,
+                                                                              fontWeight: FontWeight.w900))),
+                                                                  Container(
+                                                                    margin: EdgeInsets
+                                                                        .only(
+                                                                            left:
+                                                                                7),
+                                                                    child:
+                                                                        Column(
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: controller
+                                                                          .gameInfo
+                                                                          .genres
+                                                                          .map((genre) => Text(
+                                                                              " ${genre.name},",
+                                                                              style: TextStyle(color: Theme.of(context).canvasColor, fontWeight: FontWeight.bold)))
+                                                                          .toList(),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              )
+                                                            : Container(),
+                                                        Container(height: 20),
+                                                        controller.gameInfo
+                                                                    .platforms !=
+                                                                null
+                                                            ? Column(
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Text(
+                                                                      "Platforms:",
+                                                                      style: TextStyle(
+                                                                          fontSize:
+                                                                              16,
+                                                                          color: Theme.of(context)
+                                                                              .accentColor,
+                                                                          fontWeight:
+                                                                              FontWeight.w900)),
+                                                                  Container(
+                                                                    margin: EdgeInsets.only(
                                                                         top: 5,
                                                                         left:
                                                                             8),
-                                                                width: 200,
-                                                                child: Wrap(
-                                                                  runSpacing:
-                                                                      10,
-                                                                  spacing: 20,
-                                                                  children: controller
-                                                                      .gameInfo
-                                                                      .platforms
-                                                                      .map((platform) => Text(
-                                                                          platform
-                                                                              .name,
-                                                                          style: TextStyle(
-                                                                              color: Theme.of(context).canvasColor,
-                                                                              fontWeight: FontWeight.bold)))
-                                                                      .toList(),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          )
-                                                        : Container(),
+                                                                    width: 200,
+                                                                    child: Wrap(
+                                                                      runSpacing:
+                                                                          10,
+                                                                      spacing:
+                                                                          20,
+                                                                      children: controller
+                                                                          .gameInfo
+                                                                          .platforms
+                                                                          .map((platform) => Text(
+                                                                              platform.name,
+                                                                              style: TextStyle(color: Theme.of(context).canvasColor, fontWeight: FontWeight.bold)))
+                                                                          .toList(),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              )
+                                                            : Container()
+                                                      ],
+                                                    ),
                                                     Spacer(),
                                                     controller.gameInfo
                                                                 .totalRating !=
@@ -318,34 +348,48 @@ class _DetailsPageState extends State<DetailsPage>
                                                                 child: RatingChart(
                                                                     controller)),
                                                           )
-                                                        : Container()
+                                                        : Container(),
                                                   ],
                                                 ),
                                               ),
-                                              Text("Websites: ",
-                                                  style: TextStyle(
-                                                      fontSize: 16,
-                                                      color: Theme.of(context)
-                                                          .accentColor,
-                                                      fontWeight:
-                                                          FontWeight.w900)),
-                                              Container(
-                                                margin: EdgeInsets.only(
-                                                  bottom: 20,
-                                                  top: 5,
-                                                  left: 8,
-                                                ),
-                                                child: Wrap(
-                                                  runSpacing: 10,
-                                                  spacing: 20,
-                                                  children: controller
-                                                      .gameInfo.websites
-                                                      .map((website) =>
-                                                          WebsiteLinkComponent(
-                                                              website))
-                                                      .toList(),
-                                                ),
-                                              ),
+                                              controller.gameInfo.websites !=
+                                                      null
+                                                  ? Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text("Websites: ",
+                                                            style: TextStyle(
+                                                                fontSize: 16,
+                                                                color: Theme.of(
+                                                                        context)
+                                                                    .accentColor,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w900)),
+                                                        Container(
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                            bottom: 20,
+                                                            top: 5,
+                                                            left: 8,
+                                                          ),
+                                                          child: Wrap(
+                                                            runSpacing: 10,
+                                                            spacing: 20,
+                                                            children: controller
+                                                                .gameInfo
+                                                                .websites
+                                                                .map((website) =>
+                                                                    WebsiteLinkComponent(
+                                                                        website))
+                                                                .toList(),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    )
+                                                  : Container()
                                             ],
                                           ),
                                         )
@@ -373,7 +417,7 @@ class _DetailsPageState extends State<DetailsPage>
                                         //Same Company
                                         RecomendationsList(
                                             controller,
-                                            controller.sameCompany,
+                                            controller.gamesFromTheSameCompany,
                                             "From the same Company"),
 
                                         //Similar games

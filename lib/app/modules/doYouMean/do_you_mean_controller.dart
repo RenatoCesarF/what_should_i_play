@@ -23,7 +23,7 @@ abstract class _DoYouMeanControllerBase with Store {
 
   @action
   Future<void> findGames(String gameName) async {
-    gameName = "cyberpunk";
+    gameName = "god of war"; //fotnite, bind of isaac
     finishSearch = false;
     games.clear();
     List response = await Dio()
@@ -44,6 +44,11 @@ abstract class _DoYouMeanControllerBase with Store {
       games.add(game);
     });
 
+    if (games.length == 1) {
+      Modular.to
+          .push(MaterialPageRoute(builder: (_) => DetailsModule(games[0])));
+    }
+
     finishSearch = true;
     return;
   }
@@ -51,7 +56,7 @@ abstract class _DoYouMeanControllerBase with Store {
   @action
   Future<void> openGame(Game game) async {
     await Modular.to
-        .push(MaterialPageRoute(builder: (_) => DetailsModule(game: game)));
+        .push(MaterialPageRoute(builder: (_) => DetailsModule(game)));
     // await Navigator.push(context,
   }
 }

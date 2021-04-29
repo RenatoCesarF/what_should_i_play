@@ -1,6 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
+import 'package:project/app/modules/details/details_module.dart';
+import 'package:project/app/modules/doYouMean/do_you_mean_page.dart';
 import 'package:project/shared/models/company_model.dart';
 import 'package:project/shared/models/game_model.dart';
 
@@ -22,7 +26,7 @@ abstract class _DetailsControllerBase with Store {
   bool isSummaryExpanded = false;
 
   @observable
-  ObservableList<Game> sameCompany = ObservableList.of([]);
+  ObservableList<Game> gamesFromTheSameCompany = ObservableList.of([]);
 
   @observable
   ObservableList<Game> similarGames = ObservableList.of([]);
@@ -34,7 +38,7 @@ abstract class _DetailsControllerBase with Store {
   Future<void> getgameInfo(int gameId) async {
     isInfoExpanded = true;
     similarGames.clear();
-    sameCompany.clear();
+    gamesFromTheSameCompany.clear();
 
     finishLoad = false;
     var response = await Dio()
@@ -51,7 +55,7 @@ abstract class _DetailsControllerBase with Store {
     // print(response);
     gameInfo = Game.fromJson(response[0]);
 
-    _getSameCompanyGames(gameInfo);
+    _getgamesFromTheSameCompanyGames(gameInfo);
 
     _getSimilarGames(gameInfo);
 
@@ -88,20 +92,20 @@ abstract class _DetailsControllerBase with Store {
     return requestData;
   }
 
-  void _getSameCompanyGames(Game game) {
+  void _getgamesFromTheSameCompanyGames(Game game) {
     Company developerCompany = game.getDeveloperCompany;
 
     if (developerCompany.developed != null) {
       developerCompany.developed.forEach((eachGame) {
         if (eachGame.id == game.id) return;
-        sameCompany.add(eachGame);
+        gamesFromTheSameCompany.add(eachGame);
       });
     }
 
     if (developerCompany.published != null) {
       developerCompany.published.forEach((eachGame) {
         if (eachGame.id == game.id) return;
-        sameCompany.add(eachGame);
+        gamesFromTheSameCompany.add(eachGame);
       });
     }
   }
@@ -109,9 +113,37 @@ abstract class _DetailsControllerBase with Store {
   void _getSimilarGames(Game game) {
     if (gameInfo.similarGames != null) {
       gameInfo.similarGames.forEach((game) {
-        similarGames.add(game);
+        _gameWasAlredyListed(game)
+            ? print("Already Added")
+            : similarGames.add(game);
       });
     }
+  }
+
+  bool _gameWasAlredyListed(comparedGame) {
+    bool gameAlreadyListed = false;
+
+    // for (int indexInTheList = 0;
+    //     indexInTheList < gamesFromTheSameCompany.length;
+    //     indexInTheList++) {
+    //   Game gameOfCopmany = gamesFromTheSameCompany[indexInTheList];
+
+    //   if (gameOfCopmany.id == comparedGame.id) {
+    //     gameAlreadyListed = true;
+    //     print("${gameOfCopmany.name} was alredy listed");
+    //     break;
+    //   }
+    // }
+
+    gamesFromTheSameCompany.forEach((gameOfCompany) {
+      if (gameOfCompany.id != comparedGame.id) {
+        return;
+      }
+      gameAlreadyListed = true;
+      return;
+    });
+
+    return gameAlreadyListed;
   }
 
   @action
@@ -122,5 +154,10 @@ abstract class _DetailsControllerBase with Store {
   @action
   void onTapInfoPanel() {
     isInfoExpanded = !isInfoExpanded;
+  }
+
+  @action
+  void backToDoYouMeanPage() async {
+    await Modular.to.push(MaterialPageRoute(builder: (_) => DoYouMeanPage()));
   }
 }

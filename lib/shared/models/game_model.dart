@@ -106,11 +106,13 @@ class Game {
       ? DateTime.fromMillisecondsSinceEpoch(this.firstReleaseDate * 1000).year
       : "Undefined";
 
-  Company get getDeveloperCompany => this
-      .involvedCompanies
-      .where((element) => element.developer == true)
-      .first
-      .company;
+  Company get getDeveloperCompany => this.involvedCompanies != null
+      ? this
+          .involvedCompanies
+          .where((element) => element.developer == true)
+          .first
+          .company
+      : Company();
 
   String get getShortSummary {
     String summaryShort = "";

@@ -73,18 +73,20 @@ mixin _$DetailsController on _DetailsControllerBase, Store {
     });
   }
 
-  final _$sameCompanyAtom = Atom(name: '_DetailsControllerBase.sameCompany');
+  final _$gamesFromTheSameCompanyAtom =
+      Atom(name: '_DetailsControllerBase.gamesFromTheSameCompany');
 
   @override
-  ObservableList<Game> get sameCompany {
-    _$sameCompanyAtom.reportRead();
-    return super.sameCompany;
+  ObservableList<Game> get gamesFromTheSameCompany {
+    _$gamesFromTheSameCompanyAtom.reportRead();
+    return super.gamesFromTheSameCompany;
   }
 
   @override
-  set sameCompany(ObservableList<Game> value) {
-    _$sameCompanyAtom.reportWrite(value, super.sameCompany, () {
-      super.sameCompany = value;
+  set gamesFromTheSameCompany(ObservableList<Game> value) {
+    _$gamesFromTheSameCompanyAtom
+        .reportWrite(value, super.gamesFromTheSameCompany, () {
+      super.gamesFromTheSameCompany = value;
     });
   }
 
@@ -158,7 +160,7 @@ finishLoad: ${finishLoad},
 isRecomendationsExpanded: ${isRecomendationsExpanded},
 isInfoExpanded: ${isInfoExpanded},
 isSummaryExpanded: ${isSummaryExpanded},
-sameCompany: ${sameCompany},
+gamesFromTheSameCompany: ${gamesFromTheSameCompany},
 similarGames: ${similarGames},
 gameInfo: ${gameInfo}
     ''';
