@@ -18,7 +18,7 @@ Using the IGDB API, this app, developed in react-native, will suggest a game tha
 - [x] List Page
 - [x] Search Page
 - [x] Recomendation system
-- [ ] Game Details Page
+- [x] Game Details Page
 - [ ] Favorite system
 - [ ] Splash Screen
 - [ ] Web Version
