@@ -17,13 +17,12 @@ class DoYouMeanModule extends WidgetModule {
 
   @override
   List<ModularRouter> get routers => [
-        ModularRouter(Modular.initialRoute, child: (_, args) => DoYouMeanPage()),
+        ModularRouter('/doYouMean',
+            child: (_, args) => DoYouMeanPage(gameName: gameName)),
       ];
 
   static Inject get to => Inject<DoYouMeanModule>.of();
 
   @override
-  Widget get view => DoYouMeanPage(
-        gameName: gameName,
-      );
+  Widget get view => DoYouMeanPage(gameName: gameName);
 }

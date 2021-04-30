@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -21,7 +20,7 @@ class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateM
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff322A5C),
+      backgroundColor: Theme.of(context).primaryColor,
       body: Observer(builder: (_) {
         return Container(
           margin: EdgeInsets.symmetric(horizontal: 18, vertical: 20),
@@ -36,7 +35,7 @@ class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateM
               "Write down a game that you enjoyed,\n and discover your next expirence",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Color(0xff979797),
+                  color: Theme.of(context).canvasColor,
                   fontFamily: "Roboto",
                   fontSize: 15,
                   fontWeight: FontWeight.w400,
@@ -54,7 +53,7 @@ class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateM
                         controller.searchBarController.text = '';
                         controller.searchBarController.clear();
                       },
-                      child: Icon(Icons.cancel, color: Color(0xffF21B3F))),
+                      child: Icon(Icons.cancel, color: Theme.of(context).accentColor)),
                 ),
                 Expanded(
                   child: TextField(
@@ -76,7 +75,7 @@ class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateM
                     ),
                     selectionHeightStyle: BoxHeightStyle.tight,
                     textAlign: TextAlign.center,
-                    cursorColor: Color(0xffF21B3F),
+                    cursorColor: Theme.of(context).accentColor,
                   ),
                 ),
                 SizedBox(
@@ -86,7 +85,7 @@ class _SearchPageState extends State<SearchPage> with SingleTickerProviderStateM
                     child: Icon(
                       Icons.search_rounded,
                       size: 30,
-                      color: Color(0xffF21B3F),
+                      color: Theme.of(context).accentColor,
                     ),
                   ),
                 ),

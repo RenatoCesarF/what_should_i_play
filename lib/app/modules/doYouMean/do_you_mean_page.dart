@@ -3,7 +3,10 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:project/app/modules/search/search_module.dart';
+import 'package:project/app/modules/search/search_page.dart';
 import 'package:project/shared/components/loading.dart';
+import 'package:project/shared/components/smallCoverPlaceHolder.dart';
 import 'do_you_mean_controller.dart';
 
 class DoYouMeanPage extends StatefulWidget {
@@ -14,7 +17,8 @@ class DoYouMeanPage extends StatefulWidget {
   _DoYouMeanPageState createState() => _DoYouMeanPageState();
 }
 
-class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanController> {
+class _DoYouMeanPageState
+    extends ModularState<DoYouMeanPage, DoYouMeanController> {
   //use 'controller' variable to access controller
 
   @override
@@ -35,9 +39,11 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                 ? controller.games.isEmpty || controller.games == null
                     ? Center(
                         child: Text(
-                        "Couldn't Find ${widget.gameName.isEmpty ? controller.searchBarController.text : widget.gameName} ...",
+                        "Couldn't Find ${widget.gameName}",
                         style: TextStyle(
-                            color: Color(0xff979797), fontWeight: FontWeight.bold, fontSize: 18),
+                            color: Theme.of(context).canvasColor,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18),
                       ))
                     : ListView(
                         shrinkWrap: true,
@@ -48,50 +54,62 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                                     onTap: () => controller.openGame(game),
                                     child: Dismissible(
                                       onDismissed: (key) => controller.games
-                                          .removeWhere((element) => element == game),
+                                          .removeWhere(
+                                              (element) => element == game),
                                       key: ValueKey(game),
                                       child: Container(
                                         decoration: new BoxDecoration(
-                                            color: Color(0xff1F1A38),
+                                            color: Theme.of(context)
+                                                .backgroundColor,
                                             borderRadius: BorderRadius.all(
                                               Radius.circular(20.0),
                                             )),
                                         margin: const EdgeInsets.all(8.0),
                                         padding: const EdgeInsets.all(8),
                                         child: Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceAround,
                                           children: [
                                             Padding(
-                                              padding: const EdgeInsets.all(5.0),
+                                              padding:
+                                                  const EdgeInsets.all(5.0),
                                               child: ClipRRect(
-                                                borderRadius: BorderRadius.circular(8.0),
-                                                child: Image.network(
-                                                    game.cover != null
-                                                        ? game.cover.smallCover
-                                                        : "https://via.placeholder.com/90x128",
-                                                    fit: BoxFit.contain),
-                                              ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: game.cover != null
+                                                      ? Image.network(
+                                                          game.cover.smallCover,
+                                                          fit: BoxFit.contain)
+                                                      : SmallCoverPlaceHolder(
+                                                          scale: 1,
+                                                        )),
                                             ),
                                             Container(width: 8),
                                             Expanded(
                                               child: Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
                                                   Text(
                                                     game.name,
                                                     style: TextStyle(
-                                                        color: Color(0xff979797),
-                                                        fontWeight: FontWeight.bold,
+                                                        color: Theme.of(context)
+                                                            .canvasColor,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                         fontSize: 18),
                                                   ),
                                                   Container(height: 10),
                                                   Text(
                                                     game.summary != null
-                                                        ? "${game.summaryShort}..."
+                                                        ? "${game.getShortSummary}..."
                                                         : "",
                                                     textAlign: TextAlign.start,
                                                     style: TextStyle(
-                                                        color: Color(0xff979797), fontSize: 12),
+                                                        color: Theme.of(context)
+                                                            .canvasColor,
+                                                        fontSize: 12),
                                                   ),
                                                 ],
                                               ),
@@ -116,15 +134,18 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                       SizedBox(
                         width: 40,
                         child: TextButton(
-                          onPressed: () => Navigator.pop(context),
+                          onPressed: () async => await Modular.to.push(
+                              MaterialPageRoute(
+                                  builder: (_) => SearchModule())),
                           child: Icon(Icons.arrow_back_rounded,
-                              size: 30, color: Theme.of(context).accentColor), //changed
+                              size: 30,
+                              color: Theme.of(context).accentColor), //changed
                         ),
                       ),
                       Expanded(
                         child: TextField(
-                          onEditingComplete: () =>
-                              controller.findGames(controller.searchBarController.text),
+                          onEditingComplete: () => controller
+                              .findGames(controller.searchBarController.text),
                           controller: controller.searchBarController,
                           onChanged: (value) {
                             controller.searchBarController.text = value;
@@ -147,7 +168,8 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                         child: TextButton(
                           onPressed: () {
                             FocusScope.of(context).unfocus();
-                            controller.findGames(controller.searchBarController.text);
+                            controller
+                                .findGames(controller.searchBarController.text);
                           },
                           child: Icon(
                             Icons.search_rounded,
@@ -161,7 +183,7 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                 ),
                 Container(
                   height: 3,
-                  color: Color(0xff1F1A38),
+                  color: Theme.of(context).backgroundColor,
                 ),
               ],
             )),

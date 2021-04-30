@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:project/app/modules/recomendations/recomendations_controller.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:project/app/modules/details/details_controller.dart';
+import 'package:project/app/modules/details/details_module.dart';
+import 'package:project/shared/components/smallCoverPlaceHolder.dart';
 import 'package:project/shared/models/game_model.dart';
 
 class RecomendationsList extends StatefulWidget {
-  final RecomendationsController controller;
+  final DetailsController controller;
   final List<Game> games;
   final String title;
 
@@ -19,7 +22,7 @@ class _RecomendationsListState extends State<RecomendationsList> {
   Widget build(BuildContext context) {
     return Observer(
       builder: (BuildContext context) {
-        return widget.games.isNotEmpty
+        return widget.games.length > 0
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -28,28 +31,33 @@ class _RecomendationsListState extends State<RecomendationsList> {
                     child: Text(widget.games.isNotEmpty ? widget.title : "",
                         style: TextStyle(
                           fontSize: 23,
-                          color: Color(0xff979797),
+                          color: Theme.of(context).canvasColor,
                           fontWeight: FontWeight.bold,
                         )),
                   ),
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 8),
-                    color: Color(0xff1F1A38),
+                    width: double.infinity,
+                    color: Theme.of(context).backgroundColor,
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
                           children: widget.games
                               .map(
-                                (game) => Padding(
+                                (Game game) => Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: Image.network(
-                                        game.cover != null
-                                            ? game.cover.bigCover
-                                            : "https://via.placeholder.com/264x374",
-                                        scale: 2,
-                                        fit: BoxFit.contain),
+                                  child: GestureDetector(
+                                    onTap: () async {
+                                      await Modular.to.push(MaterialPageRoute(
+                                          builder: (_) => DetailsModule(game)));
+                                    }, //widget.controller.getgameInfo(game.id),
+                                    child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        child: game.cover != null
+                                            ? Image.network(game.cover.bigCover,
+                                                scale: 2, fit: BoxFit.contain)
+                                            : SmallCoverPlaceHolder()),
                                   ),
                                 ),
                               )

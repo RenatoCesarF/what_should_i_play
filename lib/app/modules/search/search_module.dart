@@ -13,7 +13,7 @@ class SearchModule extends WidgetModule {
 
   @override
   List<ModularRouter> get routers => [
-        ModularRouter(Modular.initialRoute, child: (_, args) => SearchPage()),
+        ModularRouter("/search", child: (_, args) => SearchPage()),
       ];
 
   static Inject get to => Inject<SearchModule>.of();

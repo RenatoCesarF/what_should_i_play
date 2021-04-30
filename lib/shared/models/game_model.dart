@@ -1,83 +1,178 @@
+import 'package:project/shared/models/websites_model.dart';
+
+import 'company_model.dart';
+import 'logo_model.dart';
+
 class Game {
+  List<Screenshot> screenshots;
+  List<Game> similarGames;
   String summary;
-  String summaryShort;
   int id;
   Cover cover;
   int firstReleaseDate;
   List<Genres> genres;
   List<InvolvedCompanies> involvedCompanies;
   String name;
-  List<Platforms> platforms;
+  List<Platform> platforms;
   double totalRating;
+  List<Websites> websites;
 
   Game(
       {this.id,
       this.cover,
+      this.similarGames,
       this.firstReleaseDate,
       this.genres,
+      this.screenshots,
       this.involvedCompanies,
       this.name,
       this.platforms,
       this.totalRating,
-      this.summaryShort,
+      this.websites,
       this.summary});
 
   Game.fromJson(Map<String, dynamic> json) {
-    summary = json['summary'];
-
-    if (summary != null) {
-      summaryShort = summary.substring(0, (summary.length / 3).floor());
-      if (summary.length > 500) {
-        summaryShort = summary.substring(0, (summary.length / 6).floor());
-      }
-    }
-
     id = json['id'];
     cover = json['cover'] != null ? new Cover.fromJson(json['cover']) : null;
     firstReleaseDate = json['first_release_date'];
+    name = json['name'];
+    summary = json['summary'];
+    totalRating = json['total_rating'];
+
+    if (json['websites'] != null) {
+      websites = <Websites>[];
+      json['websites'].forEach((v) {
+        websites.add(Websites.fromJson(v));
+      });
+    }
+
+    if (json['similar_games'] != null) {
+      similarGames = <Game>[];
+      json['similar_games'].forEach((v) {
+        similarGames.add(Game.fromJson(v));
+      });
+    }
+
+    if (json['screenshots'] != null) {
+      screenshots = <Screenshot>[];
+      json['screenshots'].forEach((v) {
+        screenshots.add(Screenshot.fromJson(v));
+      });
+    }
+
     if (json['genres'] != null) {
-      // ignore: deprecated_member_use
-      genres = new List<Genres>();
+      genres = <Genres>[];
       json['genres'].forEach((v) {
         genres.add(new Genres.fromJson(v));
       });
     }
     if (json['involved_companies'] != null) {
-      // ignore: deprecated_member_use
-      involvedCompanies = new List<InvolvedCompanies>();
+      involvedCompanies = <InvolvedCompanies>[];
       json['involved_companies'].forEach((v) {
         involvedCompanies.add(new InvolvedCompanies.fromJson(v));
       });
     }
-    name = json['name'];
+
     if (json['platforms'] != null) {
-      // ignore: deprecated_member_use
-      platforms = new List<Platforms>();
+      platforms = <Platform>[];
       json['platforms'].forEach((v) {
-        platforms.add(new Platforms.fromJson(v));
+        platforms.add(new Platform.fromJson(v));
       });
     }
-    totalRating = json['total_rating'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
+    data['name'] = this.name;
+    data['first_release_date'] = this.firstReleaseDate;
+    data['total_rating'] = this.totalRating;
+
     if (this.cover != null) {
       data['cover'] = this.cover.toJson();
     }
-    data['first_release_date'] = this.firstReleaseDate;
     if (this.genres != null) {
       data['genres'] = this.genres.map((v) => v.toJson()).toList();
     }
     if (this.involvedCompanies != null) {
-      data['involved_companies'] = this.involvedCompanies.map((v) => v.toJson()).toList();
+      data['involved_companies'] =
+          this.involvedCompanies.map((v) => v.toJson()).toList();
     }
-    data['name'] = this.name;
+
     if (this.platforms != null) {
       data['platforms'] = this.platforms.map((v) => v.toJson()).toList();
     }
-    data['total_rating'] = this.totalRating;
+    if (this.similarGames != null) {
+      data['similar_games'] = this.similarGames.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+
+  get launchYear => this.firstReleaseDate != null
+      ? DateTime.fromMillisecondsSinceEpoch(this.firstReleaseDate * 1000).year
+      : "Undefined";
+
+  Company get getDeveloperCompany => this.involvedCompanies != null
+      ? this
+          .involvedCompanies
+          .where((element) => element.developer == true)
+          .first
+          .company
+      : Company();
+
+  String get getShortSummary {
+    String summaryShort = "";
+    if (this.summary != null) {
+      summaryShort =
+          this.summary.substring(0, (this.summary.length / 3).floor());
+      if (this.summary.length > 500) {
+        summaryShort =
+            this.summary.substring(0, (this.summary.length / 6).floor());
+      }
+    }
+    summaryShort += '...';
+    return summaryShort;
+  }
+}
+
+class Genres {
+  int id;
+  String name;
+
+  Genres({this.id, this.name});
+
+  Genres.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    return data;
+  }
+}
+
+class Platform {
+  String name;
+  Logo platformLogo;
+
+  Platform({this.name, this.platformLogo});
+
+  Platform.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    if (json['platform_logo'] != null) {
+      platformLogo = Logo.fromJson(json['platform_logo']);
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+
+    data['name'] = this.name;
+    data['platform_logo'] = this.platformLogo;
+
     return data;
   }
 }
@@ -128,35 +223,17 @@ class Cover {
   }
 }
 
-class Genres {
-  int id;
-  String name;
-
-  Genres({this.id, this.name});
-
-  Genres.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    return data;
-  }
-}
-
 class InvolvedCompanies {
   int id;
-  Genres company;
+  Company company;
   bool developer;
 
   InvolvedCompanies({this.id, this.company, this.developer});
 
   InvolvedCompanies.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    company = json['company'] != null ? new Genres.fromJson(json['company']) : null;
+    company =
+        json['company'] != null ? new Company.fromJson(json['company']) : null;
     developer = json['developer'];
   }
 
@@ -171,25 +248,24 @@ class InvolvedCompanies {
   }
 }
 
-class Platforms {
-  List<Platforms> platforms;
+class Screenshot {
+  int id;
+  String imageId;
 
-  Platforms({this.platforms});
+  Screenshot({this.id, this.imageId});
 
-  Platforms.fromJson(Map<String, dynamic> json) {
-    if (json['platforms'] != null) {
-      platforms = List<Platforms>();
-      json['platforms'].forEach((v) {
-        platforms.add(new Platforms.fromJson(v));
-      });
-    }
+  Screenshot.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    imageId = json['image_id'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.platforms != null) {
-      data['platforms'] = this.platforms.map((v) => v.toJson()).toList();
-    }
+    data['id'] = this.id;
+    data['image_id'] = this.imageId;
     return data;
   }
+
+  get screenshotImageURL =>
+      "https://images.igdb.com/igdb/image/upload/t_screenshot_big/$imageId.jpg";
 }
