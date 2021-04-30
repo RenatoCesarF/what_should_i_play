@@ -4,6 +4,7 @@ import 'company_model.dart';
 import 'logo_model.dart';
 
 class Game {
+  List<Screenshot> screenshots;
   List<Game> similarGames;
   String summary;
   int id;
@@ -22,6 +23,7 @@ class Game {
       this.similarGames,
       this.firstReleaseDate,
       this.genres,
+      this.screenshots,
       this.involvedCompanies,
       this.name,
       this.platforms,
@@ -47,28 +49,32 @@ class Game {
     if (json['similar_games'] != null) {
       similarGames = <Game>[];
       json['similar_games'].forEach((v) {
-        similarGames.add(new Game.fromJson(v));
+        similarGames.add(Game.fromJson(v));
+      });
+    }
+
+    if (json['screenshots'] != null) {
+      screenshots = <Screenshot>[];
+      json['screenshots'].forEach((v) {
+        screenshots.add(Screenshot.fromJson(v));
       });
     }
 
     if (json['genres'] != null) {
-      // ignore: deprecated_member_use
-      genres = new List<Genres>();
+      genres = <Genres>[];
       json['genres'].forEach((v) {
         genres.add(new Genres.fromJson(v));
       });
     }
     if (json['involved_companies'] != null) {
-      // ignore: deprecated_member_use
-      involvedCompanies = new List<InvolvedCompanies>();
+      involvedCompanies = <InvolvedCompanies>[];
       json['involved_companies'].forEach((v) {
         involvedCompanies.add(new InvolvedCompanies.fromJson(v));
       });
     }
 
     if (json['platforms'] != null) {
-      // ignore: deprecated_member_use
-      platforms = new List<Platform>();
+      platforms = <Platform>[];
       json['platforms'].forEach((v) {
         platforms.add(new Platform.fromJson(v));
       });
@@ -240,4 +246,26 @@ class InvolvedCompanies {
     data['developer'] = this.developer;
     return data;
   }
+}
+
+class Screenshot {
+  int id;
+  String imageId;
+
+  Screenshot({this.id, this.imageId});
+
+  Screenshot.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    imageId = json['image_id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['image_id'] = this.imageId;
+    return data;
+  }
+
+  get screenshotImageURL =>
+      "https://images.igdb.com/igdb/image/upload/t_screenshot_big/$imageId.jpg";
 }

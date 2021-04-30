@@ -6,6 +6,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:project/app/modules/search/search_module.dart';
 import 'package:project/app/modules/search/search_page.dart';
 import 'package:project/shared/components/loading.dart';
+import 'package:project/shared/components/smallCoverPlaceHolder.dart';
 import 'do_you_mean_controller.dart';
 
 class DoYouMeanPage extends StatefulWidget {
@@ -58,7 +59,8 @@ class _DoYouMeanPageState
                                       key: ValueKey(game),
                                       child: Container(
                                         decoration: new BoxDecoration(
-                                            color: Theme.of(context).hintColor,
+                                            color: Theme.of(context)
+                                                .backgroundColor,
                                             borderRadius: BorderRadius.all(
                                               Radius.circular(20.0),
                                             )),
@@ -72,14 +74,16 @@ class _DoYouMeanPageState
                                               padding:
                                                   const EdgeInsets.all(5.0),
                                               child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                child: Image.network(
-                                                    game.cover != null
-                                                        ? game.cover.smallCover
-                                                        : "https://via.placeholder.com/90x128",
-                                                    fit: BoxFit.contain),
-                                              ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: game.cover != null
+                                                      ? Image.network(
+                                                          game.cover.smallCover,
+                                                          fit: BoxFit.contain)
+                                                      : SmallCoverPlaceHolder(
+                                                          scale: 1,
+                                                        )),
                                             ),
                                             Container(width: 8),
                                             Expanded(
@@ -179,7 +183,7 @@ class _DoYouMeanPageState
                 ),
                 Container(
                   height: 3,
-                  color: Theme.of(context).hintColor,
+                  color: Theme.of(context).backgroundColor,
                 ),
               ],
             )),

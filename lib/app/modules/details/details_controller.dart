@@ -23,6 +23,9 @@ abstract class _DetailsControllerBase with Store {
   bool isInfoExpanded = true;
 
   @observable
+  bool isScreenshotsExpanded = true;
+
+  @observable
   bool isSummaryExpanded = false;
 
   @observable
@@ -71,6 +74,8 @@ abstract class _DetailsControllerBase with Store {
       'first_release_date',
       'genres.name',
       'cover.image_id',
+      'screenshots',
+      'screenshots.image_id',
       'websites.url',
       'websites.category',
       'platforms.name',
@@ -113,27 +118,13 @@ abstract class _DetailsControllerBase with Store {
   void _getSimilarGames(Game game) {
     if (gameInfo.similarGames != null) {
       gameInfo.similarGames.forEach((game) {
-        _gameWasAlredyListed(game)
-            ? print("Already Added")
-            : similarGames.add(game);
+        _gameWasAlredyListed(game) ? print("") : similarGames.add(game);
       });
     }
   }
 
   bool _gameWasAlredyListed(comparedGame) {
     bool gameAlreadyListed = false;
-
-    // for (int indexInTheList = 0;
-    //     indexInTheList < gamesFromTheSameCompany.length;
-    //     indexInTheList++) {
-    //   Game gameOfCopmany = gamesFromTheSameCompany[indexInTheList];
-
-    //   if (gameOfCopmany.id == comparedGame.id) {
-    //     gameAlreadyListed = true;
-    //     print("${gameOfCopmany.name} was alredy listed");
-    //     break;
-    //   }
-    // }
 
     gamesFromTheSameCompany.forEach((gameOfCompany) {
       if (gameOfCompany.id != comparedGame.id) {
@@ -149,6 +140,11 @@ abstract class _DetailsControllerBase with Store {
   @action
   void onTapRecomendationsPanel() {
     isRecomendationsExpanded = !isRecomendationsExpanded;
+  }
+
+  @action
+  void onTapScreenshotsPanel() {
+    isScreenshotsExpanded = !isScreenshotsExpanded;
   }
 
   @action
