@@ -57,6 +57,23 @@ mixin _$DetailsController on _DetailsControllerBase, Store {
     });
   }
 
+  final _$isScreenshotsExpandedAtom =
+      Atom(name: '_DetailsControllerBase.isScreenshotsExpanded');
+
+  @override
+  bool get isScreenshotsExpanded {
+    _$isScreenshotsExpandedAtom.reportRead();
+    return super.isScreenshotsExpanded;
+  }
+
+  @override
+  set isScreenshotsExpanded(bool value) {
+    _$isScreenshotsExpandedAtom.reportWrite(value, super.isScreenshotsExpanded,
+        () {
+      super.isScreenshotsExpanded = value;
+    });
+  }
+
   final _$isSummaryExpandedAtom =
       Atom(name: '_DetailsControllerBase.isSummaryExpanded');
 
@@ -128,6 +145,15 @@ mixin _$DetailsController on _DetailsControllerBase, Store {
     return _$getgameInfoAsyncAction.run(() => super.getgameInfo(gameId));
   }
 
+  final _$backToDoYouMeanPageAsyncAction =
+      AsyncAction('_DetailsControllerBase.backToDoYouMeanPage');
+
+  @override
+  Future<void> backToDoYouMeanPage() {
+    return _$backToDoYouMeanPageAsyncAction
+        .run(() => super.backToDoYouMeanPage());
+  }
+
   final _$_DetailsControllerBaseActionController =
       ActionController(name: '_DetailsControllerBase');
 
@@ -137,6 +163,17 @@ mixin _$DetailsController on _DetailsControllerBase, Store {
         name: '_DetailsControllerBase.onTapRecomendationsPanel');
     try {
       return super.onTapRecomendationsPanel();
+    } finally {
+      _$_DetailsControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void onTapScreenshotsPanel() {
+    final _$actionInfo = _$_DetailsControllerBaseActionController.startAction(
+        name: '_DetailsControllerBase.onTapScreenshotsPanel');
+    try {
+      return super.onTapScreenshotsPanel();
     } finally {
       _$_DetailsControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -159,6 +196,7 @@ mixin _$DetailsController on _DetailsControllerBase, Store {
 finishLoad: ${finishLoad},
 isRecomendationsExpanded: ${isRecomendationsExpanded},
 isInfoExpanded: ${isInfoExpanded},
+isScreenshotsExpanded: ${isScreenshotsExpanded},
 isSummaryExpanded: ${isSummaryExpanded},
 gamesFromTheSameCompany: ${gamesFromTheSameCompany},
 similarGames: ${similarGames},

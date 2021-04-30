@@ -153,7 +153,7 @@ abstract class _DetailsControllerBase with Store {
   }
 
   @action
-  void backToDoYouMeanPage() async {
+  Future<void> backToDoYouMeanPage() async {
     await Modular.to.push(MaterialPageRoute(builder: (_) => DoYouMeanPage()));
   }
 }
