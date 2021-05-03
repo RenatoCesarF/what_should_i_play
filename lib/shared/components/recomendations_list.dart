@@ -21,55 +21,61 @@ class _RecomendationsListState extends State<RecomendationsList> {
     return Observer(
       builder: (BuildContext context) {
         return widget.games.length > 0
-            ? Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(left: 8),
-                    child: Text(widget.games.isNotEmpty ? widget.title : "",
-                        style: TextStyle(
-                          fontSize: 23,
-                          color: Theme.of(context).canvasColor,
-                          fontWeight: FontWeight.bold,
-                        )),
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 8),
-                    width: double.infinity,
-                    color: Theme.of(context).backgroundColor,
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                          children: widget.games
-                              .map(
-                                (Game game) => Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: GestureDetector(
-                                    onTap: () async {
-                                      await Modular.to.push(MaterialPageRoute(
-                                          builder: (_) => DetailsModule(game)));
-                                    },
-                                    child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
-                                        child: game.cover != null
-                                            ? Hero(
-                                                tag: 'image${game.cover.id}',
-                                                child: Image.network(
-                                                    game.cover.bigCover,
-                                                    scale: 2,
-                                                    fit: BoxFit.contain),
-                                              )
-                                            : CoverPlaceHolder(
-                                                scaleFactory: 0.5,
-                                              )),
-                                  ),
-                                ),
-                              )
-                              .toList()),
+            ? Container(
+                margin: EdgeInsets.only(bottom: 15),
+                color: Theme.of(context).backgroundColor,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 8, top: 5, bottom: 3),
+                      child: Text(widget.games.isNotEmpty ? widget.title : "",
+                          style: TextStyle(
+                            fontSize: 23,
+                            color: Theme.of(context).canvasColor,
+                            fontWeight: FontWeight.bold,
+                          )),
                     ),
-                  ),
-                ],
+                    Container(height: 2, color: Theme.of(context).primaryColor),
+                    Container(
+                      padding: EdgeInsets.only(bottom: 8),
+                      width: double.infinity,
+                      color: Theme.of(context).backgroundColor,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                            children: widget.games
+                                .map(
+                                  (Game game) => Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: GestureDetector(
+                                      onTap: () async {
+                                        await Modular.to.push(MaterialPageRoute(
+                                            builder: (_) =>
+                                                DetailsModule(game)));
+                                      },
+                                      child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                          child: game.cover != null
+                                              ? Hero(
+                                                  tag: 'image${game.cover.id}',
+                                                  child: Image.network(
+                                                      game.cover.bigCover,
+                                                      scale: 2,
+                                                      fit: BoxFit.contain),
+                                                )
+                                              : CoverPlaceHolder(
+                                                  scaleFactory: 0.5,
+                                                )),
+                                    ),
+                                  ),
+                                )
+                                .toList()),
+                      ),
+                    ),
+                  ],
+                ),
               )
             : Container();
       },

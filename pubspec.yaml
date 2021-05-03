@@ -95,6 +95,7 @@ flutter:
     - assets/images/websiteSymbols/instagramLogo.png
     - assets/images/websiteSymbols/website.png
     - assets/images/websiteSymbols/playstore.png
+    - assets/images/test.jpg
     - .env
   #   - images/a_dot_ham.jpeg
 

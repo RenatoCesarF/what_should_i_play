@@ -528,15 +528,9 @@ class _DetailsPageState extends State<DetailsPage>
                                       children: [
                                         //Same Company
                                         RecomendationsList(
-                                            controller.gamesFromTheSameCompany,
-                                            "From the same Company"),
-
-                                        Container(
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 15),
-                                            height: 2,
-                                            color: Theme.of(context)
-                                                .backgroundColor),
+                                          controller.gamesFromTheSameCompany,
+                                          "From the same Company",
+                                        ),
                                         //Similar games
                                         RecomendationsList(
                                             controller.similarGames,
