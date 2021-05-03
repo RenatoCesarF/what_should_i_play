@@ -13,8 +13,14 @@ abstract class _SearchControllerBase with Store {
   TextEditingController searchBarController = TextEditingController();
 
   Future pushToDoYouMeanPage(BuildContext context) async {
+    if (searchBarController.text == '') {
+      return;
+    }
     FocusScope.of(context).unfocus();
     await Modular.to.push(
-        MaterialPageRoute(builder: (_) => DoYouMeanModule(gameName: searchBarController.text)));
+      MaterialPageRoute(
+        builder: (_) => DoYouMeanModule(gameName: searchBarController.text),
+      ),
+    );
   }
 }

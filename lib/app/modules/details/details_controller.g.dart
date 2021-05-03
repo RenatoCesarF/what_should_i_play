@@ -9,21 +9,6 @@ part of 'details_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$DetailsController on _DetailsControllerBase, Store {
-  final _$finishLoadAtom = Atom(name: '_DetailsControllerBase.finishLoad');
-
-  @override
-  bool get finishLoad {
-    _$finishLoadAtom.reportRead();
-    return super.finishLoad;
-  }
-
-  @override
-  set finishLoad(bool value) {
-    _$finishLoadAtom.reportWrite(value, super.finishLoad, () {
-      super.finishLoad = value;
-    });
-  }
-
   final _$isRecomendationsExpandedAtom =
       Atom(name: '_DetailsControllerBase.isRecomendationsExpanded');
 
@@ -145,15 +130,6 @@ mixin _$DetailsController on _DetailsControllerBase, Store {
     return _$getgameInfoAsyncAction.run(() => super.getgameInfo(gameId));
   }
 
-  final _$backToDoYouMeanPageAsyncAction =
-      AsyncAction('_DetailsControllerBase.backToDoYouMeanPage');
-
-  @override
-  Future<void> backToDoYouMeanPage() {
-    return _$backToDoYouMeanPageAsyncAction
-        .run(() => super.backToDoYouMeanPage());
-  }
-
   final _$_DetailsControllerBaseActionController =
       ActionController(name: '_DetailsControllerBase');
 
@@ -180,11 +156,11 @@ mixin _$DetailsController on _DetailsControllerBase, Store {
   }
 
   @override
-  void onTapInfoPanel() {
+  void onTapDetailsPanel() {
     final _$actionInfo = _$_DetailsControllerBaseActionController.startAction(
-        name: '_DetailsControllerBase.onTapInfoPanel');
+        name: '_DetailsControllerBase.onTapDetailsPanel');
     try {
-      return super.onTapInfoPanel();
+      return super.onTapDetailsPanel();
     } finally {
       _$_DetailsControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -193,7 +169,6 @@ mixin _$DetailsController on _DetailsControllerBase, Store {
   @override
   String toString() {
     return '''
-finishLoad: ${finishLoad},
 isRecomendationsExpanded: ${isRecomendationsExpanded},
 isInfoExpanded: ${isInfoExpanded},
 isScreenshotsExpanded: ${isScreenshotsExpanded},

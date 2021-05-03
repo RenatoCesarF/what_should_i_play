@@ -23,7 +23,7 @@ abstract class _DoYouMeanControllerBase with Store {
 
   @action
   Future<void> findGames(String gameName) async {
-    gameName = "rocket league"; //fotnite, bind of isaac
+    gameName = "guitar hero";
     finishSearch = false;
     games.clear();
     List response = await Dio()
@@ -57,6 +57,5 @@ abstract class _DoYouMeanControllerBase with Store {
   Future<void> openGame(Game game) async {
     await Modular.to
         .push(MaterialPageRoute(builder: (_) => DetailsModule(game)));
-    // await Navigator.push(context,
   }
 }

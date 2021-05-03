@@ -6,7 +6,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:project/app/modules/search/search_module.dart';
 import 'package:project/app/modules/search/search_page.dart';
 import 'package:project/shared/components/loading.dart';
-import 'package:project/shared/components/smallCoverPlaceHolder.dart';
+import 'package:project/shared/components/coverPlaceHolder.dart';
 import 'do_you_mean_controller.dart';
 
 class DoYouMeanPage extends StatefulWidget {
@@ -78,12 +78,28 @@ class _DoYouMeanPageState
                                                       BorderRadius.circular(
                                                           8.0),
                                                   child: game.cover != null
-                                                      ? Image.network(
-                                                          game.cover.smallCover,
-                                                          fit: BoxFit.contain)
-                                                      : SmallCoverPlaceHolder(
-                                                          scale: 1,
-                                                        )),
+                                                      ? Hero(
+                                                          tag:
+                                                              "image${game.cover.id}",
+                                                          child: Image.network(
+                                                            game.cover
+                                                                .smallCover,
+                                                            fit: BoxFit.contain,
+                                                            loadingBuilder:
+                                                                (BuildContext
+                                                                        context,
+                                                                    Widget
+                                                                        child,
+                                                                    ImageChunkEvent
+                                                                        loadingProgress) {
+                                                              if (loadingProgress ==
+                                                                  null)
+                                                                return child;
+                                                              return CoverPlaceHolder();
+                                                            },
+                                                          ),
+                                                        )
+                                                      : CoverPlaceHolder()),
                                             ),
                                             Container(width: 8),
                                             Expanded(
@@ -123,70 +139,67 @@ class _DoYouMeanPageState
                             .toList())
                 : Loading(),
             Positioned(
-                child: Column(
-              children: [
-                Container(
-                  color: Theme.of(context).primaryColor,
-                  padding: EdgeInsets.only(top: 30, bottom: 6),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      SizedBox(
-                        width: 40,
-                        child: TextButton(
-                          onPressed: () async => await Modular.to.push(
-                              MaterialPageRoute(
-                                  builder: (_) => SearchModule())),
-                          child: Icon(Icons.arrow_back_rounded,
-                              size: 30,
-                              color: Theme.of(context).accentColor), //changed
-                        ),
-                      ),
-                      Expanded(
-                        child: TextField(
-                          onEditingComplete: () => controller
-                              .findGames(controller.searchBarController.text),
-                          controller: controller.searchBarController,
-                          onChanged: (value) {
-                            controller.searchBarController.text = value;
-                          },
-                          decoration: InputDecoration(
-                              isDense: true,
-                              hintText: "A game that you have enjoyed",
-                              hintStyle: TextStyle(color: Color(0x66979797))),
-                          autocorrect: false,
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                          selectionHeightStyle: BoxHeightStyle.tight,
-                          textAlign: TextAlign.center,
-                          cursorColor: Theme.of(context).accentColor, //changed
-                        ),
-                      ),
-                      SizedBox(
-                        width: 40,
-                        child: TextButton(
-                          onPressed: () {
-                            FocusScope.of(context).unfocus();
-                            controller
-                                .findGames(controller.searchBarController.text);
-                          },
-                          child: Icon(
-                            Icons.search_rounded,
+                child: Column(children: [
+              Container(
+                color: Theme.of(context).primaryColor,
+                padding: EdgeInsets.only(top: 30, bottom: 6),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    SizedBox(
+                      width: 40,
+                      child: TextButton(
+                        onPressed: () async => await Modular.to.push(
+                            MaterialPageRoute(builder: (_) => SearchModule())),
+                        child: Icon(Icons.arrow_back_rounded,
                             size: 30,
-                            color: Theme.of(context).accentColor, //changed
-                          ),
+                            color: Theme.of(context).accentColor), //changed
+                      ),
+                    ),
+                    Expanded(
+                      child: TextField(
+                        onEditingComplete: () => controller
+                            .findGames(controller.searchBarController.text),
+                        controller: controller.searchBarController,
+                        onChanged: (value) {
+                          controller.searchBarController.text = value;
+                        },
+                        decoration: InputDecoration(
+                            isDense: true,
+                            hintText: "A game that you have enjoyed",
+                            hintStyle: TextStyle(color: Color(0x66979797))),
+                        autocorrect: false,
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                        selectionHeightStyle: BoxHeightStyle.tight,
+                        textAlign: TextAlign.center,
+                        cursorColor: Theme.of(context).accentColor, //changed
+                      ),
+                    ),
+                    SizedBox(
+                      width: 40,
+                      child: TextButton(
+                        onPressed: () {
+                          FocusScope.of(context).unfocus();
+                          controller
+                              .findGames(controller.searchBarController.text);
+                        },
+                        child: Icon(
+                          Icons.search_rounded,
+                          size: 30,
+                          color: Theme.of(context).accentColor, //changed
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-                Container(
-                  height: 3,
-                  color: Theme.of(context).backgroundColor,
-                ),
-              ],
-            )),
+              ),
+              Container(
+                height: 3,
+                color: Theme.of(context).backgroundColor,
+              ),
+            ])),
           ]),
         );
       },

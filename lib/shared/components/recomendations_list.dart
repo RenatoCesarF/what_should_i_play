@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:project/app/modules/details/details_controller.dart';
 import 'package:project/app/modules/details/details_module.dart';
-import 'package:project/shared/components/smallCoverPlaceHolder.dart';
+import 'package:project/shared/components/coverPlaceHolder.dart';
 import 'package:project/shared/models/game_model.dart';
 
 class RecomendationsList extends StatefulWidget {
-  final DetailsController controller;
   final List<Game> games;
   final String title;
 
-  RecomendationsList(this.controller, this.games, this.title);
+  RecomendationsList(this.games, this.title);
 
   @override
   _RecomendationsListState createState() => _RecomendationsListState();
@@ -50,14 +48,21 @@ class _RecomendationsListState extends State<RecomendationsList> {
                                     onTap: () async {
                                       await Modular.to.push(MaterialPageRoute(
                                           builder: (_) => DetailsModule(game)));
-                                    }, //widget.controller.getgameInfo(game.id),
+                                    },
                                     child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                         child: game.cover != null
-                                            ? Image.network(game.cover.bigCover,
-                                                scale: 2, fit: BoxFit.contain)
-                                            : SmallCoverPlaceHolder()),
+                                            ? Hero(
+                                                tag: 'image${game.cover.id}',
+                                                child: Image.network(
+                                                    game.cover.bigCover,
+                                                    scale: 2,
+                                                    fit: BoxFit.contain),
+                                              )
+                                            : CoverPlaceHolder(
+                                                scaleFactory: 0.5,
+                                              )),
                                   ),
                                 ),
                               )

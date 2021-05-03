@@ -14,10 +14,7 @@ class DetailsController = _DetailsControllerBase with _$DetailsController;
 
 abstract class _DetailsControllerBase with Store {
   @observable
-  bool finishLoad = false;
-
-  @observable
-  bool isRecomendationsExpanded = false;
+  bool isRecomendationsExpanded = true;
 
   @observable
   bool isInfoExpanded = true;
@@ -39,11 +36,6 @@ abstract class _DetailsControllerBase with Store {
 
   @action
   Future<void> getgameInfo(int gameId) async {
-    isInfoExpanded = true;
-    similarGames.clear();
-    gamesFromTheSameCompany.clear();
-
-    finishLoad = false;
     var response = await Dio()
         .post("https://api.igdb.com/v4/games",
             data: _getRequestData(gameId),
@@ -61,8 +53,6 @@ abstract class _DetailsControllerBase with Store {
     _getgamesFromTheSameCompanyGames(gameInfo);
 
     _getSimilarGames(gameInfo);
-
-    finishLoad = true;
   }
 
   String _getRequestData(int gameId) {
@@ -98,6 +88,8 @@ abstract class _DetailsControllerBase with Store {
   }
 
   void _getgamesFromTheSameCompanyGames(Game game) {
+    gamesFromTheSameCompany.clear();
+
     Company developerCompany = game.getDeveloperCompany;
 
     if (developerCompany.developed != null) {
@@ -116,6 +108,8 @@ abstract class _DetailsControllerBase with Store {
   }
 
   void _getSimilarGames(Game game) {
+    similarGames.clear();
+
     if (gameInfo.similarGames != null) {
       gameInfo.similarGames.forEach((game) {
         _gameWasAlredyListed(game) ? print("") : similarGames.add(game);
@@ -148,12 +142,14 @@ abstract class _DetailsControllerBase with Store {
   }
 
   @action
-  void onTapInfoPanel() {
+  void onTapDetailsPanel() {
     isInfoExpanded = !isInfoExpanded;
   }
 
-  @action
-  Future<void> backToDoYouMeanPage() async {
-    await Modular.to.push(MaterialPageRoute(builder: (_) => DoYouMeanPage()));
-  }
+  // @action
+  // Future<void> backToDoYouMeanPage() async {
+  //   await Modular.to.push(MaterialPageRoute(builder: (_) => DoYouMeanPage()));
+  // }
+
+  void addGameToFavorite() {}
 }

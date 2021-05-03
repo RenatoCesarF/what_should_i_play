@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:transparent_image/transparent_image.dart';
 
 class OpenedImage extends StatelessWidget {
   final String imageURL;
@@ -16,12 +17,12 @@ class OpenedImage extends StatelessWidget {
           color: Theme.of(context).backgroundColor,
           child: InteractiveViewer(
             child: RotatedBox(
-              quarterTurns: rotate ? 1 : 4,
-              child: Image.network(
-                imageURL,
-                matchTextDirection: true,
-              ),
-            ),
+                quarterTurns: rotate ? 1 : 4,
+                child: FadeInImage.memoryNetwork(
+                  placeholder: kTransparentImage,
+                  image: imageURL,
+                  fadeInDuration: Duration(milliseconds: 200),
+                )),
           ),
         ),
       ),
