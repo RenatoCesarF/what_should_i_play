@@ -3,9 +3,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:project/app/modules/search/search_module.dart';
-import 'package:project/app/modules/search/search_page.dart';
-import 'package:project/shared/components/loading.dart';
 import 'package:project/shared/components/coverPlaceHolder.dart';
 import 'package:project/shared/models/game_model.dart';
 import 'do_you_mean_controller.dart';
@@ -19,8 +16,7 @@ class DoYouMeanPage extends StatefulWidget {
   _DoYouMeanPageState createState() => _DoYouMeanPageState();
 }
 
-class _DoYouMeanPageState
-    extends ModularState<DoYouMeanPage, DoYouMeanController> {
+class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanController> {
   //use 'controller' variable to access controller
 
   @override
@@ -39,6 +35,7 @@ class _DoYouMeanPageState
           return CustomScrollView(
             slivers: <Widget>[
               SliverAppBar(
+                backgroundColor: Theme.of(context).dividerColor,
                 shadowColor: Colors.black,
                 elevation: 24,
                 centerTitle: true,
@@ -61,9 +58,7 @@ class _DoYouMeanPageState
                     ),
                     child: Text(
                       "Do you mean",
-                      style: TextStyle(
-                          color: Color(0xffD9D5EC),
-                          fontWeight: FontWeight.bold),
+                      style: TextStyle(color: Color(0xffD9D5EC), fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
@@ -77,8 +72,7 @@ class _DoYouMeanPageState
                       return Container();
                     }
                     return Dismissible(
-                      onDismissed: (key) => controller.games
-                          .removeWhere((element) => element == game),
+                      onDismissed: (key) => controller.games.removeWhere((element) => element == game),
                       key: ValueKey(game),
                       child: GestureDetector(
                         onTap: () => controller.openGame(game),
@@ -88,8 +82,7 @@ class _DoYouMeanPageState
                               borderRadius: BorderRadius.all(
                                 Radius.circular(20.0),
                               )),
-                          margin: const EdgeInsets.only(
-                              top: 8.0, bottom: 8, left: 8, right: 15),
+                          margin: const EdgeInsets.only(top: 8.0, bottom: 8, left: 8, right: 15),
                           padding: const EdgeInsets.all(8),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -104,13 +97,8 @@ class _DoYouMeanPageState
                                             child: Image.network(
                                               game.cover.smallCover,
                                               fit: BoxFit.contain,
-                                              loadingBuilder:
-                                                  (BuildContext context,
-                                                      Widget child,
-                                                      ImageChunkEvent
-                                                          loadingProgress) {
-                                                if (loadingProgress == null)
-                                                  return child;
+                                              loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                                                if (loadingProgress == null) return child;
                                                 return CoverPlaceHolder();
                                               },
                                             ),
@@ -124,20 +112,13 @@ class _DoYouMeanPageState
                                   children: [
                                     Text(
                                       game.name,
-                                      style: TextStyle(
-                                          color: Theme.of(context).canvasColor,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
+                                      style: TextStyle(color: Theme.of(context).canvasColor, fontWeight: FontWeight.bold, fontSize: 18),
                                     ),
                                     Container(height: 10),
                                     Text(
-                                      game.summary != null
-                                          ? "${game.getShortSummary}..."
-                                          : "",
+                                      game.summary != null ? "${game.getShortSummary}..." : "",
                                       textAlign: TextAlign.start,
-                                      style: TextStyle(
-                                          color: Theme.of(context).canvasColor,
-                                          fontSize: 12),
+                                      style: TextStyle(color: Theme.of(context).canvasColor, fontSize: 12),
                                     ),
                                   ],
                                 ),

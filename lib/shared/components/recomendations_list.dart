@@ -3,6 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:project/app/modules/details/details_module.dart';
 import 'package:project/shared/components/coverPlaceHolder.dart';
+import 'package:project/shared/components/screenshotPlaceHolder.dart';
 import 'package:project/shared/models/game_model.dart';
 
 class RecomendationsList extends StatefulWidget {
@@ -38,10 +39,40 @@ class _RecomendationsListState extends State<RecomendationsList> {
                     ),
                     Container(height: 2, color: Theme.of(context).primaryColor),
                     Container(
-                      padding: EdgeInsets.only(bottom: 8),
-                      width: double.infinity,
-                      color: Theme.of(context).backgroundColor,
-                      child: SingleChildScrollView(
+                        padding: EdgeInsets.only(bottom: 8),
+                        width: double.infinity,
+                        height: 200,
+                        color: Theme.of(context).backgroundColor,
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: widget.games.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              Game game = widget.games[index];
+
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    await Modular.to.push(MaterialPageRoute(builder: (_) => DetailsModule(game)));
+                                  },
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: game.cover != null
+                                          ? Hero(
+                                              tag: 'image${game.cover.id}',
+                                              child: Image.network(game.cover.bigCover, loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
+                                                if (loadingProgress == null) return child;
+                                                return CoverPlaceHolder(scaleFactory: 0.5);
+                                              }, scale: 2, fit: BoxFit.contain),
+                                            )
+                                          : CoverPlaceHolder(
+                                              scaleFactory: 0.5,
+                                            )),
+                                ),
+                              );
+                            })
+                        /*SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
                             children: widget.games
@@ -62,6 +93,16 @@ class _RecomendationsListState extends State<RecomendationsList> {
                                                   tag: 'image${game.cover.id}',
                                                   child: Image.network(
                                                       game.cover.bigCover,
+                                                      loadingBuilder: (BuildContext
+                                                              context,
+                                                          Widget child,
+                                                          ImageChunkEvent
+                                                              loadingProgress) {
+                                                    if (loadingProgress == null)
+                                                      return child;
+                                                    return CoverPlaceHolder(
+                                                        scaleFactory: 0.5);
+                                                  },
                                                       scale: 2,
                                                       fit: BoxFit.contain),
                                                 )
@@ -73,7 +114,8 @@ class _RecomendationsListState extends State<RecomendationsList> {
                                 )
                                 .toList()),
                       ),
-                    ),
+                      */
+                        ),
                   ],
                 ),
               )
@@ -82,3 +124,42 @@ class _RecomendationsListState extends State<RecomendationsList> {
     );
   }
 }
+/*
+ListView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (BuildContext context, int index) {
+                              Game game = widget.games[index];
+
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: GestureDetector(
+                                  onTap: () async {
+                                    await Modular.to.push(MaterialPageRoute(
+                                        builder: (_) => DetailsModule(game)));
+                                  },
+                                  child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: game.cover != null
+                                          ? Hero(
+                                              tag: 'image${game.cover.id}',
+                                              child: Image.network(
+                                                  game.cover.bigCover,
+                                                  loadingBuilder:
+                                                      (BuildContext context,
+                                                          Widget child,
+                                                          ImageChunkEvent
+                                                              loadingProgress) {
+                                                if (loadingProgress == null)
+                                                  return child;
+                                                return CoverPlaceHolder(
+                                                    scaleFactory: 0.5);
+                                              }, scale: 2, fit: BoxFit.contain),
+                                            )
+                                          : CoverPlaceHolder(
+                                              scaleFactory: 0.5,
+                                            )),
+                                ),
+                              );
+                            })
+ */

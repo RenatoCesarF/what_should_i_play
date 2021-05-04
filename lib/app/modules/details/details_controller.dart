@@ -26,7 +26,7 @@ abstract class _DetailsControllerBase with Store {
   bool isSummaryExpanded = false;
 
   @observable
-  ObservableList<Game> gamesFromTheSameCompany = ObservableList.of([]);
+  ObservableList<Game> gamesFromTheSameDevelopers = ObservableList.of([]);
 
   @observable
   ObservableList<Game> similarGames = ObservableList.of([]);
@@ -50,7 +50,7 @@ abstract class _DetailsControllerBase with Store {
     // print(response);
     gameInfo = Game.fromJson(response[0]);
 
-    _getgamesFromTheSameCompanyGames(gameInfo);
+    _getGamesFromTheSameDevelopers(gameInfo);
 
     _getSimilarGames(gameInfo);
   }
@@ -87,24 +87,24 @@ abstract class _DetailsControllerBase with Store {
     return requestData;
   }
 
-  void _getgamesFromTheSameCompanyGames(Game game) {
-    gamesFromTheSameCompany.clear();
+  void _getGamesFromTheSameDevelopers(Game game) {
+    gamesFromTheSameDevelopers.clear();
 
     Company developerCompany = game.getDeveloperCompany;
 
     if (developerCompany.developed != null) {
       developerCompany.developed.forEach((eachGame) {
         if (eachGame.id == game.id) return;
-        gamesFromTheSameCompany.add(eachGame);
+        gamesFromTheSameDevelopers.add(eachGame);
       });
     }
 
-    if (developerCompany.published != null) {
-      developerCompany.published.forEach((eachGame) {
-        if (eachGame.id == game.id) return;
-        gamesFromTheSameCompany.add(eachGame);
-      });
-    }
+    // if (developerCompany.published != null) {
+    //   developerCompany.published.forEach((eachGame) {
+    //     if (eachGame.id == game.id) return;
+    //     gamesFromTheSameDevelopers.add(eachGame);
+    //   });
+    // }
   }
 
   void _getSimilarGames(Game game) {
@@ -120,7 +120,7 @@ abstract class _DetailsControllerBase with Store {
   bool _gameWasAlredyListed(comparedGame) {
     bool gameAlreadyListed = false;
 
-    gamesFromTheSameCompany.forEach((gameOfCompany) {
+    gamesFromTheSameDevelopers.forEach((gameOfCompany) {
       if (gameOfCompany.id != comparedGame.id) {
         return;
       }
