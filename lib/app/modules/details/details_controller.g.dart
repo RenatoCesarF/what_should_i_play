@@ -9,56 +9,6 @@ part of 'details_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$DetailsController on _DetailsControllerBase, Store {
-  final _$isRecomendationsExpandedAtom =
-      Atom(name: '_DetailsControllerBase.isRecomendationsExpanded');
-
-  @override
-  bool get isRecomendationsExpanded {
-    _$isRecomendationsExpandedAtom.reportRead();
-    return super.isRecomendationsExpanded;
-  }
-
-  @override
-  set isRecomendationsExpanded(bool value) {
-    _$isRecomendationsExpandedAtom
-        .reportWrite(value, super.isRecomendationsExpanded, () {
-      super.isRecomendationsExpanded = value;
-    });
-  }
-
-  final _$isInfoExpandedAtom =
-      Atom(name: '_DetailsControllerBase.isInfoExpanded');
-
-  @override
-  bool get isInfoExpanded {
-    _$isInfoExpandedAtom.reportRead();
-    return super.isInfoExpanded;
-  }
-
-  @override
-  set isInfoExpanded(bool value) {
-    _$isInfoExpandedAtom.reportWrite(value, super.isInfoExpanded, () {
-      super.isInfoExpanded = value;
-    });
-  }
-
-  final _$isScreenshotsExpandedAtom =
-      Atom(name: '_DetailsControllerBase.isScreenshotsExpanded');
-
-  @override
-  bool get isScreenshotsExpanded {
-    _$isScreenshotsExpandedAtom.reportRead();
-    return super.isScreenshotsExpanded;
-  }
-
-  @override
-  set isScreenshotsExpanded(bool value) {
-    _$isScreenshotsExpandedAtom.reportWrite(value, super.isScreenshotsExpanded,
-        () {
-      super.isScreenshotsExpanded = value;
-    });
-  }
-
   final _$isSummaryExpandedAtom =
       Atom(name: '_DetailsControllerBase.isSummaryExpanded');
 
@@ -130,48 +80,9 @@ mixin _$DetailsController on _DetailsControllerBase, Store {
     return _$getgameInfoAsyncAction.run(() => super.getgameInfo(gameId));
   }
 
-  final _$_DetailsControllerBaseActionController =
-      ActionController(name: '_DetailsControllerBase');
-
-  @override
-  void onTapRecomendationsPanel() {
-    final _$actionInfo = _$_DetailsControllerBaseActionController.startAction(
-        name: '_DetailsControllerBase.onTapRecomendationsPanel');
-    try {
-      return super.onTapRecomendationsPanel();
-    } finally {
-      _$_DetailsControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void onTapScreenshotsPanel() {
-    final _$actionInfo = _$_DetailsControllerBaseActionController.startAction(
-        name: '_DetailsControllerBase.onTapScreenshotsPanel');
-    try {
-      return super.onTapScreenshotsPanel();
-    } finally {
-      _$_DetailsControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void onTapDetailsPanel() {
-    final _$actionInfo = _$_DetailsControllerBaseActionController.startAction(
-        name: '_DetailsControllerBase.onTapDetailsPanel');
-    try {
-      return super.onTapDetailsPanel();
-    } finally {
-      _$_DetailsControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
   @override
   String toString() {
     return '''
-isRecomendationsExpanded: ${isRecomendationsExpanded},
-isInfoExpanded: ${isInfoExpanded},
-isScreenshotsExpanded: ${isScreenshotsExpanded},
 isSummaryExpanded: ${isSummaryExpanded},
 gamesFromTheSameDevelopers: ${gamesFromTheSameDevelopers},
 similarGames: ${similarGames},

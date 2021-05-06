@@ -19,7 +19,7 @@ class LoadingLine extends StatelessWidget {
             highlightColor: Theme.of(context).primaryColor,
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.all(
                   Radius.circular(20.0),
                 ),

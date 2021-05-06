@@ -14,15 +14,6 @@ class DetailsController = _DetailsControllerBase with _$DetailsController;
 
 abstract class _DetailsControllerBase with Store {
   @observable
-  bool isRecomendationsExpanded = true;
-
-  @observable
-  bool isInfoExpanded = true;
-
-  @observable
-  bool isScreenshotsExpanded = true;
-
-  @observable
   bool isSummaryExpanded = false;
 
   @observable
@@ -34,7 +25,7 @@ abstract class _DetailsControllerBase with Store {
   @observable
   Game gameInfo;
 
-  @action
+  @action //acho que pode tirar esse action
   Future<void> getgameInfo(int gameId) async {
     var response = await Dio()
         .post("https://api.igdb.com/v4/games",
@@ -129,21 +120,6 @@ abstract class _DetailsControllerBase with Store {
     });
 
     return gameAlreadyListed;
-  }
-
-  @action
-  void onTapRecomendationsPanel() {
-    isRecomendationsExpanded = !isRecomendationsExpanded;
-  }
-
-  @action
-  void onTapScreenshotsPanel() {
-    isScreenshotsExpanded = !isScreenshotsExpanded;
-  }
-
-  @action
-  void onTapDetailsPanel() {
-    isInfoExpanded = !isInfoExpanded;
   }
 
   // @action

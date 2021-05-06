@@ -8,7 +8,7 @@ class ScreenshotPlaceHolder extends StatelessWidget {
       baseColor: Theme.of(context).primaryColor,
       highlightColor: Theme.of(context).cardColor,
       child: Container(
-        color: Colors.white,
+        color: Theme.of(context).primaryColor,
         height: 312,
         width: 555,
       ),

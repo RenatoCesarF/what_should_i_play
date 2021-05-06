@@ -68,54 +68,11 @@ class _RecomendationsListState extends State<RecomendationsList> {
                                             )
                                           : CoverPlaceHolder(
                                               scaleFactory: 0.5,
+                                              gameName: game.name,
                                             )),
                                 ),
                               );
-                            })
-                        /*SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                            children: widget.games
-                                .map(
-                                  (Game game) => Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: GestureDetector(
-                                      onTap: () async {
-                                        await Modular.to.push(MaterialPageRoute(
-                                            builder: (_) =>
-                                                DetailsModule(game)));
-                                      },
-                                      child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: game.cover != null
-                                              ? Hero(
-                                                  tag: 'image${game.cover.id}',
-                                                  child: Image.network(
-                                                      game.cover.bigCover,
-                                                      loadingBuilder: (BuildContext
-                                                              context,
-                                                          Widget child,
-                                                          ImageChunkEvent
-                                                              loadingProgress) {
-                                                    if (loadingProgress == null)
-                                                      return child;
-                                                    return CoverPlaceHolder(
-                                                        scaleFactory: 0.5);
-                                                  },
-                                                      scale: 2,
-                                                      fit: BoxFit.contain),
-                                                )
-                                              : CoverPlaceHolder(
-                                                  scaleFactory: 0.5,
-                                                )),
-                                    ),
-                                  ),
-                                )
-                                .toList()),
-                      ),
-                      */
-                        ),
+                            })),
                   ],
                 ),
               )
@@ -124,42 +81,3 @@ class _RecomendationsListState extends State<RecomendationsList> {
     );
   }
 }
-/*
-ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            itemBuilder: (BuildContext context, int index) {
-                              Game game = widget.games[index];
-
-                              return Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: GestureDetector(
-                                  onTap: () async {
-                                    await Modular.to.push(MaterialPageRoute(
-                                        builder: (_) => DetailsModule(game)));
-                                  },
-                                  child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      child: game.cover != null
-                                          ? Hero(
-                                              tag: 'image${game.cover.id}',
-                                              child: Image.network(
-                                                  game.cover.bigCover,
-                                                  loadingBuilder:
-                                                      (BuildContext context,
-                                                          Widget child,
-                                                          ImageChunkEvent
-                                                              loadingProgress) {
-                                                if (loadingProgress == null)
-                                                  return child;
-                                                return CoverPlaceHolder(
-                                                    scaleFactory: 0.5);
-                                              }, scale: 2, fit: BoxFit.contain),
-                                            )
-                                          : CoverPlaceHolder(
-                                              scaleFactory: 0.5,
-                                            )),
-                                ),
-                              );
-                            })
- */

@@ -26,7 +26,10 @@ class SearchBar extends StatelessWidget {
           ),
           Expanded(
             child: TextField(
-              onEditingComplete: () => controller.findGames(controller.searchBarController.text),
+              onEditingComplete: () {
+                controller.findGames(controller.searchBarController.text);
+                FocusScope.of(context).unfocus();
+              },
               controller: controller.searchBarController,
               onChanged: (value) {
                 controller.searchBarController.text = value;
@@ -46,6 +49,7 @@ class SearchBar extends StatelessWidget {
             child: TextButton(
               onPressed: () {
                 FocusScope.of(context).unfocus();
+                controller.isSearching = true;
                 controller.findGames(controller.searchBarController.text);
               },
               child: Icon(

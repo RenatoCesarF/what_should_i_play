@@ -40,19 +40,18 @@ mixin _$DoYouMeanController on _DoYouMeanControllerBase, Store {
     });
   }
 
-  final _$finishSearchAtom =
-      Atom(name: '_DoYouMeanControllerBase.finishSearch');
+  final _$isSearchingAtom = Atom(name: '_DoYouMeanControllerBase.isSearching');
 
   @override
-  bool get finishSearch {
-    _$finishSearchAtom.reportRead();
-    return super.finishSearch;
+  bool get isSearching {
+    _$isSearchingAtom.reportRead();
+    return super.isSearching;
   }
 
   @override
-  set finishSearch(bool value) {
-    _$finishSearchAtom.reportWrite(value, super.finishSearch, () {
-      super.finishSearch = value;
+  set isSearching(bool value) {
+    _$isSearchingAtom.reportWrite(value, super.isSearching, () {
+      super.isSearching = value;
     });
   }
 
@@ -77,7 +76,7 @@ mixin _$DoYouMeanController on _DoYouMeanControllerBase, Store {
     return '''
 searchBarController: ${searchBarController},
 games: ${games},
-finishSearch: ${finishSearch}
+isSearching: ${isSearching}
     ''';
   }
 }
