@@ -13,7 +13,7 @@ class LoadingLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        margin: EdgeInsets.only(top: 3.5, left: 12, bottom: 3.5),
+        margin: EdgeInsets.only(top: 3.5, bottom: 3.5),
         child: Shimmer.fromColors(
             baseColor: Theme.of(context).dividerColor,
             highlightColor: Theme.of(context).primaryColor,
