@@ -171,7 +171,10 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                                         ),
                                         Container(
                                           margin: EdgeInsets.only(top: 15),
-                                          child: Text("${controller.gameInfo.launchYear} — ${controller.gameInfo.getDeveloperCompany.name}",
+                                          child: Text(
+                                              controller.gameInfo.getDeveloperCompany.name != null
+                                                  ? "${controller.gameInfo.launchYear} — ${controller.gameInfo.getDeveloperCompany.name}"
+                                                  : "${controller.gameInfo.launchYear}",
                                               style: TextStyle(color: Theme.of(context).canvasColor, fontWeight: FontWeight.bold)),
                                         )
                                       ],
