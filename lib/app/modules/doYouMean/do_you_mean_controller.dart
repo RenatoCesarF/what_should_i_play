@@ -19,12 +19,12 @@ abstract class _DoYouMeanControllerBase with Store {
   ObservableList<Game> games = ObservableList.of([]);
 
   @observable
-  bool finishSearch = false;
+  bool isSearching = false;
 
   @action
   Future<void> findGames(String gameName) async {
-    gameName = "rocket league"; //fotnite, bind of isaac
-    finishSearch = false;
+    gameName = "dark souls";
+    isSearching = true;
     games.clear();
     List response = await Dio()
         .post("https://api.igdb.com/v4/games/",
@@ -45,18 +45,15 @@ abstract class _DoYouMeanControllerBase with Store {
     });
 
     if (games.length == 1) {
-      Modular.to
-          .push(MaterialPageRoute(builder: (_) => DetailsModule(games[0])));
+      Modular.to.push(MaterialPageRoute(builder: (_) => DetailsModule(games[0])));
     }
 
-    finishSearch = true;
+    isSearching = false;
     return;
   }
 
   @action
   Future<void> openGame(Game game) async {
-    await Modular.to
-        .push(MaterialPageRoute(builder: (_) => DetailsModule(game)));
-    // await Navigator.push(context,
+    await Modular.to.push(MaterialPageRoute(builder: (_) => DetailsModule(game)));
   }
 }

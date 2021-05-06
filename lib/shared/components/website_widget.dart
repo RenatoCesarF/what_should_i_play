@@ -2,21 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:project/shared/models/websites_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class s extends StatefulWidget {
-  final Websites website;
-
-  s(this.website);
-
+class WebsiteWrapList extends StatelessWidget {
+  final List<Websites> websiteList;
+  WebsiteWrapList(this.websiteList);
   @override
-  _sState createState() => _sState();
-}
-
-class _sState extends State<s> {
-  Color categoryColor;
-  Image svg;
-
-  @override
-  Widget build(BuildContext context) {}
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(height: 10),
+        Text("Websites: ",
+            style: TextStyle(
+                fontSize: 16,
+                color: Theme.of(context).accentColor,
+                fontWeight: FontWeight.w900)),
+        Container(
+          margin: EdgeInsets.only(bottom: 20, top: 5, left: 8),
+          child: Wrap(
+            runSpacing: 10,
+            spacing: 20,
+            children: websiteList
+                .map((website) => WebsiteLinkComponent(website))
+                .toList(),
+          ),
+        ),
+      ],
+    );
+  }
 }
 
 class WebsiteLinkComponent extends StatelessWidget {

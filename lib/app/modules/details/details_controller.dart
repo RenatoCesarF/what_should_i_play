@@ -14,22 +14,10 @@ class DetailsController = _DetailsControllerBase with _$DetailsController;
 
 abstract class _DetailsControllerBase with Store {
   @observable
-  bool finishLoad = false;
-
-  @observable
-  bool isRecomendationsExpanded = false;
-
-  @observable
-  bool isInfoExpanded = true;
-
-  @observable
-  bool isScreenshotsExpanded = true;
-
-  @observable
   bool isSummaryExpanded = false;
 
   @observable
-  ObservableList<Game> gamesFromTheSameCompany = ObservableList.of([]);
+  ObservableList<Game> gamesFromTheSameDevelopers = ObservableList.of([]);
 
   @observable
   ObservableList<Game> similarGames = ObservableList.of([]);
@@ -37,13 +25,8 @@ abstract class _DetailsControllerBase with Store {
   @observable
   Game gameInfo;
 
-  @action
+  @action //acho que pode tirar esse action
   Future<void> getgameInfo(int gameId) async {
-    isInfoExpanded = true;
-    similarGames.clear();
-    gamesFromTheSameCompany.clear();
-
-    finishLoad = false;
     var response = await Dio()
         .post("https://api.igdb.com/v4/games",
             data: _getRequestData(gameId),
@@ -58,11 +41,9 @@ abstract class _DetailsControllerBase with Store {
     // print(response);
     gameInfo = Game.fromJson(response[0]);
 
-    _getgamesFromTheSameCompanyGames(gameInfo);
+    _getGamesFromTheSameDevelopers(gameInfo);
 
     _getSimilarGames(gameInfo);
-
-    finishLoad = true;
   }
 
   String _getRequestData(int gameId) {
@@ -97,25 +78,29 @@ abstract class _DetailsControllerBase with Store {
     return requestData;
   }
 
-  void _getgamesFromTheSameCompanyGames(Game game) {
+  void _getGamesFromTheSameDevelopers(Game game) {
+    gamesFromTheSameDevelopers.clear();
+
     Company developerCompany = game.getDeveloperCompany;
 
     if (developerCompany.developed != null) {
       developerCompany.developed.forEach((eachGame) {
         if (eachGame.id == game.id) return;
-        gamesFromTheSameCompany.add(eachGame);
+        gamesFromTheSameDevelopers.add(eachGame);
       });
     }
 
-    if (developerCompany.published != null) {
-      developerCompany.published.forEach((eachGame) {
-        if (eachGame.id == game.id) return;
-        gamesFromTheSameCompany.add(eachGame);
-      });
-    }
+    // if (developerCompany.published != null) {
+    //   developerCompany.published.forEach((eachGame) {
+    //     if (eachGame.id == game.id) return;
+    //     gamesFromTheSameDevelopers.add(eachGame);
+    //   });
+    // }
   }
 
   void _getSimilarGames(Game game) {
+    similarGames.clear();
+
     if (gameInfo.similarGames != null) {
       gameInfo.similarGames.forEach((game) {
         _gameWasAlredyListed(game) ? print("") : similarGames.add(game);
@@ -126,7 +111,7 @@ abstract class _DetailsControllerBase with Store {
   bool _gameWasAlredyListed(comparedGame) {
     bool gameAlreadyListed = false;
 
-    gamesFromTheSameCompany.forEach((gameOfCompany) {
+    gamesFromTheSameDevelopers.forEach((gameOfCompany) {
       if (gameOfCompany.id != comparedGame.id) {
         return;
       }
@@ -137,23 +122,10 @@ abstract class _DetailsControllerBase with Store {
     return gameAlreadyListed;
   }
 
-  @action
-  void onTapRecomendationsPanel() {
-    isRecomendationsExpanded = !isRecomendationsExpanded;
-  }
+  // @action
+  // Future<void> backToDoYouMeanPage() async {
+  //   await Modular.to.push(MaterialPageRoute(builder: (_) => DoYouMeanPage()));
+  // }
 
-  @action
-  void onTapScreenshotsPanel() {
-    isScreenshotsExpanded = !isScreenshotsExpanded;
-  }
-
-  @action
-  void onTapInfoPanel() {
-    isInfoExpanded = !isInfoExpanded;
-  }
-
-  @action
-  Future<void> backToDoYouMeanPage() async {
-    await Modular.to.push(MaterialPageRoute(builder: (_) => DoYouMeanPage()));
-  }
+  void addGameToFavorite() {}
 }

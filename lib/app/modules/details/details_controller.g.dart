@@ -9,71 +9,6 @@ part of 'details_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$DetailsController on _DetailsControllerBase, Store {
-  final _$finishLoadAtom = Atom(name: '_DetailsControllerBase.finishLoad');
-
-  @override
-  bool get finishLoad {
-    _$finishLoadAtom.reportRead();
-    return super.finishLoad;
-  }
-
-  @override
-  set finishLoad(bool value) {
-    _$finishLoadAtom.reportWrite(value, super.finishLoad, () {
-      super.finishLoad = value;
-    });
-  }
-
-  final _$isRecomendationsExpandedAtom =
-      Atom(name: '_DetailsControllerBase.isRecomendationsExpanded');
-
-  @override
-  bool get isRecomendationsExpanded {
-    _$isRecomendationsExpandedAtom.reportRead();
-    return super.isRecomendationsExpanded;
-  }
-
-  @override
-  set isRecomendationsExpanded(bool value) {
-    _$isRecomendationsExpandedAtom
-        .reportWrite(value, super.isRecomendationsExpanded, () {
-      super.isRecomendationsExpanded = value;
-    });
-  }
-
-  final _$isInfoExpandedAtom =
-      Atom(name: '_DetailsControllerBase.isInfoExpanded');
-
-  @override
-  bool get isInfoExpanded {
-    _$isInfoExpandedAtom.reportRead();
-    return super.isInfoExpanded;
-  }
-
-  @override
-  set isInfoExpanded(bool value) {
-    _$isInfoExpandedAtom.reportWrite(value, super.isInfoExpanded, () {
-      super.isInfoExpanded = value;
-    });
-  }
-
-  final _$isScreenshotsExpandedAtom =
-      Atom(name: '_DetailsControllerBase.isScreenshotsExpanded');
-
-  @override
-  bool get isScreenshotsExpanded {
-    _$isScreenshotsExpandedAtom.reportRead();
-    return super.isScreenshotsExpanded;
-  }
-
-  @override
-  set isScreenshotsExpanded(bool value) {
-    _$isScreenshotsExpandedAtom.reportWrite(value, super.isScreenshotsExpanded,
-        () {
-      super.isScreenshotsExpanded = value;
-    });
-  }
-
   final _$isSummaryExpandedAtom =
       Atom(name: '_DetailsControllerBase.isSummaryExpanded');
 
@@ -90,20 +25,20 @@ mixin _$DetailsController on _DetailsControllerBase, Store {
     });
   }
 
-  final _$gamesFromTheSameCompanyAtom =
-      Atom(name: '_DetailsControllerBase.gamesFromTheSameCompany');
+  final _$gamesFromTheSameDevelopersAtom =
+      Atom(name: '_DetailsControllerBase.gamesFromTheSameDevelopers');
 
   @override
-  ObservableList<Game> get gamesFromTheSameCompany {
-    _$gamesFromTheSameCompanyAtom.reportRead();
-    return super.gamesFromTheSameCompany;
+  ObservableList<Game> get gamesFromTheSameDevelopers {
+    _$gamesFromTheSameDevelopersAtom.reportRead();
+    return super.gamesFromTheSameDevelopers;
   }
 
   @override
-  set gamesFromTheSameCompany(ObservableList<Game> value) {
-    _$gamesFromTheSameCompanyAtom
-        .reportWrite(value, super.gamesFromTheSameCompany, () {
-      super.gamesFromTheSameCompany = value;
+  set gamesFromTheSameDevelopers(ObservableList<Game> value) {
+    _$gamesFromTheSameDevelopersAtom
+        .reportWrite(value, super.gamesFromTheSameDevelopers, () {
+      super.gamesFromTheSameDevelopers = value;
     });
   }
 
@@ -145,60 +80,11 @@ mixin _$DetailsController on _DetailsControllerBase, Store {
     return _$getgameInfoAsyncAction.run(() => super.getgameInfo(gameId));
   }
 
-  final _$backToDoYouMeanPageAsyncAction =
-      AsyncAction('_DetailsControllerBase.backToDoYouMeanPage');
-
-  @override
-  Future<void> backToDoYouMeanPage() {
-    return _$backToDoYouMeanPageAsyncAction
-        .run(() => super.backToDoYouMeanPage());
-  }
-
-  final _$_DetailsControllerBaseActionController =
-      ActionController(name: '_DetailsControllerBase');
-
-  @override
-  void onTapRecomendationsPanel() {
-    final _$actionInfo = _$_DetailsControllerBaseActionController.startAction(
-        name: '_DetailsControllerBase.onTapRecomendationsPanel');
-    try {
-      return super.onTapRecomendationsPanel();
-    } finally {
-      _$_DetailsControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void onTapScreenshotsPanel() {
-    final _$actionInfo = _$_DetailsControllerBaseActionController.startAction(
-        name: '_DetailsControllerBase.onTapScreenshotsPanel');
-    try {
-      return super.onTapScreenshotsPanel();
-    } finally {
-      _$_DetailsControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void onTapInfoPanel() {
-    final _$actionInfo = _$_DetailsControllerBaseActionController.startAction(
-        name: '_DetailsControllerBase.onTapInfoPanel');
-    try {
-      return super.onTapInfoPanel();
-    } finally {
-      _$_DetailsControllerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
   @override
   String toString() {
     return '''
-finishLoad: ${finishLoad},
-isRecomendationsExpanded: ${isRecomendationsExpanded},
-isInfoExpanded: ${isInfoExpanded},
-isScreenshotsExpanded: ${isScreenshotsExpanded},
 isSummaryExpanded: ${isSummaryExpanded},
-gamesFromTheSameCompany: ${gamesFromTheSameCompany},
+gamesFromTheSameDevelopers: ${gamesFromTheSameDevelopers},
 similarGames: ${similarGames},
 gameInfo: ${gameInfo}
     ''';

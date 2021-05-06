@@ -266,6 +266,10 @@ class Screenshot {
     return data;
   }
 
-  get screenshotImageURL =>
+  get bigScreenshotImageURL =>
       "https://images.igdb.com/igdb/image/upload/t_screenshot_big/$imageId.jpg";
+  get medScreenshotImageURL =>
+      "https://images.igdb.com/igdb/image/upload/t_screenshot_med/$imageId.jpg";
+  get coverMedImageURL =>
+      "https://images.igdb.com/igdb/image/upload/t_cover_big/$imageId.jpg";
 }

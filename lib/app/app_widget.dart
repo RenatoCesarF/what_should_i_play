@@ -10,9 +10,9 @@ class AppWidget extends StatelessWidget {
         fontFamily: "Poppins",
         visualDensity: VisualDensity.adaptivePlatformDensity,
         accentColor: Color(0xffF21B3F),
-        hintColor: Color(0xff1F1A38),
         backgroundColor: Color(0xff1F1A38),
         primaryColor: Color(0xff322A5C),
+        dividerColor: Color(0xff2A234D),
         cardColor: Color(0xff5D4DA8),
         canvasColor: Color(0xff979797),
         textTheme: TextTheme(
