@@ -23,13 +23,13 @@ abstract class _DoYouMeanControllerBase with Store {
 
   @action
   Future<void> findGames(String gameName) async {
-    gameName = "dark souls";
+    gameName = "Pokemon";
     isSearching = true;
     games.clear();
     List response = await Dio()
         .post("https://api.igdb.com/v4/games/",
             data:
-                'search "$gameName"; limit 29;fields name,cover.image_id,summary,first_release_date,genres.name,platforms.name,total_rating, involved_companies.company.name,involved_companies.developer;',
+                'search "$gameName"; limit 29;fields name,cover.image_id,summary,first_release_date,total_rating;',
             options: Options(headers: {
               'Accept': 'application/json',
               'Content-Type': 'application/x-www-form-urlencoded',
@@ -45,7 +45,8 @@ abstract class _DoYouMeanControllerBase with Store {
     });
 
     if (games.length == 1) {
-      Modular.to.push(MaterialPageRoute(builder: (_) => DetailsModule(games[0])));
+      Modular.to
+          .push(MaterialPageRoute(builder: (_) => DetailsModule(games[0])));
     }
 
     isSearching = false;
@@ -54,6 +55,7 @@ abstract class _DoYouMeanControllerBase with Store {
 
   @action
   Future<void> openGame(Game game) async {
-    await Modular.to.push(MaterialPageRoute(builder: (_) => DetailsModule(game)));
+    await Modular.to
+        .push(MaterialPageRoute(builder: (_) => DetailsModule(game)));
   }
 }

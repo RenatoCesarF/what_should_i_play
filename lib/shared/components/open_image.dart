@@ -5,14 +5,15 @@ class OpenedImage extends StatelessWidget {
   final String imageURL;
   final bool rotate;
   final int uniqueID;
-  OpenedImage(this.imageURL, this.uniqueID, {this.rotate = true});
+  final String tag;
+  OpenedImage(this.imageURL, this.uniqueID, {this.rotate = true, this.tag = 'image'});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onDoubleTap: () => Navigator.pop(context),
       child: Hero(
-        tag: "image$uniqueID",
+        tag: "$tag$uniqueID",
         child: Container(
           color: Theme.of(context).backgroundColor,
           child: InteractiveViewer(

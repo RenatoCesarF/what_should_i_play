@@ -1,8 +1,10 @@
 import 'dart:ui';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:project/app/modules/search/search_controller.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SearchPage extends StatefulWidget {
   @override
@@ -21,6 +23,134 @@ class _SearchPageState extends State<SearchPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        leading: Builder(
+          builder: (context) => // Ensure Scaffold is in context
+              IconButton(
+                  icon: Icon(
+                    Icons.menu,
+                    color: Theme.of(context).accentColor,
+                    size: 30,
+                  ),
+                  onPressed: () => Scaffold.of(context).openDrawer()),
+        ),
+      ),
+      drawer: Drawer(
+        child: Container(
+          color: Theme.of(context).dividerColor,
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: <Widget>[
+              Container(
+                  height: 150,
+                  width: double.infinity,
+                  color: Theme.of(context).primaryColor,
+                  child: Center(
+                      child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      SizedBox(
+                        width: 40,
+                        child: TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: Icon(
+                              Icons.arrow_back_ios_rounded,
+                              color: Theme.of(context).accentColor,
+                            )),
+                      ),
+                      Text(
+                        'Menu',
+                        style: TextStyle(
+                            fontSize: 30,
+                            color: Theme.of(context).accentColor,
+                            fontWeight: FontWeight.w900),
+                      ),
+                      Container(width: 60)
+                    ],
+                  ))),
+              ListTile(
+                leading: Icon(
+                  Icons.person,
+                  color: Theme.of(context).accentColor,
+                ),
+                title: Text('Profile',
+                    style: TextStyle(
+                        fontSize: 19,
+                        color: Theme.of(context).accentColor,
+                        fontWeight: FontWeight.w900)),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.settings,
+                  color: Theme.of(context).accentColor,
+                ),
+                title: Text('Settings',
+                    style: TextStyle(
+                        fontSize: 19,
+                        color: Theme.of(context).accentColor,
+                        fontWeight: FontWeight.w900)),
+                onTap: () {},
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.info,
+                  color: Theme.of(context).accentColor,
+                ),
+                title: Text('Info',
+                    style: TextStyle(
+                        fontSize: 19,
+                        color: Theme.of(context).accentColor,
+                        fontWeight: FontWeight.w900)),
+                onTap: () {
+                  showAboutDialog(
+                      context: context,
+                      applicationIcon: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset(
+                          "assets/images/icon.png",
+                          scale: 3.5,
+                        ),
+                      ),
+                      children: [
+                        Row(
+                          children: [
+                            Text("Made with"),
+                            Icon(Icons.favorite),
+                            Text("By Renato Cesar")
+                          ],
+                        ),
+                        GestureDetector(
+                          onTap: () async => {
+                            await canLaunch(
+                                    "https://github.com/RenatoCesarF/what_should_i_play")
+                                ? await launch(
+                                    "https://github.com/RenatoCesarF/what_should_i_play")
+                                : throw 'Could not launch '
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Image.asset(
+                                "assets/images/websiteSymbols/github.png",
+                                scale: 18,
+                              ),
+                              Text("Repository"),
+                              Container(
+                                width: 120,
+                              )
+                            ],
+                          ),
+                        )
+                      ]);
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
       backgroundColor: Theme.of(context).primaryColor,
       body: Observer(builder: (_) {
         return Container(
@@ -30,7 +160,7 @@ class _SearchPageState extends State<SearchPage>
               children: <Widget>[
                 MediaQuery.of(context).viewInsets.bottom == 0
                     ? Padding(
-                        padding: const EdgeInsets.only(top: 140),
+                        padding: const EdgeInsets.only(top: 80),
                         child: Column(
                           children: [
                             Container(

@@ -5,7 +5,9 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:project/app/modules/doYouMean/loading_do_you_mean_page.dart';
 import 'package:project/shared/components/coverPlaceHolder.dart';
+import 'package:project/shared/components/vertical_list_of_games.dart';
 import 'package:project/shared/models/game_model.dart';
+import 'package:transparent_image/transparent_image.dart';
 import 'do_you_mean_controller.dart';
 import '../../../shared/components/search_bar.dart';
 
@@ -17,7 +19,8 @@ class DoYouMeanPage extends StatefulWidget {
   _DoYouMeanPageState createState() => _DoYouMeanPageState();
 }
 
-class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanController> {
+class _DoYouMeanPageState
+    extends ModularState<DoYouMeanPage, DoYouMeanController> {
   //use 'controller' variable to access controller
   Future getGamesList;
   @override
@@ -32,7 +35,8 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
     return FutureBuilder(
         future: getGamesList,
         builder: (context, snapshot) {
-          if (snapshot.connectionState != ConnectionState.done || controller.isSearching == true) {
+          if (snapshot.connectionState != ConnectionState.done ||
+              controller.isSearching == true) {
             return LoadingDoYouMeanPage(controller);
           }
 
@@ -68,80 +72,15 @@ class _DoYouMeanPageState extends ModularState<DoYouMeanPage, DoYouMeanControlle
                                 ),
                                 child: Text(
                                   "Do you mean",
-                                  style: TextStyle(color: Color(0xffD9D5EC), fontWeight: FontWeight.bold),
+                                  style: TextStyle(
+                                      color: Color(0xffD9D5EC),
+                                      fontWeight: FontWeight.bold),
                                 ),
                               ),
                             ),
                           ),
-                          SliverList(
-                            delegate: SliverChildBuilderDelegate(
-                              (BuildContext context, int index) {
-                                Game game = controller.games[index];
-
-                                if (game == null) {
-                                  return Container();
-                                }
-                                return Dismissible(
-                                  onDismissed: (key) => controller.games.removeWhere((element) => element == game),
-                                  key: ValueKey(game),
-                                  child: GestureDetector(
-                                    onTap: () => controller.openGame(game),
-                                    child: Container(
-                                      decoration: new BoxDecoration(
-                                          color: Theme.of(context).backgroundColor,
-                                          borderRadius: BorderRadius.all(
-                                            Radius.circular(20.0),
-                                          )),
-                                      margin: const EdgeInsets.only(top: 8.0, bottom: 8, left: 8, right: 15),
-                                      padding: const EdgeInsets.all(8),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.all(5.0),
-                                            child: ClipRRect(
-                                                borderRadius: BorderRadius.circular(8.0),
-                                                child: game.cover != null
-                                                    ? Hero(
-                                                        tag: "image${game.cover.id}",
-                                                        child: Image.network(
-                                                          game.cover.smallCover,
-                                                          fit: BoxFit.contain,
-                                                          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
-                                                            if (loadingProgress == null) return child;
-                                                            return CoverPlaceHolder();
-                                                          },
-                                                        ),
-                                                      )
-                                                    : CoverPlaceHolder()),
-                                          ),
-                                          Container(width: 8),
-                                          Expanded(
-                                            child: Column(
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  game.name,
-                                                  style: TextStyle(color: Theme.of(context).canvasColor, fontWeight: FontWeight.bold, fontSize: 18),
-                                                ),
-                                                Container(height: 10),
-                                                Text(
-                                                  game.summary != null ? "${game.getShortSummary}..." : "",
-                                                  textAlign: TextAlign.start,
-                                                  style: TextStyle(color: Theme.of(context).canvasColor, fontSize: 12),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              },
-                              childCount: controller.games.length,
-                            ),
-                          ),
+                          SliverVerticalGameList(games: controller.games)
+                          //
                         ],
                       );
               },

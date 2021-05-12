@@ -24,7 +24,8 @@ class DetailsPage extends StatefulWidget {
   _DetailsPageState createState() => _DetailsPageState();
 }
 
-class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStateMixin {
+class _DetailsPageState extends State<DetailsPage>
+    with SingleTickerProviderStateMixin {
   final DetailsController controller = DetailsController();
 
   Future getGameData;
@@ -66,7 +67,10 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                                 // onLongPress: () =>
                                 //     controller.backToDoYouMeanPage(),
                                 onPressed: () => Modular.to.pop(),
-                                child: Icon(Icons.arrow_back_rounded, size: 30, color: Theme.of(context).accentColor), //changed
+                                child: Icon(Icons.arrow_back_rounded,
+                                    size: 30,
+                                    color: Theme.of(context)
+                                        .accentColor), //changed
                               ),
                             ),
                             TextButton(
@@ -87,23 +91,53 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                         automaticallyImplyLeading: false,
                         leading: Container(),
                         pinned: true,
-                        expandedHeight: 170.0,
+                        expandedHeight: 168.0,
                         flexibleSpace: FlexibleSpaceBar(
                           background: controller.gameInfo.screenshots != null
-                              ? FadeInImage.memoryNetwork(
-                                  fadeInDuration: Duration(milliseconds: 300),
-                                  placeholder: kTransparentImage,
-                                  image: controller.gameInfo.screenshots[0].bigScreenshotImageURL,
-                                  fit: BoxFit.fill,
+                              ? Container(
+                                  color: Theme.of(context).backgroundColor,
+                                  child: Stack(
+                                    fit: StackFit.passthrough,
+                                    children: [
+                                      FadeInImage.memoryNetwork(
+                                        fadeInDuration:
+                                            Duration(milliseconds: 300),
+                                        placeholder: kTransparentImage,
+                                        image: controller
+                                            .gameInfo
+                                            .screenshots[0]
+                                            .bigScreenshotImageURL,
+                                        fit: BoxFit.fill,
+                                      ),
+                                      DecoratedBox(
+                                          position:
+                                              DecorationPosition.foreground,
+                                          decoration: new BoxDecoration(
+                                              //color: Colors.lightGreen
+                                              gradient: new LinearGradient(
+                                                  begin: FractionalOffset
+                                                      .bottomCenter,
+                                                  end: FractionalOffset
+                                                      .topCenter,
+                                                  colors: [
+                                                Theme.of(context)
+                                                    .backgroundColor,
+                                                Color(0x0000000),
+                                                Color(0x0000000),
+                                              ])))
+                                    ],
+                                  ),
                                 )
                               : Container(),
                           titlePadding: EdgeInsets.zero,
                           centerTitle: false,
                           title: Container(
-                            margin: const EdgeInsets.only(top: 30.0, left: 35, right: 35),
+                            margin: const EdgeInsets.only(
+                                top: 30.0, left: 43, right: 43),
                             child: Center(
                               child: Text(
-                                controller.gameInfo.name, //controller.gameInfo.name.length < 30 ? controller.gameInfo.name : "${controller.gameInfo.name.substring(0, 30)}...",
+                                controller.gameInfo
+                                    .name, //controller.gameInfo.name.length < 30 ? controller.gameInfo.name : "${controller.gameInfo.name.substring(0, 30)}...",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   color: Theme.of(context).accentColor,
@@ -113,19 +147,23 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                                     Shadow(
                                         // bottomLeft
                                         offset: Offset(-1, -1),
-                                        color: Theme.of(context).backgroundColor),
+                                        color:
+                                            Theme.of(context).backgroundColor),
                                     Shadow(
                                         // bottomRight
                                         offset: Offset(1, -1),
-                                        color: Theme.of(context).backgroundColor),
+                                        color:
+                                            Theme.of(context).backgroundColor),
                                     Shadow(
                                         // topRight
                                         offset: Offset(1, 1),
-                                        color: Theme.of(context).backgroundColor),
+                                        color:
+                                            Theme.of(context).backgroundColor),
                                     Shadow(
                                         // topLeft
                                         offset: Offset(-1, 1),
-                                        color: Theme.of(context).backgroundColor),
+                                        color:
+                                            Theme.of(context).backgroundColor),
                                   ],
                                 ),
                               ),
@@ -142,28 +180,42 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                               Stack(
                                 children: [
                                   Container(
-                                    padding: EdgeInsets.only(top: 20, bottom: 20),
+                                    padding:
+                                        EdgeInsets.only(top: 20, bottom: 20),
                                     width: double.infinity,
                                     color: Theme.of(context).backgroundColor,
                                     child: Column(
                                       children: [
                                         ClipRRect(
-                                          borderRadius: BorderRadius.circular(18.0),
-                                          child: controller.gameInfo.cover != null
+                                          borderRadius:
+                                              BorderRadius.circular(18.0),
+                                          child: controller.gameInfo.cover !=
+                                                  null
                                               ? Hero(
-                                                  tag: "image${controller.gameInfo.cover.id}",
+                                                  tag:
+                                                      "cover${controller.gameInfo.cover.imageId}",
                                                   child: GestureDetector(
-                                                      onDoubleTap: () => Navigator.push(
-                                                          context,
-                                                          MaterialPageRoute(
-                                                              builder: (context) => OpenedImage(controller.gameInfo.cover.hd, controller.gameInfo.cover.id, rotate: false))),
-                                                      child: FadeInImage.memoryNetwork(
-                                                        fadeInDuration: Duration(milliseconds: 200),
-                                                        placeholder: kTransparentImage,
-                                                        image: controller.gameInfo.cover.bigCover,
-                                                        height: 352,
-                                                        width: 264,
-                                                      )),
+                                                      // onDoubleTap: () => Navigator.push(
+                                                      //     context,
+                                                      //     MaterialPageRoute(
+                                                      //       builder: (context) => OpenedImage(
+                                                      //         controller.gameInfo.cover.hd,
+                                                      //         controller.gameInfo.cover.id,
+                                                      //         rotate: false,
+                                                      //         tag: "cover",
+                                                      //       ),
+                                                      //     )),
+                                                      child: FadeInImage
+                                                          .memoryNetwork(
+                                                    fadeInDuration: Duration(
+                                                        milliseconds: 200),
+                                                    placeholder:
+                                                        kTransparentImage,
+                                                    image: controller.gameInfo
+                                                        .cover.bigCover,
+                                                    height: 352,
+                                                    width: 264,
+                                                  )),
                                                 )
                                               : CoverPlaceHolder(
                                                   scaleFactory: 1,
@@ -172,31 +224,48 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                                         Container(
                                           margin: EdgeInsets.only(top: 15),
                                           child: Text(
-                                              controller.gameInfo.getDeveloperCompany.name != null
+                                              controller
+                                                          .gameInfo
+                                                          .getDeveloperCompany
+                                                          .name !=
+                                                      null
                                                   ? "${controller.gameInfo.launchYear} — ${controller.gameInfo.getDeveloperCompany.name}"
                                                   : "${controller.gameInfo.launchYear}",
-                                              style: TextStyle(color: Theme.of(context).canvasColor, fontWeight: FontWeight.bold)),
+                                              style: TextStyle(
+                                                  color: Theme.of(context)
+                                                      .canvasColor,
+                                                  fontWeight: FontWeight.bold)),
                                         )
                                       ],
                                     ),
                                   ),
-                                  Positioned(
-                                      bottom: 40,
-                                      right: 30,
-                                      child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(8.0),
-                                          child: controller.gameInfo.getDeveloperCompany.logo != null
-                                              ? Container(
-                                                  color: Theme.of(context).primaryColor,
+                                  controller.gameInfo.getDeveloperCompany
+                                              .logo !=
+                                          null
+                                      ? Positioned(
+                                          bottom: 40,
+                                          right: 30,
+                                          child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(8.0),
+                                              child: Container(
+                                                  color: Theme.of(context)
+                                                      .primaryColor,
                                                   padding: EdgeInsets.all(3),
-                                                  child: FadeInImage.memoryNetwork(
+                                                  child:
+                                                      FadeInImage.memoryNetwork(
                                                     imageScale: 2.3,
-                                                    fadeInDuration: Duration(milliseconds: 200),
-                                                    placeholder: kTransparentImage,
-                                                    image: controller.gameInfo.getDeveloperCompany.logo.getLogoMedURL,
-                                                  ),
-                                                )
-                                              : Container()))
+                                                    fadeInDuration: Duration(
+                                                        milliseconds: 200),
+                                                    placeholder:
+                                                        kTransparentImage,
+                                                    image: controller
+                                                        .gameInfo
+                                                        .getDeveloperCompany
+                                                        .logo
+                                                        .getLogoMedURL,
+                                                  ))))
+                                      : Container()
                                 ],
                               ),
                               Container(
@@ -206,58 +275,99 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                                   children: [
                                     Container(
                                       margin: EdgeInsets.only(top: 10),
-                                      child: Text("Summary: ", style: TextStyle(fontSize: 16, color: Theme.of(context).accentColor, fontWeight: FontWeight.w900)),
+                                      child: Text("Summary: ",
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              color:
+                                                  Theme.of(context).accentColor,
+                                              fontWeight: FontWeight.w900)),
                                     ),
                                     GestureDetector(
                                       onTap: () {
                                         print(controller.isSummaryExpanded);
-                                        controller.isSummaryExpanded = !controller.isSummaryExpanded;
+                                        controller.isSummaryExpanded =
+                                            !controller.isSummaryExpanded;
                                       },
                                       child: Stack(
                                         children: [
                                           Container(
-                                            margin: EdgeInsets.only(top: 5, left: 10),
+                                            margin: EdgeInsets.only(
+                                                top: 5, left: 10),
                                             child: Text(
                                               "\t${controller.isSummaryExpanded ? controller.gameInfo.summary : controller.gameInfo.getShortSummary}",
                                               textAlign: TextAlign.justify,
-                                              style: TextStyle(color: Theme.of(context).canvasColor, fontSize: 15),
+                                              style: TextStyle(
+                                                  color: Theme.of(context)
+                                                      .canvasColor,
+                                                  fontSize: 15),
                                             ),
                                           ),
                                           Positioned(
                                               right: -5,
                                               bottom: -10,
                                               child: Icon(
-                                                controller.isSummaryExpanded ? Icons.expand_less_rounded : Icons.expand_more_outlined,
-                                                color: Theme.of(context).accentColor,
+                                                controller.isSummaryExpanded
+                                                    ? Icons.expand_less_rounded
+                                                    : Icons
+                                                        .expand_more_outlined,
+                                                color: Theme.of(context)
+                                                    .accentColor,
                                                 size: 30,
                                               ))
                                         ],
                                       ),
                                     ),
                                     Container(
-                                      margin: EdgeInsets.only(top: 3, bottom: 20),
+                                      margin:
+                                          EdgeInsets.only(top: 3, bottom: 20),
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               controller.gameInfo.genres != null
                                                   ? Column(
-                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
                                                       children: [
                                                         Container(
-                                                            margin: EdgeInsets.only(top: 5),
-                                                            child: Text("Genres: ",
-                                                                style: TextStyle(fontSize: 16, color: Theme.of(context).accentColor, fontWeight: FontWeight.w900))),
+                                                            margin:
+                                                                EdgeInsets.only(
+                                                                    top: 5),
+                                                            child: Text(
+                                                                "Genres: ",
+                                                                style: TextStyle(
+                                                                    fontSize:
+                                                                        16,
+                                                                    color: Theme.of(
+                                                                            context)
+                                                                        .accentColor,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w900))),
                                                         Container(
-                                                          margin: EdgeInsets.only(left: 7),
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  left: 7),
                                                           child: Column(
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: controller.gameInfo.genres
-                                                                .map((genre) =>
-                                                                    Text(" ${genre.name},", style: TextStyle(color: Theme.of(context).canvasColor, fontWeight: FontWeight.bold)))
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: controller
+                                                                .gameInfo.genres
+                                                                .map((genre) => Text(
+                                                                    " ${genre.name},",
+                                                                    style: TextStyle(
+                                                                        color: Theme.of(context)
+                                                                            .canvasColor,
+                                                                        fontWeight:
+                                                                            FontWeight.bold)))
                                                                 .toList(),
                                                           ),
                                                         ),
@@ -266,10 +376,16 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                                                   : Container(),
                                             ],
                                           ),
-                                          controller.gameInfo.totalRating != null
+                                          controller.gameInfo.totalRating !=
+                                                  null
                                               ? Padding(
-                                                  padding: const EdgeInsets.all(8.0),
-                                                  child: SizedBox(width: 100, height: 100, child: RatingChart(controller)),
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: SizedBox(
+                                                      width: 100,
+                                                      height: 100,
+                                                      child: RatingChart(
+                                                          controller)),
                                                 )
                                               : Container(),
                                         ],
@@ -277,23 +393,43 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                                     ),
                                     controller.gameInfo.platforms != null
                                         ? Column(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
-                                              Text("Platforms:", style: TextStyle(fontSize: 16, color: Theme.of(context).accentColor, fontWeight: FontWeight.w900)),
+                                              Text("Platforms:",
+                                                  style: TextStyle(
+                                                      fontSize: 16,
+                                                      color: Theme.of(context)
+                                                          .accentColor,
+                                                      fontWeight:
+                                                          FontWeight.w900)),
                                               Container(
-                                                margin: EdgeInsets.only(top: 5, left: 8),
+                                                margin: EdgeInsets.only(
+                                                    top: 5, left: 8),
                                                 child: Wrap(
                                                   runSpacing: 10,
                                                   spacing: 20,
-                                                  children: controller.gameInfo.platforms
-                                                      .map((platform) => Text(platform.name, style: TextStyle(color: Theme.of(context).canvasColor, fontWeight: FontWeight.bold)))
+                                                  children: controller
+                                                      .gameInfo.platforms
+                                                      .map((platform) => Text(
+                                                          platform.name,
+                                                          style: TextStyle(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .canvasColor,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold)))
                                                       .toList(),
                                                 ),
                                               ),
                                             ],
                                           )
                                         : Container(),
-                                    controller.gameInfo.websites != null ? WebsiteWrapList(controller.gameInfo.websites) : Container(),
+                                    controller.gameInfo.websites != null
+                                        ? WebsiteWrapList(
+                                            controller.gameInfo.websites)
+                                        : Container(),
                                   ],
                                 ),
                               ),
@@ -309,7 +445,8 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                                   Container(
                                     color: Theme.of(context).backgroundColor,
                                     width: double.infinity,
-                                    padding: EdgeInsets.only(left: 10, top: 5, bottom: 5),
+                                    padding: EdgeInsets.only(
+                                        left: 10, top: 5, bottom: 5),
                                     child: Text("Screenshots",
                                         style: TextStyle(
                                           fontSize: 26,
@@ -317,31 +454,50 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                                           fontWeight: FontWeight.w900,
                                         )),
                                   ),
-                                  Container(height: 2, color: Theme.of(context).primaryColor),
+                                  Container(
+                                      height: 2,
+                                      color: Theme.of(context).primaryColor),
                                   Container(
                                     padding: EdgeInsets.symmetric(vertical: 10),
                                     color: Theme.of(context).backgroundColor,
                                     height: 340,
                                     width: double.infinity,
                                     child: ListView.builder(
-                                      itemCount: controller.gameInfo.screenshots.length,
+                                      itemCount: controller
+                                          .gameInfo.screenshots.length,
                                       shrinkWrap: true,
                                       scrollDirection: Axis.horizontal,
-                                      itemBuilder: (BuildContext context, int index) {
-                                        Screenshot image = controller.gameInfo.screenshots[index];
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        Screenshot image = controller
+                                            .gameInfo.screenshots[index];
 
                                         return InteractiveViewer(
                                           child: GestureDetector(
-                                            onDoubleTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => OpenedImage(image.bigScreenshotImageURL, image.id))),
+                                            onDoubleTap: () => Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        OpenedImage(
+                                                            image
+                                                                .bigScreenshotImageURL,
+                                                            image.id,
+                                                            tag:
+                                                                "screenshot"))),
                                             child: Container(
-                                                margin: EdgeInsets.symmetric(horizontal: 10),
+                                                margin: EdgeInsets.symmetric(
+                                                    horizontal: 10),
                                                 child: Hero(
-                                                  transitionOnUserGestures: true,
-                                                  tag: "image${image.id}",
+                                                  tag: "screenshot${image.id}",
                                                   child: Image.network(
                                                     image.medScreenshotImageURL,
-                                                    loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent loadingProgress) {
-                                                      if (loadingProgress == null) return child;
+                                                    loadingBuilder: (BuildContext
+                                                            context,
+                                                        Widget child,
+                                                        ImageChunkEvent
+                                                            loadingProgress) {
+                                                      if (loadingProgress ==
+                                                          null) return child;
                                                       return ScreenshotPlaceHolder();
                                                     },
                                                   ),
@@ -361,11 +517,14 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(height: 2, color: Theme.of(context).backgroundColor),
+                            Container(
+                                height: 2,
+                                color: Theme.of(context).backgroundColor),
                             Container(
                               // color: Theme.of(context).backgroundColor,
                               // width: double.infinity,
-                              padding: EdgeInsets.only(left: 10, top: 5, bottom: 5),
+                              padding:
+                                  EdgeInsets.only(left: 10, top: 5, bottom: 5),
                               child: Text("Recomendations",
                                   style: TextStyle(
                                     fontSize: 33,
@@ -377,7 +536,8 @@ class _DetailsPageState extends State<DetailsPage> with SingleTickerProviderStat
                               controller.gamesFromTheSameDevelopers,
                               "From the same Developers",
                             ),
-                            RecomendationsList(controller.similarGames, "Similar ones"),
+                            RecomendationsList(
+                                controller.similarGames, "Similar ones"),
                             Container(height: 20),
                           ],
                         ),

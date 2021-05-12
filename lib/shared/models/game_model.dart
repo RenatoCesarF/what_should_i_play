@@ -112,13 +112,32 @@ class Game {
       ? DateTime.fromMillisecondsSinceEpoch(this.firstReleaseDate * 1000).year
       : "Undefined";
 
-  Company get getDeveloperCompany => this.involvedCompanies != null
-      ? this
-          .involvedCompanies
-          .where((element) => element.developer == true)
-          .first
-          .company
-      : Company();
+  Company get getDeveloperCompany {
+    if (this.involvedCompanies != null) {
+      try {
+        return this
+            .involvedCompanies
+            .where((element) => element.developer == true)
+            .first
+            .company;
+      } catch (error) {
+        return Company(
+          id: null,
+          name: null,
+          developed: [],
+          published: [],
+          logo: Logo(id: 0, imageId: null),
+        );
+      }
+    }
+    return Company(
+      id: 0,
+      name: "",
+      developed: [],
+      published: [],
+      logo: Logo(id: 0, imageId: "0"),
+    );
+  }
 
   String get getShortSummary {
     String summaryShort = "";
