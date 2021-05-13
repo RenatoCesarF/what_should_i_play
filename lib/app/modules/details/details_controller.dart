@@ -7,6 +7,7 @@ import 'package:project/app/modules/details/details_module.dart';
 import 'package:project/app/modules/doYouMean/do_you_mean_page.dart';
 import 'package:project/shared/models/company_model.dart';
 import 'package:project/shared/models/game_model.dart';
+import 'package:project/shared/utils/showCustomSnackBar.dart';
 
 part 'details_controller.g.dart';
 
@@ -26,18 +27,22 @@ abstract class _DetailsControllerBase with Store {
   Game gameInfo;
 
   @action //acho que pode tirar esse action
-  Future<void> getgameInfo(int gameId) async {
-    var response = await Dio()
-        .post("https://api.igdb.com/v4/games",
-            data: _getRequestData(gameId),
-            options: Options(headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/x-www-form-urlencoded',
-              'Client-ID': env["CLIENT_ID"],
-              'Authorization': env["AUTHORIZATION"],
-            }))
-        .then((value) => value.data);
-
+  Future<void> getgameInfo(int gameId, {BuildContext context}) async {
+    var response;
+    try {
+      response = await Dio()
+          .post("https://api.igdb.com/v4/games",
+              data: _getRequestData(gameId),
+              options: Options(headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Client-ID': env["CLIENT_ID"],
+                'Authorization': env["AUTHORIZATION"],
+              }))
+          .then((value) => value.data);
+    } catch (DioErro) {
+      showCustomSnackBar(context, text: "Connection or server Error");
+    }
     // print(response);
     gameInfo = Game.fromJson(response[0]);
 
@@ -83,29 +88,22 @@ abstract class _DetailsControllerBase with Store {
 
     Company developerCompany = game.getDeveloperCompany;
 
-    if (developerCompany.developed != null) {
-      developerCompany.developed.forEach((eachGame) {
-        if (eachGame.id == game.id) return;
-        gamesFromTheSameDevelopers.add(eachGame);
-      });
-    }
+    if (developerCompany.developed == null) return;
+    developerCompany.developed.forEach((eachGame) {
+      if (eachGame.id == game.id) return;
 
-    // if (developerCompany.published != null) {
-    //   developerCompany.published.forEach((eachGame) {
-    //     if (eachGame.id == game.id) return;
-    //     gamesFromTheSameDevelopers.add(eachGame);
-    //   });
-    // }
+      gamesFromTheSameDevelopers.add(eachGame);
+    });
   }
 
   void _getSimilarGames(Game game) {
     similarGames.clear();
 
-    if (gameInfo.similarGames != null) {
-      gameInfo.similarGames.forEach((game) {
-        _gameWasAlredyListed(game) ? print("") : similarGames.add(game);
-      });
-    }
+    if (gameInfo.similarGames == null) return;
+
+    gameInfo.similarGames.forEach((game) {
+      _gameWasAlredyListed(game) ? print("") : similarGames.add(game);
+    });
   }
 
   bool _gameWasAlredyListed(comparedGame) {
@@ -127,5 +125,7 @@ abstract class _DetailsControllerBase with Store {
   //   await Modular.to.push(MaterialPageRoute(builder: (_) => DoYouMeanPage()));
   // }
 
-  void addGameToFavorite() {}
+  void addGameToFavorite(BuildContext context) {
+    showCustomSnackBar(context, text: "This is not possible yet");
+  }
 }

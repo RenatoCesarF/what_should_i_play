@@ -35,7 +35,11 @@ class AppWidget extends StatelessWidget {
       title: 'What Should I Play',
       initialRoute: '/',
       onGenerateRoute: Modular.generateRoute,
-      builder: BotToastInit(),
+      builder: (BuildContext context, Widget child) {
+        return Scaffold(
+          body: child,
+        );
+      },
       themeMode: ThemeMode.dark,
       navigatorObservers: [BotToastNavigatorObserver()],
     );

@@ -76,8 +76,9 @@ mixin _$DetailsController on _DetailsControllerBase, Store {
       AsyncAction('_DetailsControllerBase.getgameInfo');
 
   @override
-  Future<void> getgameInfo(int gameId) {
-    return _$getgameInfoAsyncAction.run(() => super.getgameInfo(gameId));
+  Future<void> getgameInfo(int gameId, {BuildContext context}) {
+    return _$getgameInfoAsyncAction
+        .run(() => super.getgameInfo(gameId, context: context));
   }
 
   @override

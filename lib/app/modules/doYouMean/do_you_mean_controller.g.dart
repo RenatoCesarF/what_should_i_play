@@ -55,12 +55,29 @@ mixin _$DoYouMeanController on _DoYouMeanControllerBase, Store {
     });
   }
 
+  final _$scrollControllerAtom =
+      Atom(name: '_DoYouMeanControllerBase.scrollController');
+
+  @override
+  ScrollController get scrollController {
+    _$scrollControllerAtom.reportRead();
+    return super.scrollController;
+  }
+
+  @override
+  set scrollController(ScrollController value) {
+    _$scrollControllerAtom.reportWrite(value, super.scrollController, () {
+      super.scrollController = value;
+    });
+  }
+
   final _$findGamesAsyncAction =
       AsyncAction('_DoYouMeanControllerBase.findGames');
 
   @override
-  Future<void> findGames(String gameName) {
-    return _$findGamesAsyncAction.run(() => super.findGames(gameName));
+  Future<void> findGames(String gameName, {BuildContext context}) {
+    return _$findGamesAsyncAction
+        .run(() => super.findGames(gameName, context: context));
   }
 
   final _$openGameAsyncAction =
@@ -71,12 +88,27 @@ mixin _$DoYouMeanController on _DoYouMeanControllerBase, Store {
     return _$openGameAsyncAction.run(() => super.openGame(game));
   }
 
+  final _$_DoYouMeanControllerBaseActionController =
+      ActionController(name: '_DoYouMeanControllerBase');
+
+  @override
+  void backToTop() {
+    final _$actionInfo = _$_DoYouMeanControllerBaseActionController.startAction(
+        name: '_DoYouMeanControllerBase.backToTop');
+    try {
+      return super.backToTop();
+    } finally {
+      _$_DoYouMeanControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 searchBarController: ${searchBarController},
 games: ${games},
-isSearching: ${isSearching}
+isSearching: ${isSearching},
+scrollController: ${scrollController}
     ''';
   }
 }

@@ -20,8 +20,10 @@ class SearchBar extends StatelessWidget {
           SizedBox(
             width: 40,
             child: TextButton(
-              onPressed: () async => await Modular.to.push(MaterialPageRoute(builder: (_) => SearchModule())),
-              child: Icon(Icons.arrow_back_rounded, size: 30, color: Theme.of(context).accentColor), //changed
+              onPressed: () async => await Modular.to
+                  .push(MaterialPageRoute(builder: (_) => SearchModule())),
+              child: Icon(Icons.arrow_back_rounded,
+                  size: 30, color: Theme.of(context).accentColor), //changed
             ),
           ),
           Expanded(
@@ -34,7 +36,10 @@ class SearchBar extends StatelessWidget {
               onChanged: (value) {
                 controller.searchBarController.text = value;
               },
-              decoration: InputDecoration(isDense: true, hintText: "A game that you have enjoyed", hintStyle: TextStyle(color: Color(0x66979797))),
+              decoration: InputDecoration(
+                  isDense: true,
+                  hintText: "A game that you have enjoyed",
+                  hintStyle: TextStyle(color: Color(0x66979797))),
               autocorrect: false,
               style: TextStyle(
                 color: Colors.white,
@@ -49,7 +54,6 @@ class SearchBar extends StatelessWidget {
             child: TextButton(
               onPressed: () {
                 FocusScope.of(context).unfocus();
-                controller.isSearching = true;
                 controller.findGames(controller.searchBarController.text);
               },
               child: Icon(

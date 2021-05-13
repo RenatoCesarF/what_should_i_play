@@ -108,35 +108,26 @@ class Game {
     return data;
   }
 
-  get launchYear => this.firstReleaseDate != null
+  int get launchYear => this.firstReleaseDate != null
       ? DateTime.fromMillisecondsSinceEpoch(this.firstReleaseDate * 1000).year
-      : "Undefined";
+      : null;
 
   Company get getDeveloperCompany {
-    if (this.involvedCompanies != null) {
-      try {
-        return this
-            .involvedCompanies
-            .where((element) => element.developer == true)
-            .first
-            .company;
-      } catch (error) {
-        return Company(
-          id: null,
-          name: null,
-          developed: [],
-          published: [],
-          logo: Logo(id: 0, imageId: null),
-        );
+    if (this.involvedCompanies == null) return Company();
+    try {
+      Company company = this
+          .involvedCompanies
+          .where((element) => element.developer == true)
+          .first
+          .company;
+
+      if (company.name == "") {
+        company.name = null;
       }
+      return company;
+    } catch (error) {
+      return Company();
     }
-    return Company(
-      id: 0,
-      name: "",
-      developed: [],
-      published: [],
-      logo: Logo(id: 0, imageId: "0"),
-    );
   }
 
   String get getShortSummary {

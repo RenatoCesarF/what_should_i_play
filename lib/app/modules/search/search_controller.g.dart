@@ -25,10 +25,26 @@ mixin _$SearchController on _SearchControllerBase, Store {
     });
   }
 
+  final _$pageFocusAtom = Atom(name: '_SearchControllerBase.pageFocus');
+
+  @override
+  FocusNode get pageFocus {
+    _$pageFocusAtom.reportRead();
+    return super.pageFocus;
+  }
+
+  @override
+  set pageFocus(FocusNode value) {
+    _$pageFocusAtom.reportWrite(value, super.pageFocus, () {
+      super.pageFocus = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
-searchBarController: ${searchBarController}
+searchBarController: ${searchBarController},
+pageFocus: ${pageFocus}
     ''';
   }
 }

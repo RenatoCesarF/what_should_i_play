@@ -27,7 +27,7 @@ class _DoYouMeanPageState
   void initState() {
     super.initState();
     controller.searchBarController.text = widget.gameName;
-    getGamesList = controller.findGames(widget.gameName);
+    getGamesList = controller.findGames(widget.gameName, context: context);
   }
 
   @override
@@ -40,51 +40,57 @@ class _DoYouMeanPageState
             return LoadingDoYouMeanPage(controller);
           }
 
-          return Scaffold(
-            backgroundColor: Theme.of(context).primaryColor,
-            body: Observer(
-              builder: (BuildContext context) {
-                return controller.isSearching
-                    ? LoadingDoYouMeanPage(controller)
-                    : CustomScrollView(
-                        slivers: <Widget>[
-                          SliverAppBar(
-                            backgroundColor: Theme.of(context).dividerColor,
-                            shadowColor: Colors.black,
-                            elevation: 24,
-                            centerTitle: true,
-                            leadingWidth: 0,
-                            automaticallyImplyLeading: false,
-                            leading: Container(),
-                            pinned: true,
-                            // snap: true,
-                            // floating: true,
-                            expandedHeight: 140.0,
-                            flexibleSpace: FlexibleSpaceBar(
-                              stretchModes: [],
-                              background: SearchBar(controller),
-                              titlePadding: EdgeInsets.zero,
-                              centerTitle: false,
-                              title: Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 18.0,
-                                  bottom: 13,
-                                ),
-                                child: Text(
-                                  "Do you mean",
-                                  style: TextStyle(
-                                      color: Color(0xffD9D5EC),
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
+          return Observer(
+            builder: (BuildContext context) {
+              return Scaffold(
+                  backgroundColor: Theme.of(context).primaryColor,
+                  body: CustomScrollView(
+                    controller: controller.scrollController,
+                    slivers: <Widget>[
+                      SliverAppBar(
+                        backgroundColor: Theme.of(context).dividerColor,
+                        shadowColor: Colors.black,
+                        elevation: 24,
+                        centerTitle: true,
+                        leadingWidth: 0,
+                        automaticallyImplyLeading: false,
+                        leading: Container(),
+                        pinned: true,
+                        // snap: true,
+                        // floating: true,
+                        expandedHeight: 140.0,
+                        flexibleSpace: FlexibleSpaceBar(
+                          stretchModes: [],
+                          background: SearchBar(controller),
+                          titlePadding: EdgeInsets.zero,
+                          centerTitle: false,
+                          title: Padding(
+                            padding: const EdgeInsets.only(
+                              left: 18.0,
+                              bottom: 13,
+                            ),
+                            child: Text(
+                              "Do you mean",
+                              style: TextStyle(
+                                  color: Color(0xffD9D5EC),
+                                  fontWeight: FontWeight.bold),
                             ),
                           ),
-                          SliverVerticalGameList(games: controller.games)
-                          //
-                        ],
-                      );
-              },
-            ),
+                        ),
+                      ),
+                      SliverVerticalGameList(games: controller.games)
+                    ],
+                  ),
+                  floatingActionButton: FloatingActionButton(
+                    mini: true,
+                    onPressed: controller.backToTop,
+                    child: Icon(
+                      Icons.arrow_circle_up_rounded,
+                      color: Theme.of(context).backgroundColor,
+                      size: 40,
+                    ),
+                  ));
+            },
           );
         });
   }

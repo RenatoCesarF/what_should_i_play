@@ -33,7 +33,7 @@ class _DetailsPageState extends State<DetailsPage>
   @override
   void initState() {
     super.initState();
-    getGameData = controller.getgameInfo(widget.game.id);
+    getGameData = controller.getgameInfo(widget.game.id, context: context);
   }
 
   @override
@@ -58,6 +58,15 @@ class _DetailsPageState extends State<DetailsPage>
                       child: CustomScrollView(
                     slivers: [
                       SliverAppBar(
+                        backgroundColor: Theme.of(context).dividerColor,
+                        shadowColor: Colors.black,
+                        elevation: 24,
+                        centerTitle: true,
+                        leadingWidth: 0,
+                        automaticallyImplyLeading: false,
+                        leading: Container(),
+                        pinned: true,
+                        expandedHeight: 168.0, //maybe 300
                         title: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -74,7 +83,8 @@ class _DetailsPageState extends State<DetailsPage>
                               ),
                             ),
                             TextButton(
-                              onPressed: controller.addGameToFavorite,
+                              onPressed: () =>
+                                  controller.addGameToFavorite(context),
                               child: Icon(
                                 Icons.bookmark_border_outlined,
                                 size: 30,
@@ -83,15 +93,6 @@ class _DetailsPageState extends State<DetailsPage>
                             ),
                           ],
                         ),
-                        backgroundColor: Theme.of(context).dividerColor,
-                        shadowColor: Colors.black,
-                        elevation: 24,
-                        centerTitle: true,
-                        leadingWidth: 0,
-                        automaticallyImplyLeading: false,
-                        leading: Container(),
-                        pinned: true,
-                        expandedHeight: 168.0,
                         flexibleSpace: FlexibleSpaceBar(
                           background: controller.gameInfo.screenshots != null
                               ? Container(
@@ -223,18 +224,36 @@ class _DetailsPageState extends State<DetailsPage>
                                         ),
                                         Container(
                                           margin: EdgeInsets.only(top: 15),
-                                          child: Text(
-                                              controller
-                                                          .gameInfo
-                                                          .getDeveloperCompany
-                                                          .name !=
-                                                      null
-                                                  ? "${controller.gameInfo.launchYear} — ${controller.gameInfo.getDeveloperCompany.name}"
-                                                  : "${controller.gameInfo.launchYear}",
-                                              style: TextStyle(
-                                                  color: Theme.of(context)
-                                                      .canvasColor,
-                                                  fontWeight: FontWeight.bold)),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                  controller.gameInfo
+                                                              .launchYear !=
+                                                          null
+                                                      ? "${controller.gameInfo.launchYear}"
+                                                      : "",
+                                                  style: TextStyle(
+                                                      color: Theme.of(context)
+                                                          .canvasColor,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                              Text(
+                                                  controller
+                                                              .gameInfo
+                                                              .getDeveloperCompany
+                                                              .name !=
+                                                          null
+                                                      ? " — ${controller.gameInfo.getDeveloperCompany.name}"
+                                                      : "",
+                                                  style: TextStyle(
+                                                      color: Theme.of(context)
+                                                          .canvasColor,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                            ],
+                                          ),
                                         )
                                       ],
                                     ),
@@ -521,8 +540,6 @@ class _DetailsPageState extends State<DetailsPage>
                                 height: 2,
                                 color: Theme.of(context).backgroundColor),
                             Container(
-                              // color: Theme.of(context).backgroundColor,
-                              // width: double.infinity,
                               padding:
                                   EdgeInsets.only(left: 10, top: 5, bottom: 5),
                               child: Text("Recomendations",
@@ -537,7 +554,9 @@ class _DetailsPageState extends State<DetailsPage>
                               "From the same Developers",
                             ),
                             RecomendationsList(
-                                controller.similarGames, "Similar ones"),
+                              controller.similarGames,
+                              "Similar ones",
+                            ),
                             Container(height: 20),
                           ],
                         ),
