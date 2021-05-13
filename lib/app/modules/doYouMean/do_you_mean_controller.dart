@@ -27,7 +27,7 @@ abstract class _DoYouMeanControllerBase with Store {
 
   @action
   Future<void> findGames(String gameName, {BuildContext context}) async {
-    gameName = "star wars";
+    gameName = "god of war";
     isSearching = true;
     games.clear();
     List response;

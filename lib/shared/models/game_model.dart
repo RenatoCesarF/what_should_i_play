@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:project/shared/models/websites_model.dart';
 
 import 'company_model.dart';
@@ -16,9 +17,11 @@ class Game {
   List<Platform> platforms;
   double totalRating;
   List<Websites> websites;
+  List<ArtWork> artworks;
 
   Game(
       {this.id,
+      this.artworks,
       this.cover,
       this.similarGames,
       this.firstReleaseDate,
@@ -57,6 +60,13 @@ class Game {
       screenshots = <Screenshot>[];
       json['screenshots'].forEach((v) {
         screenshots.add(Screenshot.fromJson(v));
+      });
+    }
+
+    if (json['artworks'] != null) {
+      artworks = <ArtWork>[];
+      json['artworks'].forEach((v) {
+        artworks.add(ArtWork.fromJson(v));
       });
     }
 
@@ -282,4 +292,28 @@ class Screenshot {
       "https://images.igdb.com/igdb/image/upload/t_screenshot_med/$imageId.jpg";
   get coverMedImageURL =>
       "https://images.igdb.com/igdb/image/upload/t_cover_big/$imageId.jpg";
+}
+
+class ArtWork {
+  int id;
+  String imageId;
+
+  ArtWork({this.id, this.imageId});
+
+  ArtWork.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    imageId = json['image_id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['image_id'] = this.imageId;
+    return data;
+  }
+
+  get bigImageURL =>
+      "https://images.igdb.com/igdb/image/upload/t_screenshot_big/$imageId.jpg";
+  get medImageURL =>
+      "https://images.igdb.com/igdb/image/upload/t_screenshot_med/$imageId.jpg";
 }

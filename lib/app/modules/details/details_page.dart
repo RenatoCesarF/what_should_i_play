@@ -466,7 +466,7 @@ class _DetailsPageState extends State<DetailsPage>
                                     width: double.infinity,
                                     padding: EdgeInsets.only(
                                         left: 10, top: 5, bottom: 5),
-                                    child: Text("Screenshots",
+                                    child: Text("📷 Screenshots",
                                         style: TextStyle(
                                           fontSize: 26,
                                           color: Theme.of(context).canvasColor,
@@ -510,6 +510,78 @@ class _DetailsPageState extends State<DetailsPage>
                                                   tag: "screenshot${image.id}",
                                                   child: Image.network(
                                                     image.medScreenshotImageURL,
+                                                    loadingBuilder: (BuildContext
+                                                            context,
+                                                        Widget child,
+                                                        ImageChunkEvent
+                                                            loadingProgress) {
+                                                      if (loadingProgress ==
+                                                          null) return child;
+                                                      return ScreenshotPlaceHolder();
+                                                    },
+                                                  ),
+                                                )),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              )
+                            : Container(),
+                      ),
+                      SliverToBoxAdapter(
+                        child: controller.gameInfo.artworks != null
+                            ? Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    color: Theme.of(context).backgroundColor,
+                                    width: double.infinity,
+                                    padding: EdgeInsets.only(
+                                        left: 10, top: 5, bottom: 5),
+                                    child: Text("🖼️ Artworks",
+                                        style: TextStyle(
+                                          fontSize: 26,
+                                          color: Theme.of(context).canvasColor,
+                                          fontWeight: FontWeight.w900,
+                                        )),
+                                  ),
+                                  Container(
+                                      height: 2,
+                                      color: Theme.of(context).primaryColor),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(vertical: 10),
+                                    color: Theme.of(context).backgroundColor,
+                                    height: 340,
+                                    width: double.infinity,
+                                    child: ListView.builder(
+                                      itemCount:
+                                          controller.gameInfo.artworks.length,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.horizontal,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        ArtWork image =
+                                            controller.gameInfo.artworks[index];
+
+                                        return InteractiveViewer(
+                                          child: GestureDetector(
+                                            onDoubleTap: () => Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        OpenedImage(
+                                                            image.bigImageURL,
+                                                            image.id,
+                                                            tag: "artworks"))),
+                                            child: Container(
+                                                margin: EdgeInsets.symmetric(
+                                                    horizontal: 10),
+                                                child: Hero(
+                                                  tag: "artworks${image.id}",
+                                                  child: Image.network(
+                                                    image.medImageURL,
                                                     loadingBuilder: (BuildContext
                                                             context,
                                                         Widget child,

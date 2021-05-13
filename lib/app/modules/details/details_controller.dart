@@ -44,8 +44,8 @@ abstract class _DetailsControllerBase with Store {
       showCustomSnackBar(context, text: "Connection or server Error");
     }
     // print(response);
-    gameInfo = Game.fromJson(response[0]);
 
+    gameInfo = Game.fromJson(response[0]);
     _getGamesFromTheSameDevelopers(gameInfo);
 
     _getSimilarGames(gameInfo);
@@ -56,6 +56,7 @@ abstract class _DetailsControllerBase with Store {
     final List<String> eachField = [
       'name',
       'summary',
+      'artworks.image_id',
       'total_rating',
       'first_release_date',
       'genres.name',
