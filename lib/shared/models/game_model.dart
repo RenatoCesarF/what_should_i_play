@@ -286,11 +286,11 @@ class Screenshot {
     return data;
   }
 
-  get bigScreenshotImageURL =>
+  String get bigScreenshotImageURL =>
       "https://images.igdb.com/igdb/image/upload/t_screenshot_big/$imageId.jpg";
-  get medScreenshotImageURL =>
+  String get medScreenshotImageURL =>
       "https://images.igdb.com/igdb/image/upload/t_screenshot_med/$imageId.jpg";
-  get coverMedImageURL =>
+  String get coverMedImageURL =>
       "https://images.igdb.com/igdb/image/upload/t_cover_big/$imageId.jpg";
 }
 
@@ -312,8 +312,8 @@ class ArtWork {
     return data;
   }
 
-  get bigImageURL =>
+  String get bigImageURL =>
       "https://images.igdb.com/igdb/image/upload/t_screenshot_big/$imageId.jpg";
-  get medImageURL =>
+  String get medImageURL =>
       "https://images.igdb.com/igdb/image/upload/t_screenshot_med/$imageId.jpg";
 }

@@ -196,27 +196,39 @@ class _DetailsPageState extends State<DetailsPage>
                                                   tag:
                                                       "cover${controller.gameInfo.cover.imageId}",
                                                   child: GestureDetector(
-                                                      // onDoubleTap: () => Navigator.push(
-                                                      //     context,
-                                                      //     MaterialPageRoute(
-                                                      //       builder: (context) => OpenedImage(
-                                                      //         controller.gameInfo.cover.hd,
-                                                      //         controller.gameInfo.cover.id,
-                                                      //         rotate: false,
-                                                      //         tag: "cover",
-                                                      //       ),
-                                                      //     )),
+                                                      onDoubleTap: () =>
+                                                          Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        OpenedImage(
+                                                                  controller
+                                                                      .gameInfo
+                                                                      .cover
+                                                                      .hd,
+                                                                  controller
+                                                                      .gameInfo
+                                                                      .cover
+                                                                      .id,
+                                                                  tag: "cover",
+                                                                ),
+                                                              )),
                                                       child: FadeInImage
                                                           .memoryNetwork(
-                                                    fadeInDuration: Duration(
-                                                        milliseconds: 200),
-                                                    placeholder:
-                                                        kTransparentImage,
-                                                    image: controller.gameInfo
-                                                        .cover.bigCover,
-                                                    height: 352,
-                                                    width: 264,
-                                                  )),
+                                                        fadeInDuration:
+                                                            Duration(
+                                                                milliseconds:
+                                                                    200),
+                                                        placeholder:
+                                                            kTransparentImage,
+                                                        image: controller
+                                                            .gameInfo
+                                                            .cover
+                                                            .bigCover,
+                                                        height: 352,
+                                                        width: 264,
+                                                      )),
                                                 )
                                               : CoverPlaceHolder(
                                                   scaleFactory: 1,
@@ -496,13 +508,18 @@ class _DetailsPageState extends State<DetailsPage>
                                             onDoubleTap: () => Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        OpenedImage(
-                                                            image
-                                                                .bigScreenshotImageURL,
-                                                            image.id,
-                                                            tag:
-                                                                "screenshot"))),
+                                                    builder: (context) => OpenedImage(
+                                                        image
+                                                            .bigScreenshotImageURL,
+                                                        image.id,
+                                                        imageUrlList: controller
+                                                            .gameInfo
+                                                            .screenshots
+                                                            .map((element) =>
+                                                                element
+                                                                    .bigScreenshotImageURL)
+                                                            .toList(),
+                                                        tag: "screenshot"))),
                                             child: Container(
                                                 margin: EdgeInsets.symmetric(
                                                     horizontal: 10),
@@ -570,11 +587,16 @@ class _DetailsPageState extends State<DetailsPage>
                                             onDoubleTap: () => Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        OpenedImage(
-                                                            image.bigImageURL,
-                                                            image.id,
-                                                            tag: "artworks"))),
+                                                    builder: (context) => OpenedImage(
+                                                        image.bigImageURL,
+                                                        image.id,
+                                                        imageUrlList: controller
+                                                            .gameInfo.artworks
+                                                            .map((element) =>
+                                                                element
+                                                                    .bigImageURL)
+                                                            .toList(),
+                                                        tag: "artworks"))),
                                             child: Container(
                                                 margin: EdgeInsets.symmetric(
                                                     horizontal: 10),
