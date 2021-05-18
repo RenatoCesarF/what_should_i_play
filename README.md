@@ -15,8 +15,12 @@
 
 ## 📰 Each Page Layout:
 -
+  <h2> Home Page</h2>
   <img width=300 src="https://user-images.githubusercontent.com/62253156/118571563-bd89e980-b754-11eb-8212-b1105696d590.gif"/>
+
+  <h2> Do You Mean Page</h2>
   <img width=300 src="https://user-images.githubusercontent.com/62253156/118571737-1ce7f980-b755-11eb-97f7-738e60ed4041.gif"/>
+  <h2>Details</h2>
   <img width=300 src="https://user-images.githubusercontent.com/62253156/118573529-1eb3bc00-b759-11eb-813b-4f3d67dd8685.gif"/>
 
 ### Watch the entire [📼Layout video](https://user-images.githubusercontent.com/62253156/118574316-8c141c80-b75a-11eb-9616-a4437f9e7ecc.mp4)
