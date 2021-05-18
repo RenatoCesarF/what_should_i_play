@@ -11,7 +11,16 @@
     <img src="https://img.shields.io/badge/Video--Games-%F0%9F%8E%AE-red?style=flat-square">
 </p>
 
-Using the IGDB API, this app, developed in react-native, will suggest a game that you probably like based in one that you have already liked.
+### Using the IGDB API, this app, developed in react-native, will suggest a game that you probably like based in one that you have already liked.
+
+## 📰 Each Page Layout:
+-
+  <img width=300 src="https://user-images.githubusercontent.com/62253156/118571563-bd89e980-b754-11eb-8212-b1105696d590.gif"/>
+  <img width=300 src="https://user-images.githubusercontent.com/62253156/118571737-1ce7f980-b755-11eb-97f7-738e60ed4041.gif"/>
+  <img width=300 src="https://user-images.githubusercontent.com/62253156/118573529-1eb3bc00-b759-11eb-813b-4f3d67dd8685.gif"/>
+
+### Watch the entire [📼Layout video](https://user-images.githubusercontent.com/62253156/118574316-8c141c80-b75a-11eb-9616-a4437f9e7ecc.mp4)
+
 
 ## 📝 To-Do:
 - [x] IGDB API Conect
@@ -31,10 +40,8 @@ Using the IGDB API, this app, developed in react-native, will suggest a game tha
 - Flutter Modular
 - Dio
 
-## 📰 Layout:
-- :construction: Working on it
 
-## ⚠️ Problems:
+## ⚠️ Bugs:
 - :construction:
 
 ## 🔮 Future implementations:
