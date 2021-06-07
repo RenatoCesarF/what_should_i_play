@@ -32,6 +32,7 @@
 - [x] Search Page
 - [x] Recomendation system
 - [x] Game Details Page
+- [ ] Build the first version of the app
 - [ ] Favorite system
 - [ ] Splash Screen
 - [ ] Web Version
@@ -46,7 +47,7 @@
 
 
 ## ⚠️ Bugs:
-- :construction:
+- nothing here yet
 
 ## 🔮 Future implementations:
 - A web version of the app
