@@ -61,49 +61,34 @@ class WebsiteLinkComponent extends StatelessWidget {
     switch (category) {
       case 1:
         return Color(0xffB5E6FF); //Color(0xffCDEEFF);
-        break;
       case 2:
         return Color(0xffF4D35E);
-        break;
       case 4:
         return Color(0xff1773EA);
-        break;
       case 5:
         return Color(0xff1c9cea);
-        break;
       case 6:
         return Color(0xff8C45F7);
-        break;
       case 8:
         return Color(0xff322A5C);
-        break;
       case 9:
         return Color(0xffF70000);
-        break;
       case 11:
         return Color(0xffA2B1D2);
-        break;
       case 13:
         return Color(0xff171A21);
-        break;
       case 14:
         return Color(0xffF74300);
-        break;
       case 15:
         return Color(0xffFD254B);
-        break;
       case 16:
         return Color(0xff111111);
-        break;
       case 17:
         return Color(0xff722B91);
-        break;
       case 18:
         return Color(0xff6E85D3);
-        break;
       default:
         return Color(0xffE6E6E7);
-        break;
     }
   }
 
