@@ -37,10 +37,10 @@ dependencies:
     sdk: flutter
   flutter_modular: ^2.0.1
   flutter_dotenv: ^3.1.0
-  dio: ^3.0.10
+  dio: ^5.0.3
   fl_chart: ^0.35.0
-  mobx: ^1.2.1+4
-  flutter_mobx: ^1.1.0+2
+  mobx: ^2.1.4
+  flutter_mobx: ^2.0.6+5
   bot_toast: ^3.0.5
   url_launcher: ^6.0.3
   shimmer: ^2.0.0
@@ -49,19 +49,19 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  slidy: ^2.2.1
+  slidy: ^4.0.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^1.10.13
+  build_runner: ^2.1.8
   effective_dart: ^1.3.0
   flutter_modular_annotations: any
-  flutter_native_splash: ^0.2.9
-  http_mock_adapter: ^0.1.5
-  mobx_codegen: ^1.1.2
-  mockito: ^4.1.3
-  modular_codegen: any
+  flutter_native_splash: ^2.2.19
+  http_mock_adapter: ^0.4.2
+  mobx_codegen: ^2.0.4
+  mockito: ^5.3.0
+  modular_codegen: ^3.0.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
